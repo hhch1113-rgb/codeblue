@@ -3,12 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="브라우저 내장 기능을 활용하여 텍스트의 맞춤법을 검사하고 오타를 확인하는 온라인 도구입니다.">
+    <meta name="description" content="주식, 코인 등 투자 자산의 현재 평단가와 추가 매수 정보를 기반으로 새로운 평균 단가를 계산해주는 물타기 계산기입니다.">
     <meta name="google-adsense-account" content="ca-pub-2738395748022643">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2738395748022643"
      crossorigin="anonymous"></script>
-    <title>맞춤법 검사기 - 온라인 도구 모음</title>
+    <title>물타기 계산기 - 온라인 도구 모음</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .calculator-section {
+            padding: 1.5rem;
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: 8px;
+        }
+        .calc-input-group {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .calc-input-group label {
+            text-align: right;
+        }
+        .calc-input-group input[type="number"] {
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: 1px solid var(--card-border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+        .calc-button {
+             padding: 0.8rem 1.2rem;
+             border-radius: 5px;
+             border: 1px solid var(--card-border-color);
+             cursor: pointer;
+             width: 100%;
+        }
+        .result-box {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: 5px;
+        }
+        .result-box p {
+            margin: 0 0 0.5rem 0;
+        }
+        .result-box span {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -17,14 +63,35 @@
     </header>
     <main class="tool-page">
         <div class="tool-header">
-            <h2>맞춤법 검사기</h2>
+            <h2>물타기 계산기</h2>
             <a href="/" class="back-button">메인으로 돌아가기</a>
         </div>
         <div class="tool-content">
-            <p class="tool-description">
-                아래 텍스트 상자에 내용을 입력하면 브라우저의 내장 맞춤법 검사 기능이 오타를 자동으로 표시해줍니다. (빨간 밑줄로 표시)
-            </p>
-            <textarea id="text-input" placeholder="여기에 텍스트를 입력하여 맞춤법을 검사하세요..." spellcheck="true"></textarea>
+            <div class="calculator-section">
+                <div class="calc-input-group">
+                    <label for="current-quantity">현재 보유 수량:</label>
+                    <input type="number" id="current-quantity" value="0" min="0">
+                </div>
+                <div class="calc-input-group">
+                    <label for="current-price">현재 평균 단가:</label>
+                    <input type="number" id="current-price" value="0" min="0">
+                </div>
+                <hr>
+                <div class="calc-input-group">
+                    <label for="add-quantity">추가 매수 수량:</label>
+                    <input type="number" id="add-quantity" value="0" min="0">
+                </div>
+                <div class="calc-input-group">
+                    <label for="add-price">추가 매수 단가:</label>
+                    <input type="number" id="add-price" value="0" min="0">
+                </div>
+                <button id="calc-btn" class="calc-button">계산하기</button>
+                <div id="result" class="result-box" style="display: none;">
+                    <p>새로운 평균 단가: <span id="new-avg-price">0</span> 원</p>
+                    <p>총 매수 금액: <span id="total-buy-amount">0</span> 원</p>
+                    <p>총 수량: <span id="total-quantity">0</span> 개</p>
+                </div>
+            </div>
         </div>
     </main>
     <footer>
@@ -32,5 +99,38 @@
         <p><a href="/about.html">사이트 정보</a> | <a href="/privacy.html">개인정보처리방침</a></p>
     </footer>
     <script src="main.js"></script>
+    <script>
+        document.getElementById('calc-btn').addEventListener('click', () => {
+            const currentQuantity = parseFloat(document.getElementById('current-quantity').value);
+            const currentPrice = parseFloat(document.getElementById('current-price').value);
+            const addQuantity = parseFloat(document.getElementById('add-quantity').value);
+            const addPrice = parseFloat(document.getElementById('add-price').value);
+
+            if (isNaN(currentQuantity) || isNaN(currentPrice) || isNaN(addQuantity) || isNaN(addPrice)) {
+                alert('모든 값을 숫자로 입력해주세요.');
+                return;
+            }
+
+            if (currentQuantity + addQuantity === 0) {
+                document.getElementById('new-avg-price').textContent = '0';
+                document.getElementById('total-buy-amount').textContent = '0';
+                document.getElementById('total-quantity').textContent = '0';
+                document.getElementById('result').style.display = 'block';
+                return;
+            }
+
+            const totalCurrentAmount = currentQuantity * currentPrice;
+            const totalAddAmount = addQuantity * addPrice;
+
+            const newTotalQuantity = currentQuantity + addQuantity;
+            const newTotalBuyAmount = totalCurrentAmount + totalAddAmount;
+            const newAveragePrice = newTotalBuyAmount / newTotalQuantity;
+
+            document.getElementById('new-avg-price').textContent = Math.round(newAveragePrice).toLocaleString();
+            document.getElementById('total-buy-amount').textContent = Math.round(newTotalBuyAmount).toLocaleString();
+            document.getElementById('total-quantity').textContent = Math.round(newTotalQuantity).toLocaleString();
+            document.getElementById('result').style.display = 'block';
+        });
+    </script>
 </body>
 </html>
