@@ -108,4 +108,22 @@
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
+    <url>
+        <loc>https://codeblue-4vg.pages.dev/tool-16.html</loc>
+        <lastmod>2026-01-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://codeblue-4vg.pages.dev/tool-17.html</loc>
+        <lastmod>2026-01-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://codeblue-4vg.pages.dev/tool-18.html</loc>
+        <lastmod>2026-01-27</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
 </urlset>

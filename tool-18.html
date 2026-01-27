@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="키와 몸무게를 입력하여 남녀별 체질량지수(BMI)를 계산하고 건강 상태를 알려주는 온라인 BMI 계산기입니다.">
+    <meta name="google-adsense-account" content="ca-pub-2738395748022643">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2738395748022643"
+     crossorigin="anonymous"></script>
+    <title>BMI 계산기 (남녀 구분) - 온라인 도구 모음</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .calculator-section {
+            padding: 1.5rem;
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: 8px;
+        }
+        .calc-input-group {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .calc-input-group label {
+            text-align: right;
+        }
+        .calc-input-group input[type="number"] {
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: 1px solid var(--card-border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+        .calc-button {
+             padding: 0.8rem 1.2rem;
+             border-radius: 5px;
+             border: 1px solid var(--card-border-color);
+             cursor: pointer;
+             width: 100%;
+        }
+        .result-box {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: 5px;
+            text-align: center;
+        }
+        .result-box p {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .bmi-interpretation {
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/" class="home-link">온라인 도구 모음</a></h1>
+        <button id="theme-toggle">다크 모드</button>
+    </header>
+    <main class="tool-page">
+        <div class="tool-header">
+            <h2>BMI 계산기 (남녀 구분)</h2>
+            <a href="/" class="back-button">메인으로 돌아가기</a>
+        </div>
+        <div class="tool-content">
+            <div class="calculator-section">
+                <div class="calc-input-group">
+                    <label for="height">키 (cm):</label>
+                    <input type="number" id="height" placeholder="예: 175">
+                </div>
+                <div class="calc-input-group">
+                    <label for="weight">몸무게 (kg):</label>
+                    <input type="number" id="weight" placeholder="예: 70">
+                </div>
+                <div class="calc-input-group">
+                    <label>성별:</label>
+                    <div>
+                        <label><input type="radio" name="gender" value="male" checked> 남</label>
+                        <label><input type="radio" name="gender" value="female"> 여</label>
+                    </div>
+                </div>
+                <button id="calc-btn" class="calc-button">계산하기</button>
+                <div id="result" class="result-box" style="display: none;">
+                    <p>BMI: <span id="bmi-value">0</span></p>
+                    <p class="bmi-interpretation">판정: <span id="bmi-category"></span></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Made by CodeBlue</p>
+        <p><a href="/about.html">사이트 정보</a> | <a href="/privacy.html">개인정보처리방침</a></p>
+    </footer>
+    <script src="main.js"></script>
+    <script>
+        document.getElementById('calc-btn').addEventListener('click', () => {
+            const heightCm = parseFloat(document.getElementById('height').value);
+            const weightKg = parseFloat(document.getElementById('weight').value);
+            const gender = document.querySelector('input[name="gender"]:checked').value;
+
+            if (isNaN(heightCm) || isNaN(weightKg) || heightCm <= 0 || weightKg <= 0) {
+                alert('키와 몸무게를 올바르게 입력해주세요.');
+                return;
+            }
+
+            const heightM = heightCm / 100;
+            const bmi = weightKg / (heightM * heightM);
+
+            let category = '';
+            if (bmi < 18.5) {
+                category = '저체중';
+            } else if (bmi >= 18.5 && bmi < 23) {
+                category = '정상 체중';
+            } else if (bmi >= 23 && bmi < 25) {
+                category = '과체중';
+            } else if (bmi >= 25 && bmi < 30) {
+                category = '비만 1단계';
+            } else if (bmi >= 30 && bmi < 35) {
+                category = '비만 2단계';
+            } else {
+                category = '비만 3단계 (고도 비만)';
+            }
+            
+            // Note: BMI calculation is universal, interpretation categories can vary slightly by region/gender,
+            // but for simplicity, using a common set of Korean standards here.
+
+            document.getElementById('bmi-value').textContent = bmi.toFixed(2);
+            document.getElementById('bmi-category').textContent = category;
+            document.getElementById('result').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

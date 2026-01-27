@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="다양하고 재미있는 텍스트 이모티콘을 한눈에 보고 클릭 한 번으로 쉽게 복사할 수 있는 이모티콘 모음집입니다.">
+    <meta name="google-adsense-account" content="ca-pub-2738395748022643">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2738395748022643"
+     crossorigin="anonymous"></script>
+    <title>이모티콘 모음집 - 온라인 도구 모음</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .emoticon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 1rem;
+            text-align: center;
+        }
+        .emoticon-item {
+            cursor: pointer;
+            padding: 0.8rem;
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: 5px;
+            font-size: 1.5rem;
+            transition: background-color 0.2s, transform 0.2s;
+            user-select: none; /* Prevent text selection on double click */
+        }
+        .emoticon-item:hover {
+            background-color: var(--button-bg-color);
+            transform: translateY(-2px);
+        }
+        #copy-message {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: #4CAF50;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/" class="home-link">온라인 도구 모음</a></h1>
+        <button id="theme-toggle">다크 모드</button>
+    </header>
+    <main class="tool-page">
+        <div class="tool-header">
+            <h2>이모티콘 모음집</h2>
+            <a href="/" class="back-button">메인으로 돌아가기</a>
+        </div>
+        <div class="tool-content">
+            <p>원하는 이모티콘을 클릭하면 클립보드에 자동으로 복사됩니다.</p>
+            <div id="emoticon-grid" class="emoticon-grid"></div>
+            <div id="copy-message">복사되었습니다!</div>
+        </div>
+    </main>
+    <footer>
+        <p>Made by CodeBlue</p>
+        <p><a href="/about.html">사이트 정보</a> | <a href="/privacy.html">개인정보처리방침</a></p>
+    </footer>
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const emoticons = [
+                // Happy/Smiling
+                '^_^', '^^', ':)', '(:', '=)', '(^-^)', '(*^.^*)', '(*´▽｀*)', 'ᕕ( ᐛ )ᕗ', '(＾▽＾)', '٩(๑•̀o•́๑)و', '＼(^o^)／', 'ヾ(＠⌒ー⌒＠)ノ',
+                // Sad/Crying
+                ';_;', 'T_T', 'T^T', ';-;', ':(', '(;_;)', '(;﹏;)', '｡ﾟ(ﾟ´Д｀ﾟ)ﾟ｡', '(つД`)ノ', 'ಥ_ಥ', '૮(꒦ິཅ꒦ິ)ა',
+                // Angry/Annoyed
+                '(｀皿´)', 'o(｀ω´ )o', '凸( `n´ )凸', '(ノ°益°)ノ', '(╬ﾟ◥益◤ﾟ)', 'ヽ(｀Д´)ﾉ', '(ʘ言ʘ╬)',
+                // Surprised/Shocked
+                'O.O', 'O_O', 'o.O', 'o_o', '(@_@)', '(°ロ°)', '(ﾟДﾟ;)', '∑(ﾟДﾟ)', 'Σ(ﾟдﾟ;)', '(゜ロ゜)ギョェ',
+                // Confused/Conflicted
+                '???', '._.', '-.-', '(=_=)', '╮(╯_╰)╭', '(´･ω･`)', 'ヽ(ﾟДﾟ)ﾉ',
+                // Winking/Playful
+                ';)', ';-)', '(^_-)', '(*ゝω・*)',
+                // Shy/Embarrassed
+                '(/ω＼)', '(///∇//)', '(*ﾉωﾉ)', '(*￣(エ)￣*)',
+                // Love/Kiss
+                '(´ε｀ )♡', '( ˘ ³˘)♥', 'ε(*´･ω･)з', '(*˘︶˘*).｡.:*♡',
+                // Bowing/Thankful
+                'm(_ _)m', '(_ _)',
+                // Sleeping/Tired
+                '(-_-)zzz', '(=_=)｡o○',
+                // Other
+                'ヾ(o◕∀◕)ﾉ', '(´・ω・`)', '(｡･ω･｡)', 'U・x・U', 'ʕ•ᴥ•ʔ', '(´･ω･`)', '༼ つ ◕_◕ ༽つ', '(ง ˙˘˙ )ว', 'ԅ( ˘ω˘ ԅ)',
+                '٩( *˙0˙*)۶', '╰(*´︶`*)╯', '(*^▽^*)', '(〃´・ω・`)', '(๑´•.̫ • `๑)', '(´∇｀)', '(*^ω^*)', '(〃∀〃)', '(`･ω･´)',
+                '(*^▽^*)', '(*ﾟ▽ﾟ*)', 'ヽ(*´∀｀)ノ', 'ヾ(☆▽☆)', 'ε=ε=(ง ˙∇˙)ว', '( •̀ ω •́ )y', '(ง •̀_•́)ง', '( •_• )', '(-ω-)',
+                '( ´◔ ω◔`)', '( ´∀｀)', '( ´ ▽ ` )', '( ´ ▽ ` )ﾉ', '( ´・ω・)', '( ´ Д ` )', 'ヾ(・ω・｀)ノ', 'ヾ(・ω・)ノ',
+                '( ・ω・)', '( ・∀・)', '(*´ω`*)', '(´・ω・｀)', '( ･ω･ )', '٩(๑´0`๑)۶', 'p(^-^)q', 'q(^-^q)', '٩( 'ω' )و'
+            ];
+
+            const emoticonGrid = document.getElementById('emoticon-grid');
+            const copyMessage = document.getElementById('copy-message');
+
+            emoticons.forEach(emo => {
+                const item = document.createElement('div');
+                item.classList.add('emoticon-item');
+                item.textContent = emo;
+                item.title = "클릭하여 복사";
+                item.addEventListener('click', () => {
+                    navigator.clipboard.writeText(emo)
+                        .then(() => {
+                            copyMessage.style.display = 'block';
+                            setTimeout(() => {
+                                copyMessage.style.display = 'none';
+                            }, 1500);
+                        })
+                        .catch(err => {
+                            console.error('Failed to copy emoticon: ', err);
+                            alert('복사 실패! 브라우저 권한을 확인해주세요.');
+                        });
+                });
+                emoticonGrid.appendChild(item);
+            });
+        });
+    </script>
+</body>
+</html>
