@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="원하는 수량만큼 1부터 45 사이의 로또 번호 6개를 무작위로 생성해주는 온라인 로또 번호 생성기입니다.">
     <title>로또 번호 생성기 - 온라인 도구 모음</title>
     <link rel="stylesheet" href="style.css">
     <style>
@@ -58,8 +59,12 @@
         </div>
         <div class="tool-content">
             <div class="generator-section">
-                <button id="generate-btn" class="generate-button">🍀 행운의 번호 받기 🍀</button>
-                <div id="ball-container" class="ball-container"></div>
+                <div class="controls">
+                    <label for="num-combinations">생성할 조합 수:</label>
+                    <input type="number" id="num-combinations" value="1" min="1" max="10" style="width: 60px; padding: 0.5rem; border-radius: 5px; border: 1px solid var(--card-border-color); background-color: var(--card-bg-color); color: var(--text-color);">
+                </div>
+                <button id="generate-btn" class="generate-button">🍀 번호 생성 🍀</button>
+                <div id="results-container"></div>
             </div>
         </div>
     </main>
@@ -69,31 +74,44 @@
     <script src="main.js"></script>
     <script>
         document.getElementById('generate-btn').addEventListener('click', () => {
-            const container = document.getElementById('ball-container');
-            container.innerHTML = ''; // Clear previous balls
+            const numCombinationsInput = document.getElementById('num-combinations');
+            const numCombinations = parseInt(numCombinationsInput.value);
+            const resultsContainer = document.getElementById('results-container');
+            resultsContainer.innerHTML = ''; // Clear previous results
 
-            const numbers = new Set();
-            while (numbers.size < 6) {
-                numbers.add(Math.floor(Math.random() * 45) + 1);
+            if (isNaN(numCombinations) || numCombinations < 1 || numCombinations > 10) {
+                alert('1에서 10 사이의 유효한 조합 수를 입력해주세요.');
+                return;
             }
 
-            const sortedNumbers = Array.from(numbers).sort((a, b) => a - b);
+            for (let i = 0; i < numCombinations; i++) {
+                const numbers = new Set();
+                while (numbers.size < 6) {
+                    numbers.add(Math.floor(Math.random() * 45) + 1);
+                }
 
-            sortedNumbers.forEach(num => {
-                const ball = document.createElement('div');
-                ball.classList.add('lotto-ball');
-                ball.textContent = num;
+                const sortedNumbers = Array.from(numbers).sort((a, b) => a - b);
 
-                let colorClass = '';
-                if (num <= 10) colorClass = 'ball-yellow';
-                else if (num <= 20) colorClass = 'ball-blue';
-                else if (num <= 30) colorClass = 'ball-red';
-                else if (num <= 40) colorClass = 'ball-gray';
-                else colorClass = 'ball-green';
-                
-                ball.classList.add(colorClass);
-                container.appendChild(ball);
-            });
+                const combinationDiv = document.createElement('div');
+                combinationDiv.classList.add('ball-container'); // Reuse existing ball-container style for each combination
+
+                sortedNumbers.forEach(num => {
+                    const ball = document.createElement('div');
+                    ball.classList.add('lotto-ball');
+                    ball.textContent = num;
+
+                    let colorClass = '';
+                    if (num <= 10) colorClass = 'ball-yellow';
+                    else if (num <= 20) colorClass = 'ball-blue';
+                    else if (num <= 30) colorClass = 'ball-red';
+                    else if (num <= 40) colorClass = 'ball-gray';
+                    else colorClass = 'ball-green';
+                    
+                    ball.classList.add(colorClass);
+                    combinationDiv.appendChild(ball);
+                });
+                resultsContainer.appendChild(combinationDiv);
+            }
         });
     </script>
 </body>

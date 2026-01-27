@@ -3,148 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이미지 포맷 변환 - 온라인 도구 모음</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .converter-section {
-            text-align: center;
-        }
-        #image-preview {
-            max-width: 100%;
-            max-height: 400px;
-            margin-top: 1rem;
-            border: 1px solid var(--card-border-color);
-            background-color: var(--card-bg-color);
-        }
-        .controls {
-            margin: 1rem 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 1rem;
-        }
-        .file-input-label, .download-button {
-            padding: 0.8rem 1.2rem;
-            border-radius: 5px;
-            border: 1px solid var(--card-border-color);
-            cursor: pointer;
-        }
-        .progress-bar-container {
-            width: 100%;
-            background-color: var(--card-border-color);
-            border-radius: 5px;
-            margin-top: 1rem;
-            display: none; /* Hidden by default */
-        }
-        .progress-bar {
-            width: 0%;
-            height: 10px;
-            background-color: #4CAF50;
-            border-radius: 5px;
-            transition: width 0.4s ease-in-out;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1><a href="/" class="home-link">온라인 도구 모음</a></h1>
-        <button id="theme-toggle">다크 모드</button>
-    </header>
-    <main class="tool-page">
-        <div class="tool-header">
-            <h2>이미지 포맷 변환</h2>
-            <a href="/" class="back-button">메인으로 돌아가기</a>
-        </div>
-        <div class="tool-content">
-            <div class="converter-section">
-                <input type="file" id="file-input" accept="image/*" style="display: none;">
-                <label for="file-input" class="file-input-label">이미지 선택</label>
-                <div class="controls">
-                    <label for="format-select">변환할 포맷:</label>
-                    <select id="format-select">
-                        <option value="jpeg">JPG</option>
-                        <option value="png">PNG</option>
-                        <option value="webp">WEBP</option>
-                    </select>
-                    <button id="download-btn" class="download-button" disabled>변환 및 다운로드</button>
-                </div>
-                <div id="progress-container" class="progress-bar-container">
-                    <div id="progress-bar" class="progress-bar"></div>
-                </div>
-                <img id="image-preview" src="" alt="Image preview will appear here.">
-            </div>
-        </div>
-    </main>
-    <footer>
-        <p>Made by CodeBlue</p>
-    </footer>
-    <script src="main.js"></script>
-    <script>
-        const fileInput = document.getElementById('file-input');
-        const imagePreview = document.getElementById('image-preview');
-        const downloadBtn = document.getElementById('download-btn');
-        const formatSelect = document.getElementById('format-select');
-        const progressContainer = document.getElementById('progress-container');
-        const progressBar = document.getElementById('progress-bar');
-        let originalFileName = '';
-
-        fileInput.addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                originalFileName = file.name.split('.')[0];
-                reader.onload = (e) => {
-                    imagePreview.src = e.target.result;
-                    downloadBtn.disabled = false;
-                };
-                reader.readAsDataURL(file);
+        <meta name="description" content="다양한 이미지 파일을 JPG, PNG, WEBP 등 원하는 포맷으로 손쉽게 변환하고 다운로드할 수 있는 온라인 이미지 변환기입니다.">
+        <title>이미지 포맷 변환 - 온라인 도구 모음</title>
+        <style>
+            .converter-section {
+                text-align: center;
             }
-        });
-
-        downloadBtn.addEventListener('click', () => {
-            const img = imagePreview;
-            if (!img.src) return;
-
-            downloadBtn.disabled = true;
-            progressContainer.style.display = 'block';
-            progressBar.style.width = '0%';
-
-            // Simulate progress
-            setTimeout(() => {
-                progressBar.style.width = '30%';
-                
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                
-                canvas.width = img.naturalWidth;
-                canvas.height = img.naturalHeight;
-                
+            #image-preview {
+                max-width: 100%;
+                max-height: 400px;
+                margin-top: 1rem;
+                border: 1px solid var(--card-border-color);
+                background-color: var(--card-bg-color);
+            }
+            .controls {
+                margin: 1rem 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+            }
+            .file-input-label, .download-button {
+                padding: 0.8rem 1.2rem;
+                border-radius: 5px;
+                border: 1px solid var(--card-border-color);
+                cursor: pointer;
+            }
+            .progress-bar-container {
+                width: 100%;
+                background-color: var(--card-border-color);
+                border-radius: 5px;
+                margin-top: 1rem;
+                display: none; /* Hidden by default */
+            }
+            .progress-bar {
+                width: 0%;
+                height: 10px;
+                background-color: #4CAF50;
+                border-radius: 5px;
+                transition: width 0.4s ease-in-out;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1><a href="/" class="home-link">온라인 도구 모음</a></h1>
+            <button id="theme-toggle">다크 모드</button>
+        </header>
+        <main class="tool-page">
+            <div class="tool-header">
+                <h2>이미지 포맷 변환</h2>
+                <a href="/" class="back-button">메인으로 돌아가기</a>
+            </div>
+            <div class="tool-content">
+                <div class="converter-section">
+                    <input type="file" id="file-input" accept="image/*" style="display: none;">
+                    <label for="file-input" class="file-input-label">이미지 선택</label>
+                    <div class="controls">
+                        <label for="format-select">변환할 포맷:</label>
+                        <select id="format-select">
+                            <option value="jpeg">JPG</option>
+                            <option value="png">PNG</option>
+                            <option value="webp">WEBP</option>
+                        </select>
+                        <button id="download-btn" class="download-button" disabled>변환 및 다운로드</button>
+                    </div>
+                    <div id="progress-container" class="progress-bar-container">
+                        <div id="progress-bar" class="progress-bar"></div>
+                    </div>
+                    <img id="image-preview" src="" alt="선택된 이미지 미리보기. 이미지가 업로드되면 여기에 표시됩니다.">
+                </div>
+            </div>
+        </main>
+        <footer>
+            <p>Made by CodeBlue</p>
+        </footer>
+        <script src="main.js"></script>
+        <script>
+            const fileInput = document.getElementById('file-input');
+            const imagePreview = document.getElementById('image-preview');
+            const downloadBtn = document.getElementById('download-btn');
+            const formatSelect = document.getElementById('format-select');
+            const progressContainer = document.getElementById('progress-container');
+            const progressBar = document.getElementById('progress-bar');
+            let originalFileName = '';
+    
+            fileInput.addEventListener('change', (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    originalFileName = file.name.split('.')[0];
+                    reader.onload = (e) => {
+                        imagePreview.src = e.target.result;
+                        downloadBtn.disabled = false;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+    
+            downloadBtn.addEventListener('click', () => {
+                const img = imagePreview;
+                if (!img.src) return;
+    
+                downloadBtn.disabled = true;
+                progressContainer.style.display = 'block';
+                progressBar.style.width = '0%';
+    
+                // Simulate progress
                 setTimeout(() => {
-                    progressBar.style.width = '70%';
-                    ctx.drawImage(img, 0, 0);
-
-                    const format = formatSelect.value;
-                    const mimeType = `image/${format}`;
-                    const dataUrl = canvas.toDataURL(mimeType);
-
-                    const link = document.createElement('a');
-                    link.href = dataUrl;
-                    link.download = `${originalFileName}.${format}`;
+                    progressBar.style.width = '30%';
+                    
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    
+                    canvas.width = img.naturalWidth;
+                    canvas.height = img.naturalHeight;
                     
                     setTimeout(() => {
-                        progressBar.style.width = '100%';
-                        link.click();
+                        progressBar.style.width = '70%';
+                        ctx.drawImage(img, 0, 0);
+    
+                        const format = formatSelect.value;
+                        const mimeType = `image/${format}`;
+                        const dataUrl = canvas.toDataURL(mimeType);
+    
+                        const link = document.createElement('a');
+                        link.href = dataUrl;
+                        link.download = `${originalFileName}.${format}`;
                         
-                        // Reset after a short delay
                         setTimeout(() => {
-                            progressContainer.style.display = 'none';
-                            downloadBtn.disabled = false;
-                        }, 500);
-
-                    }, 200);
+                            progressBar.style.width = '100%';
+                            link.click();
+                            
+                            // Reset after a short delay
+                            setTimeout(() => {
+                                progressContainer.style.display = 'none';
+                                downloadBtn.disabled = false;
+                            }, 500);
+    
+                        }, 200);
+                    }, 100);
                 }, 100);
-            }, 100);
-        });
-    </script>
-</body>
-</html>
+            });
+        </script>
+    </body>
+    </html>
+    
