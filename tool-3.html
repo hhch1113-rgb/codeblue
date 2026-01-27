@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공백 제거 / 줄바꿈 정리 - 온라인 도구 모음</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .action-button {
+            flex-grow: 1;
+            background-color: var(--button-bg-color);
+            color: var(--button-text-color);
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border: 1px solid var(--card-border-color);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/" class="home-link">온라인 도구 모음</a></h1>
+        <button id="theme-toggle">다크 모드</button>
+    </header>
+    <main class="tool-page">
+        <div class="tool-header">
+            <h2>공백 제거 / 줄바꿈 정리</h2>
+            <a href="/" class="back-button">메인으로 돌아가기</a>
+        </div>
+        <div class="tool-content">
+            <div class="button-group">
+                <button id="remove-extra-spaces" class="action-button">연속 공백 제거</button>
+                <button id="remove-all-breaks" class="action-button">줄바꿈 모두 제거</button>
+                <button id="consolidate-breaks" class="action-button">빈 줄 제거</button>
+            </div>
+            <textarea id="text-input" placeholder="여기에 텍스트를 입력하세요..."></textarea>
+        </div>
+    </main>
+    <footer>
+        <p>Made by CodeBlue</p>
+    </footer>
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const textInput = document.getElementById('text-input');
+            
+            document.getElementById('remove-extra-spaces').addEventListener('click', () => {
+                // Replaces multiple spaces/tabs with a single space
+                textInput.value = textInput.value.replace(/[ \t]+/g, ' ');
+            });
+
+            document.getElementById('remove-all-breaks').addEventListener('click', () => {
+                // Replaces all line breaks with a space
+                textInput.value = textInput.value.replace(/(\r\n|\n|\r)/gm, ' ');
+            });
+
+            document.getElementById('consolidate-breaks').addEventListener('click', () => {
+                // Replaces two or more consecutive line breaks with a single one
+                textInput.value = textInput.value.replace(/(\r\n|\n|\r){2,}/gm, '\n');
+            });
+        });
+    </script>
+</body>
+</html>

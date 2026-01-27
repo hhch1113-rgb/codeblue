@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이자 계산기 - 온라인 도구 모음</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .calculator-section {
+            padding: 1.5rem;
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: 8px;
+        }
+        .calc-input-group {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .calc-input-group input[type="number"] {
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: 1px solid var(--card-border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+        .calc-button {
+             background-color: var(--button-bg-color);
+             color: var(--button-text-color);
+             padding: 0.8rem 1.2rem;
+             border-radius: 5px;
+             border: 1px solid var(--card-border-color);
+             cursor: pointer;
+             font-size: 1rem;
+             width: 100%;
+        }
+        .result-box {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/" class="home-link">온라인 도구 모음</a></h1>
+        <button id="theme-toggle">다크 모드</button>
+    </header>
+    <main class="tool-page">
+        <div class="tool-header">
+            <h2>이자 계산기</h2>
+            <a href="/" class="back-button">메인으로 돌아가기</a>
+        </div>
+        <div class="tool-content">
+            <div class="calculator-section">
+                <div class="calc-input-group">
+                    <label for="principal">원금 (원):</label>
+                    <input type="number" id="principal" placeholder="예: 10,000,000">
+                </div>
+                <div class="calc-input-group">
+                    <label for="rate">연 이자율 (%):</label>
+                    <input type="number" id="rate" placeholder="예: 5">
+                </div>
+                <div class="calc-input-group">
+                    <label for="years">기간 (년):</label>
+                    <input type="number" id="years" placeholder="예: 3">
+                </div>
+                <div class="calc-input-group">
+                    <label>계산 방식:</label>
+                    <div>
+                        <label><input type="radio" name="interest_type" value="simple" checked> 단리</label>
+                        <label><input type="radio" name="interest_type" value="compound"> 복리</label>
+                    </div>
+                </div>
+                <button id="calc-btn" class="calc-button">계산하기</button>
+                <div id="result" class="result-box" style="display: none;">
+                    <p>총 이자: <span id="interest-amount">0</span> 원</p>
+                    <p><strong>세후 총 수령액: <span id="total-amount">0</span> 원</strong></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Made by CodeBlue</p>
+    </footer>
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const calcBtn = document.getElementById('calc-btn');
+            
+            calcBtn.addEventListener('click', () => {
+                const principal = parseFloat(document.getElementById('principal').value);
+                const rate = parseFloat(document.getElementById('rate').value) / 100;
+                const years = parseFloat(document.getElementById('years').value);
+                const interestType = document.querySelector('input[name="interest_type"]:checked').value;
+                
+                if (isNaN(principal) || isNaN(rate) || isNaN(years)) return;
+
+                let interest = 0;
+                let totalAmount = 0;
+
+                if (interestType === 'simple') {
+                    interest = principal * rate * years;
+                } else { // compound
+                    totalAmount = principal * Math.pow((1 + rate), years);
+                    interest = totalAmount - principal;
+                }
+                
+                const interestTax = interest * 0.154; // 이자 소득세 15.4%
+                const finalAmount = principal + interest - interestTax;
+
+                document.getElementById('interest-amount').textContent = Math.round(interest).toLocaleString();
+                document.getElementById('total-amount').textContent = Math.round(finalAmount).toLocaleString();
+                document.getElementById('result').style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

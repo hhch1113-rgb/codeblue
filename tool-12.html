@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로또 번호 생성기 - 온라인 도구 모음</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .generator-section {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .generate-button {
+             background-color: var(--button-bg-color);
+             color: var(--button-text-color);
+             padding: 1rem 2rem;
+             border-radius: 5px;
+             border: 1px solid var(--card-border-color);
+             cursor: pointer;
+             font-size: 1.2rem;
+        }
+        .ball-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        .lotto-ball {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .ball-yellow { background-color: #fbc400; }
+        .ball-blue { background-color: #69c8f2; }
+        .ball-red { background-color: #ff7272; }
+        .ball-gray { background-color: #aaa; }
+        .ball-green { background-color: #b0d840; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/" class="home-link">온라인 도구 모음</a></h1>
+        <button id="theme-toggle">다크 모드</button>
+    </header>
+    <main class="tool-page">
+        <div class="tool-header">
+            <h2>로또 번호 생성기</h2>
+            <a href="/" class="back-button">메인으로 돌아가기</a>
+        </div>
+        <div class="tool-content">
+            <div class="generator-section">
+                <button id="generate-btn" class="generate-button">🍀 행운의 번호 받기 🍀</button>
+                <div id="ball-container" class="ball-container"></div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Made by CodeBlue</p>
+    </footer>
+    <script src="main.js"></script>
+    <script>
+        document.getElementById('generate-btn').addEventListener('click', () => {
+            const container = document.getElementById('ball-container');
+            container.innerHTML = ''; // Clear previous balls
+
+            const numbers = new Set();
+            while (numbers.size < 6) {
+                numbers.add(Math.floor(Math.random() * 45) + 1);
+            }
+
+            const sortedNumbers = Array.from(numbers).sort((a, b) => a - b);
+
+            sortedNumbers.forEach(num => {
+                const ball = document.createElement('div');
+                ball.classList.add('lotto-ball');
+                ball.textContent = num;
+
+                let colorClass = '';
+                if (num <= 10) colorClass = 'ball-yellow';
+                else if (num <= 20) colorClass = 'ball-blue';
+                else if (num <= 30) colorClass = 'ball-red';
+                else if (num <= 40) colorClass = 'ball-gray';
+                else colorClass = 'ball-green';
+                
+                ball.classList.add(colorClass);
+                container.appendChild(ball);
+            });
+        });
+    </script>
+</body>
+</html>

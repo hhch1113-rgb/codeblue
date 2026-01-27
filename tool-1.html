@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글자수 / 단어수 / 문장수 세기 - 온라인 도구 모음</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1><a href="/" class="home-link">온라인 도구 모음</a></h1>
+        <button id="theme-toggle">다크 모드</button>
+    </header>
+    <main class="tool-page">
+        <div class="tool-header">
+            <h2>글자수 / 단어수 / 문장수 세기</h2>
+            <a href="/" class="back-button">메인으로 돌아가기</a>
+        </div>
+        <div class="tool-content">
+            <textarea id="text-input" placeholder="여기에 텍스트를 입력하세요..."></textarea>
+            <div id="result" class="result-box">
+                <p>글자 수: <span id="char-count">0</span></p>
+                <p>단어 수: <span id="word-count">0</span></p>
+                <p>문장 수: <span id="sentence-count">0</span></p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Made by CodeBlue</p>
+    </footer>
+    <script src="main.js"></script>
+    <script>
+        // Specific logic for tool-1
+        document.addEventListener('DOMContentLoaded', () => {
+            const textInput = document.getElementById('text-input');
+            const charCount = document.getElementById('char-count');
+            const wordCount = document.getElementById('word-count');
+            const sentenceCount = document.getElementById('sentence-count');
+
+            textInput.addEventListener('input', () => {
+                const text = textInput.value;
+
+                // Character count
+                charCount.textContent = text.length;
+
+                // Word count
+                const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+                wordCount.textContent = words.length;
+                if (text.trim() === '') {
+                     wordCount.textContent = 0;
+                }
+
+                // Sentence count
+                const sentences = text.split(/[.?!]+/).filter(sentence => sentence.trim().length > 0);
+                sentenceCount.textContent = sentences.length;
+                if (text.trim() === '') {
+                     sentenceCount.textContent = 0;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

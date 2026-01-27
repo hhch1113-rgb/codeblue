@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TXT → PDF 변환 - 온라인 도구 모음</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- jsPDF library from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        .warning-box {
+            background-color: #ffcdd2;
+            color: #c62828;
+            border: 1px solid #c62828;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+        body.dark-mode .warning-box {
+             background-color: #4e2a2a;
+             color: #ff9a9a;
+             border-color: #ff9a9a;
+        }
+        .download-button {
+             width: 100%;
+             padding: 1rem;
+             font-size: 1.1rem;
+             cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/" class="home-link">온라인 도구 모음</a></h1>
+        <button id="theme-toggle">다크 모드</button>
+    </header>
+    <main class="tool-page">
+        <div class="tool-header">
+            <h2>TXT → PDF 변환</h2>
+            <a href="/" class="back-button">메인으로 돌아가기</a>
+        </div>
+        <div class="tool-content">
+            <div class="warning-box">
+                <strong>주의:</strong> 현재 이 도구는 한글을 지원하지 않습니다. 한글 텍스트는 PDF에서 깨져 보일 수 있습니다. 영문과 숫자, 특수문자만 사용해주세요.
+            </div>
+            <textarea id="text-input" placeholder="여기에 PDF로 변환할 텍스트를 입력하세요..."></textarea>
+            <button id="download-pdf" class="action-button download-button">PDF로 다운로드</button>
+        </div>
+    </main>
+    <footer>
+        <p>Made by CodeBlue</p>
+    </footer>
+    <script src="main.js"></script>
+    <script>
+        window.jsPDF = window.jspdf.jsPDF;
+
+        document.getElementById('download-pdf').addEventListener('click', () => {
+            const text = document.getElementById('text-input').value;
+            if (!text) {
+                alert('텍스트를 입력해주세요.');
+                return;
+            }
+
+            // Create a new jsPDF instance
+            const doc = new jsPDF();
+            
+            // Add text to the PDF. The text function handles wrapping.
+            doc.text(text, 10, 10);
+            
+            // Save the PDF
+            doc.save('converted-document.pdf');
+        });
+    </script>
+</body>
+</html>

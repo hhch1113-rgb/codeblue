@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>퍼센트 계산기 - 온라인 도구 모음</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .calculator-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: 8px;
+        }
+        .calculator-section h3 {
+            margin-top: 0;
+            border-bottom: 1px solid var(--card-border-color);
+            padding-bottom: 0.5rem;
+        }
+        .calc-input-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        .calc-input-group input[type="number"] {
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: 1px solid var(--card-border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            width: 100px;
+        }
+        .calc-result {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .calc-button {
+             background-color: var(--button-bg-color);
+             color: var(--button-text-color);
+             padding: 0.6rem 1.2rem;
+             border-radius: 5px;
+             border: 1px solid var(--card-border-color);
+             cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/" class="home-link">온라인 도구 모음</a></h1>
+        <button id="theme-toggle">다크 모드</button>
+    </header>
+    <main class="tool-page">
+        <div class="tool-header">
+            <h2>퍼센트 계산기</h2>
+            <a href="/" class="back-button">메인으로 돌아가기</a>
+        </div>
+        <div class="tool-content">
+            <!-- Calculator 1 -->
+            <div class="calculator-section">
+                <h3>Y의 X%는 얼마인가요?</h3>
+                <div class="calc-input-group">
+                    <input type="number" id="perc1-val1">
+                    <span>의</span>
+                    <input type="number" id="perc1-val2">
+                    <span>%</span>
+                    <button id="calc1-btn" class="calc-button">=</button>
+                    <span id="calc1-result" class="calc-result"></span>
+                </div>
+            </div>
+
+            <!-- Calculator 2 -->
+            <div class="calculator-section">
+                <h3>X는 Y의 몇 %인가요?</h3>
+                <div class="calc-input-group">
+                    <input type="number" id="perc2-val1">
+                    <span>은(는)</span>
+                    <input type="number" id="perc2-val2">
+                    <span>의</span>
+                    <button id="calc2-btn" class="calc-button">=</button>
+                    <span id="calc2-result" class="calc-result"></span>
+                     <span>%</span>
+                </div>
+            </div>
+
+            <!-- Calculator 3 -->
+            <div class="calculator-section">
+                <h3>X가 Y로 변하면, 몇 % 변경된건가요?</h3>
+                <div class="calc-input-group">
+                     <input type="number" id="perc3-val1">
+                    <span>에서</span>
+                    <input type="number" id="perc3-val2">
+                    <span>(으)로</span>
+                    <button id="calc3-btn" class="calc-button">=</button>
+                    <span id="calc3-result" class="calc-result"></span>
+                     <span>%</span>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Made by CodeBlue</p>
+    </footer>
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Calc 1
+            document.getElementById('calc1-btn').addEventListener('click', () => {
+                const y = parseFloat(document.getElementById('perc1-val1').value);
+                const x = parseFloat(document.getElementById('perc1-val2').value);
+                if (!isNaN(x) && !isNaN(y)) {
+                    document.getElementById('calc1-result').textContent = (y * (x / 100)).toLocaleString();
+                }
+            });
+
+            // Calc 2
+            document.getElementById('calc2-btn').addEventListener('click', () => {
+                const x = parseFloat(document.getElementById('perc2-val1').value);
+                const y = parseFloat(document.getElementById('perc2-val2').value);
+                if (!isNaN(x) && !isNaN(y) && y !== 0) {
+                    document.getElementById('calc2-result').textContent = ((x / y) * 100).toLocaleString();
+                }
+            });
+
+            // Calc 3
+            document.getElementById('calc3-btn').addEventListener('click', () => {
+                const x = parseFloat(document.getElementById('perc3-val1').value);
+                const y = parseFloat(document.getElementById('perc3-val2').value);
+                 if (!isNaN(x) && !isNaN(y) && x !== 0) {
+                    const result = ((y - x) / x) * 100;
+                    document.getElementById('calc3-result').textContent = result.toLocaleString();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

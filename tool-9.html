@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>환율 계산기 - 온라인 도구 모음</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .calculator-section {
+            padding: 1.5rem;
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: 8px;
+        }
+        .calc-input-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        .calc-input-group input, .calc-input-group select {
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: 1px solid var(--card-border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+        .calc-button {
+             background-color: var(--button-bg-color);
+             color: var(--button-text-color);
+             padding: 0.8rem 1.2rem;
+             border-radius: 5px;
+             border: 1px solid var(--card-border-color);
+             cursor: pointer;
+        }
+        .result-box {
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .data-source {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            text-align: right;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/" class="home-link">온라인 도구 모음</a></h1>
+        <button id="theme-toggle">다크 모드</button>
+    </header>
+    <main class="tool-page">
+        <div class="tool-header">
+            <h2>환율 계산기</h2>
+            <a href="/" class="back-button">메인으로 돌아가기</a>
+        </div>
+        <div class="tool-content">
+            <div class="calculator-section">
+                <div class="calc-input-group">
+                    <input type="number" id="amount" value="100">
+                    <select id="from-currency"></select>
+                    <span>→</span>
+                    <select id="to-currency"></select>
+                </div>
+                <button id="convert-btn" class="calc-button">변환하기</button>
+                <div id="result" class="result-box"></div>
+                <p class="data-source">* 환율 정보는 European Central Bank 데이터를 따릅니다.</p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Made by CodeBlue</p>
+    </footer>
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const fromSelect = document.getElementById('from-currency');
+            const toSelect = document.getElementById('to-currency');
+            const convertBtn = document.getElementById('convert-btn');
+            const resultDiv = document.getElementById('result');
+            const amountInput = document.getElementById('amount');
+
+            const host = 'api.frankfurter.app';
+            
+            // Fetch currencies and populate dropdowns
+            try {
+                const response = await fetch(`https://${host}/currencies`);
+                const currencies = await response.json();
+                
+                const commonCurrencies = ['USD', 'EUR', 'JPY', 'GBP', 'AUD', 'CAD', 'CHF', 'CNY', 'KRW'];
+                
+                for (const code in currencies) {
+                    if (commonCurrencies.includes(code)) {
+                        const option1 = document.createElement('option');
+                        option1.value = code;
+                        option1.textContent = `${code} (${currencies[code]})`;
+                        fromSelect.appendChild(option1);
+
+                        const option2 = document.createElement('option');
+                        option2.value = code;
+                        option2.textContent = `${code} (${currencies[code]})`;
+                        toSelect.appendChild(option2);
+                    }
+                }
+                
+                fromSelect.value = 'USD';
+                toSelect.value = 'KRW';
+
+            } catch (error) {
+                resultDiv.textContent = '통화 목록을 불러오는 데 실패했습니다.';
+                console.error('Error fetching currencies:', error);
+            }
+
+            // Convert currency on button click
+            convertBtn.addEventListener('click', async () => {
+                const amount = parseFloat(amountInput.value);
+                const from = fromSelect.value;
+                const to = toSelect.value;
+
+                if (isNaN(amount) || !from || !to) return;
+                
+                if (from === to) {
+                    resultDiv.textContent = `${amount.toLocaleString()} ${to}`;
+                    return;
+                }
+
+                resultDiv.textContent = '계산 중...';
+
+                try {
+                    const response = await fetch(`https://${host}/latest?amount=${amount}&from=${from}&to=${to}`);
+                    const data = await response.json();
+
+                    const convertedAmount = data.rates[to];
+                    resultDiv.textContent = `${convertedAmount.toLocaleString()} ${to}`;
+
+                } catch (error) {
+                    resultDiv.textContent = '환율 변환에 실패했습니다.';
+                    console.error('Error converting currency:', error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대출 상환금 계산기 - 온라인 도구 모음</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .calculator-section {
+            padding: 1.5rem;
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: 8px;
+        }
+        .calc-input-group {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .calc-input-group input[type="number"] {
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: 1px solid var(--card-border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        .calc-button {
+             padding: 0.8rem 1.2rem;
+             border-radius: 5px;
+             border: 1px solid var(--card-border-color);
+             cursor: pointer;
+             width: 100%;
+        }
+        .result-box {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .final-amount {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/" class="home-link">온라인 도구 모음</a></h1>
+        <button id="theme-toggle">다크 모드</button>
+    </header>
+    <main class="tool-page">
+        <div class="tool-header">
+            <h2>대출 상환금 계산기 (원리금균등)</h2>
+            <a href="/" class="back-button">메인으로 돌아가기</a>
+        </div>
+        <div class="tool-content">
+            <div class="calculator-section">
+                <div class="calc-input-group">
+                    <label for="loan-amount">대출 원금 (원):</label>
+                    <input type="number" id="loan-amount" placeholder="예: 100,000,000">
+                </div>
+                <div class="calc-input-group">
+                    <label for="interest-rate">연 이자율 (%):</label>
+                    <input type="number" id="interest-rate" placeholder="예: 5">
+                </div>
+                <div class="calc-input-group">
+                    <label for="loan-term">대출 기간 (년):</label>
+                    <input type="number" id="loan-term" placeholder="예: 30">
+                </div>
+                <button id="calc-btn" class="calc-button">계산하기</button>
+                <div id="result" class="result-box" style="display: none;">
+                    <p>매월 상환 예상금액</p>
+                    <p id="monthly-payment" class="final-amount"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Made by CodeBlue</p>
+    </footer>
+    <script src="main.js"></script>
+    <script>
+        document.getElementById('calc-btn').addEventListener('click', () => {
+            const principal = parseFloat(document.getElementById('loan-amount').value);
+            const annualRate = parseFloat(document.getElementById('interest-rate').value);
+            const years = parseFloat(document.getElementById('loan-term').value);
+
+            if (isNaN(principal) || isNaN(annualRate) || isNaN(years) || years === 0) return;
+
+            const monthlyRate = annualRate / 12 / 100;
+            const numberOfPayments = years * 12;
+
+            const monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+
+            document.getElementById('monthly-payment').textContent = `${Math.round(monthlyPayment).toLocaleString()} 원`;
+            document.getElementById('result').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

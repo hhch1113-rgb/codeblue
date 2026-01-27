@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>특수문자 제거 - 온라인 도구 모음</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .control-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+        #chars-to-remove {
+            flex-grow: 1;
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: 1px solid var(--card-border-color);
+            background-color: var(--card-bg-color);
+            color: var(--text-color);
+        }
+        .action-button {
+            background-color: var(--button-bg-color);
+            color: var(--button-text-color);
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
+            border: 1px solid var(--card-border-color);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/" class="home-link">온라인 도구 모음</a></h1>
+        <button id="theme-toggle">다크 모드</button>
+    </header>
+    <main class="tool-page">
+        <div class="tool-header">
+            <h2>특수문자 제거</h2>
+            <a href="/" class="back-button">메인으로 돌아가기</a>
+        </div>
+        <div class="tool-content">
+            <div class="control-group">
+                <input type="text" id="chars-to-remove" placeholder="제거할 특정 문자를 여기에 입력하세요.">
+                <button id="remove-specific" class="action-button">지정 문자 제거</button>
+            </div>
+            <div class="control-group">
+                 <button id="remove-all-special" class="action-button" style="width: 100%;">모든 특수문자 제거 (영문, 숫자, 한글, 공백 제외)</button>
+            </div>
+            <textarea id="text-input" placeholder="여기에 텍스트를 입력하세요..."></textarea>
+        </div>
+    </main>
+    <footer>
+        <p>Made by CodeBlue</p>
+    </footer>
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const textInput = document.getElementById('text-input');
+            const charsToRemoveInput = document.getElementById('chars-to-remove');
+
+            document.getElementById('remove-specific').addEventListener('click', () => {
+                const chars = charsToRemoveInput.value;
+                if (chars) {
+                    // Escape characters that have special meaning in regex
+                    const escapedChars = chars.replace(/[-\/\\^$*+?.()|[\\\]{}]/g, '\\$&');
+                    const regex = new RegExp(`[${escapedChars}]`, 'g');
+                    textInput.value = textInput.value.replace(regex, '');
+                }
+            });
+
+            document.getElementById('remove-all-special').addEventListener('click', () => {
+                // Keep English, numbers, Korean, and spaces
+                textInput.value = textInput.value.replace(/[^a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣\s]/g, '');
+            });
+        });
+    </script>
+</body>
+</html>

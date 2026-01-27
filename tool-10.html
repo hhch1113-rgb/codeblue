@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연봉 실수령액 계산기 - 온라인 도구 모음</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .calculator-section {
+            padding: 1.5rem;
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: 8px;
+        }
+        .calc-input-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .calc-input-group input[type="number"] {
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: 1px solid var(--card-border-color);
+            width: 200px;
+        }
+        .calc-button {
+             padding: 0.8rem 1.2rem;
+             border-radius: 5px;
+             border: 1px solid var(--card-border-color);
+             cursor: pointer;
+        }
+        .result-table {
+            width: 100%;
+            margin-top: 1.5rem;
+            border-collapse: collapse;
+        }
+        .result-table th, .result-table td {
+            border: 1px solid var(--card-border-color);
+            padding: 0.8rem;
+            text-align: right;
+        }
+        .result-table th {
+            background-color: var(--card-bg-color);
+            text-align: left;
+        }
+        .final-amount {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/" class="home-link">온라인 도구 모음</a></h1>
+        <button id="theme-toggle">다크 모드</button>
+    </header>
+    <main class="tool-page">
+        <div class="tool-header">
+            <h2>연봉 → 실수령액 계산기</h2>
+            <a href="/" class="back-button">메인으로 돌아가기</a>
+        </div>
+        <div class="tool-content">
+            <div class="calculator-section">
+                <p>* 2024년 기준, 1인 가구, 비과세액 0원으로 가정하여 계산합니다.</p>
+                <div class="calc-input-group">
+                    <input type="number" id="salary" placeholder="연봉 입력 (만원 단위)">
+                    <span>만원</span>
+                    <button id="calc-btn" class="calc-button">계산하기</button>
+                </div>
+                <div id="result" style="display: none;">
+                    <table class="result-table">
+                        <tr><th>항목</th><th>월별 금액</th></tr>
+                        <tr><td>예상 월 소득</td><td id="monthly-gross"></td></tr>
+                        <tr><td>국민연금 (4.5%)</td><td id="national-pension"></td></tr>
+                        <tr><td>건강보험 (3.545%)</td><td id="health-insurance"></td></tr>
+                        <tr><td>장기요양보험</td><td id="longterm-care"></td></tr>
+                        <tr><td>고용보험 (0.9%)</td><td id="employment-insurance"></td></tr>
+                        <tr><td>소득세</td><td id="income-tax"></td></tr>
+                        <tr><td>지방소득세 (10%)</td><td id="local-tax"></td></tr>
+                        <tr><th><strong>월 공제액 합계</strong></th><td id="total-deduction"></td></tr>
+                        <tr><th><strong class="final-amount">월 예상 실수령액</strong></th><td id="monthly-net" class="final-amount"></td></tr>
+                         <tr><th><strong class="final-amount">연봉 실수령액</strong></th><td id="annual-net" class="final-amount"></td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Made by CodeBlue</p>
+    </footer>
+    <script src="main.js"></script>
+    <script>
+        document.getElementById('calc-btn').addEventListener('click', () => {
+            const annualSalary = parseFloat(document.getElementById('salary').value) * 10000;
+            if (isNaN(annualSalary)) return;
+
+            const monthlyGross = annualSalary / 12;
+
+            // 4대 보험 계산
+            const pensionMax = 5900000; // 국민연금 상한액 (2024년 7월부터)
+            const monthlyPension = Math.min(monthlyGross, pensionMax) * 0.045;
+            const monthlyHealth = monthlyGross * 0.03545;
+            const monthlyLongTerm = monthlyHealth * 0.1281;
+            const monthlyEmployment = monthlyGross * 0.009;
+
+            // 근로소득세 계산 (2024년 기준, 1인 가구)
+            const taxableIncome = annualSalary - 1500000; // 근로소득공제 (단순화)
+            let annualTax = 0;
+            if (taxableIncome <= 14000000) {
+                annualTax = taxableIncome * 0.06;
+            } else if (taxableIncome <= 50000000) {
+                annualTax = 840000 + (taxableIncome - 14000000) * 0.15;
+            } else if (taxableIncome <= 88000000) {
+                annualTax = 6240000 + (taxableIncome - 50000000) * 0.24;
+            } else if (taxableIncome <= 150000000) {
+                annualTax = 15360000 + (taxableIncome - 88000000) * 0.35;
+            } else {
+                 annualTax = 37060000 + (taxableIncome - 150000000) * 0.38;
+            }
+
+            const monthlyIncomeTax = annualTax / 12;
+            const monthlyLocalTax = monthlyIncomeTax * 0.1;
+
+            const totalDeduction = monthlyPension + monthlyHealth + monthlyLongTerm + monthlyEmployment + monthlyIncomeTax + monthlyLocalTax;
+            const monthlyNet = monthlyGross - totalDeduction;
+            const annualNet = monthlyNet * 12;
+
+            const format = (num) => `${Math.round(num).toLocaleString()} 원`;
+
+            document.getElementById('monthly-gross').textContent = format(monthlyGross);
+            document.getElementById('national-pension').textContent = format(monthlyPension);
+            document.getElementById('health-insurance').textContent = format(monthlyHealth);
+            document.getElementById('longterm-care').textContent = format(monthlyLongTerm);
+            document.getElementById('employment-insurance').textContent = format(monthlyEmployment);
+            document.getElementById('income-tax').textContent = format(monthlyIncomeTax);
+            document.getElementById('local-tax').textContent = format(monthlyLocalTax);
+            document.getElementById('total-deduction').textContent = format(totalDeduction);
+            document.getElementById('monthly-net').textContent = format(monthlyNet);
+            document.getElementById('annual-net').textContent = format(annualNet);
+
+            document.getElementById('result').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

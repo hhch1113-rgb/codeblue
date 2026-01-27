@@ -1,1 +1,173 @@
-/* Add styles here */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --card-bg-color: #f9f9f9;
+    --card-border-color: #eeeeee;
+    --header-bg-color: #f1f1f1;
+    --footer-bg-color: #f1f1f1;
+    --button-bg-color: #e0e0e0;
+    --button-text-color: #333333;
+}
+
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #e0e0e0;
+    --card-bg-color: #1e1e1e;
+    --card-border-color: #333333;
+    --header-bg-color: #1a1a1a;
+    --footer-bg-color: #1a1a1a;
+    --button-bg-color: #333333;
+    --button-text-color: #e0e0e0;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+header, footer {
+    background-color: var(--header-bg-color);
+    text-align: center;
+    padding: 1rem;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--card-border-color);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+#theme-toggle {
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+main {
+    padding: 2rem;
+}
+
+.intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+    line-height: 1.6;
+}
+
+.tool-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tool-card {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tool-card h3 {
+    margin-top: 0;
+    font-size: 1.2rem;
+}
+
+.tool-card p {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+footer {
+    margin-top: 2rem;
+    border-top: 1px solid var(--card-border-color);
+}
+
+/* Tool Page Specific Styles */
+.tool-page {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.tool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--card-border-color);
+    padding-bottom: 1rem;
+}
+
+.tool-header h2 {
+    margin: 0;
+}
+
+.back-button {
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border: 1px solid var(--card-border-color);
+}
+
+.home-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.tool-content textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 1rem;
+    border-radius: 5px;
+    border: 1px solid var(--card-border-color);
+    background-color: var(--card-bg-color);
+    color: var(--text-color);
+    font-size: 1rem;
+    resize: vertical;
+}
+
+.result-box {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--card-border-color);
+    border-radius: 5px;
+}
+
+.result-box p {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.result-box span {
+    font-weight: bold;
+}

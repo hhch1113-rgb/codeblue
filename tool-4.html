@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대소문자 변환 - 온라인 도구 모음</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .action-button {
+            flex-grow: 1;
+            background-color: var(--button-bg-color);
+            color: var(--button-text-color);
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            border: 1px solid var(--card-border-color);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/" class="home-link">온라인 도구 모음</a></h1>
+        <button id="theme-toggle">다크 모드</button>
+    </header>
+    <main class="tool-page">
+        <div class="tool-header">
+            <h2>대소문자 변환</h2>
+            <a href="/" class="back-button">메인으로 돌아가기</a>
+        </div>
+        <div class="tool-content">
+            <div class="button-group">
+                <button id="to-lowercase" class="action-button">lowercase</button>
+                <button id="to-uppercase" class="action-button">UPPERCASE</button>
+                <button id="to-sentence-case" class="action-button">Sentence case</button>
+                <button id="to-title-case" class="action-button">Title Case</button>
+            </div>
+            <textarea id="text-input" placeholder="여기에 텍스트를 입력하세요..."></textarea>
+        </div>
+    </main>
+    <footer>
+        <p>Made by CodeBlue</p>
+    </footer>
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const textInput = document.getElementById('text-input');
+
+            document.getElementById('to-lowercase').addEventListener('click', () => {
+                textInput.value = textInput.value.toLowerCase();
+            });
+
+            document.getElementById('to-uppercase').addEventListener('click', () => {
+                textInput.value = textInput.value.toUpperCase();
+            });
+
+            document.getElementById('to-sentence-case').addEventListener('click', () => {
+                let text = textInput.value.toLowerCase();
+                text = text.replace(/(^\s*\w|[.?!]\s*\w)/g, (c) => c.toUpperCase());
+                textInput.value = text;
+            });
+
+            document.getElementById('to-title-case').addEventListener('click', () => {
+                textInput.value = textInput.value.toLowerCase().split(' ').map(word => {
+                    return (word.charAt(0).toUpperCase() + word.slice(1));
+                }).join(' ');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부가세 계산기 - 온라인 도구 모음</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .calculator-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: 8px;
+        }
+        .calc-input-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        .calc-input-group input[type="number"] {
+            padding: 0.8rem;
+            border-radius: 5px;
+            border: 1px solid var(--card-border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            width: 200px;
+            font-size: 1rem;
+        }
+        .calc-button {
+             background-color: var(--button-bg-color);
+             color: var(--button-text-color);
+             padding: 0.8rem 1.2rem;
+             border-radius: 5px;
+             border: 1px solid var(--card-border-color);
+             cursor: pointer;
+             font-size: 1rem;
+        }
+        .result-box {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background-color: var(--bg-color);
+            border: 1px solid var(--card-border-color);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/" class="home-link">온라인 도구 모음</a></h1>
+        <button id="theme-toggle">다크 모드</button>
+    </header>
+    <main class="tool-page">
+        <div class="tool-header">
+            <h2>부가세 계산기</h2>
+            <a href="/" class="back-button">메인으로 돌아가기</a>
+        </div>
+        <div class="tool-content">
+            <div class="calculator-section">
+                <div class="calc-input-group">
+                    <input type="number" id="amount-input" placeholder="금액 입력">
+                    <button id="calc-btn" class="calc-button">계산하기</button>
+                </div>
+                <div class="calc-input-group">
+                    <label><input type="radio" name="vat_type" value="exclusive" checked> 부가세 별도</label>
+                    <label><input type="radio" name="vat_type" value="inclusive"> 부가세 포함</label>
+                </div>
+                <div id="result" class="result-box" style="display: none;">
+                    <p>공급가액: <span id="supply-price">0</span> 원</p>
+                    <p>부가세: <span id="vat-amount">0</span> 원</p>
+                    <p><strong>총 합계: <span id="total-price">0</span> 원</strong></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Made by CodeBlue</p>
+    </footer>
+    <script src="main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const calcBtn = document.getElementById('calc-btn');
+            
+            calcBtn.addEventListener('click', () => {
+                const amount = parseFloat(document.getElementById('amount-input').value);
+                const vatType = document.querySelector('input[name="vat_type"]:checked').value;
+                
+                if (isNaN(amount)) return;
+
+                let supplyPrice, vatAmount, totalPrice;
+
+                if (vatType === 'inclusive') {
+                    totalPrice = amount;
+                    supplyPrice = amount / 1.1;
+                    vatAmount = totalPrice - supplyPrice;
+                } else { // exclusive
+                    supplyPrice = amount;
+                    vatAmount = amount * 0.1;
+                    totalPrice = supplyPrice + vatAmount;
+                }
+
+                document.getElementById('supply-price').textContent = Math.round(supplyPrice).toLocaleString();
+                document.getElementById('vat-amount').textContent = Math.round(vatAmount).toLocaleString();
+                document.getElementById('total-price').textContent = Math.round(totalPrice).toLocaleString();
+                document.getElementById('result').style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

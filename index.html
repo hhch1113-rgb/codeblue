@@ -1,14 +1,86 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>온라인 도구 모음</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+    <header>
+        <h1>온라인 도구 모음</h1>
+        <button id="theme-toggle">다크 모드</button>
+    </header>
+    <main>
+        <p class="intro">
+            저희 온라인 도구 모음 웹사이트에 오신 것을 환영합니다! 여기서는 일상생활과 업무에 유용한 다양한 도구들을 무료로 이용하실 수 있습니다. 텍스트 처리, 계산, 파일 변환 등 필요한 모든 기능을 한 곳에서 편리하게 만나보세요. 간단한 클릭만으로 복잡한 작업을 손쉽게 해결하고, 생산성을 높여보세요. 지금 바로 탐색을 시작해보세요!
+        </p>
+        <div class="tool-grid">
+            <a href="tool-1.html" class="tool-card">
+                <h3>글자 수 / 단어 수 / 문장 수 세기</h3>
+                <p>텍스트의 글자 수, 단어 수, 문장 수를 계산합니다.</p>
+            </a>
+            <a href="tool-2.html" class="tool-card">
+                <h3>맞춤법 검사기</h3>
+                <p>텍스트의 맞춤법을 검사하고 교정을 제안합니다.</p>
+            </a>
+            <a href="tool-3.html" class="tool-card">
+                <h3>공백 제거 / 줄바꿈 정리</h3>
+                <p>텍스트의 불필요한 공백과 줄바꿈을 제거하거나 정리합니다.</p>
+            </a>
+            <a href="tool-4.html" class="tool-card">
+                <h3>대소문자 변환</h3>
+                <p>텍스트의 대소문자를 원하는 형식으로 변환합니다.</p>
+            </a>
+            <a href="tool-5.html" class="tool-card">
+                <h3>특수문자 제거</h3>
+                <p>텍스트에서 특수문자나 원치 않는 문자를 제거합니다.</p>
+            </a>
+            <a href="tool-6.html" class="tool-card">
+                <h3>퍼센트 계산기</h3>
+                <p>다양한 퍼센트 계산을 쉽고 빠르게 수행합니다.</p>
+            </a>
+            <a href="tool-7.html" class="tool-card">
+                <h3>부가세 계산기</h3>
+                <p>금액에 포함된 부가세 또는 부가세 별도 금액을 계산합니다.</p>
+            </a>
+            <a href="tool-8.html" class="tool-card">
+                <h3>이자 계산기</h3>
+                <p>원금, 이자율, 기간에 따른 이자를 계산합니다.</p>
+            </a>
+            <a href="tool-9.html" class="tool-card">
+                <h3>환율 계산기</h3>
+                <p>실시간 환율 정보를 바탕으로 통화를 변환합니다.</p>
+            </a>
+            <a href="tool-10.html" class="tool-card">
+                <h3>연봉 → 실수령액 계산</h3>
+                <p>연봉을 입력하면 월별 및 연간 실수령액을 예측합니다.</p>
+            </a>
+            <a href="tool-11.html" class="tool-card">
+                <h3>DSR / 대출 상환 계산기</h3>
+                <p>대출 상환액과 DSR을 계산하여 대출 계획을 돕습니다.</p>
+            </a>
+            <a href="tool-12.html" class="tool-card">
+                <h3>로또 번호 생성기</h3>
+                <p>원하는 수량만큼 로또 번호를 무작위로 생성합니다.</p>
+            </a>
+            <a href="tool-13.html" class="tool-card">
+                <h3>CSV ↔ EXCEL 변환</h3>
+                <p>CSV 파일을 Excel에서 보기 좋게 변환하거나 그 반대로 변환합니다.</p>
+            </a>
+            <a href="tool-14.html" class="tool-card">
+                <h3>TXT ↔ PDF 변환</h3>
+                <p>텍스트 파일을 PDF 문서로 간편하게 변환합니다.</p>
+            </a>
+            <a href="tool-15.html" class="tool-card">
+                <h3>이미지 포맷 변환 (JPG/PNG/WEBP)</h3>
+                <p>다양한 이미지 파일을 JPG, PNG, WEBP 등으로 변환합니다.</p>
+            </a>
+        </div>
+    </main>
+    <footer>
+        <p>Made by CodeBlue</p>
+    </footer>
+    <script src="main.js"></script>
 </body>
 </html>
