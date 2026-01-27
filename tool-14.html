@@ -3,29 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TXT → PDF 변환 - 온라인 도구 모음</title>
+    <title>JSON 정렬 및 검사기 - 온라인 도구 모음</title>
     <link rel="stylesheet" href="style.css">
-    <!-- jsPDF library from CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <style>
-        .warning-box {
-            background-color: #ffcdd2;
-            color: #c62828;
-            border: 1px solid #c62828;
-            padding: 1rem;
-            border-radius: 5px;
+        .button-group {
+            display: flex;
+            gap: 1rem;
             margin-bottom: 1rem;
         }
-        body.dark-mode .warning-box {
-             background-color: #4e2a2a;
-             color: #ff9a9a;
-             border-color: #ff9a9a;
+        .action-button {
+            flex-grow: 1;
+            padding: 0.8rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
         }
-        .download-button {
-             width: 100%;
-             padding: 1rem;
-             font-size: 1.1rem;
-             cursor: pointer;
+        #status {
+            padding: 0.8rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        .status-valid {
+            background-color: #dcedc8;
+            color: #33691e;
+        }
+        .status-invalid {
+            background-color: #ffcdd2;
+            color: #c62828;
         }
     </style>
 </head>
@@ -36,15 +40,16 @@
     </header>
     <main class="tool-page">
         <div class="tool-header">
-            <h2>TXT → PDF 변환</h2>
+            <h2>JSON 정렬 및 검사기</h2>
             <a href="/" class="back-button">메인으로 돌아가기</a>
         </div>
         <div class="tool-content">
-            <div class="warning-box">
-                <strong>주의:</strong> 현재 이 도구는 한글을 지원하지 않습니다. 한글 텍스트는 PDF에서 깨져 보일 수 있습니다. 영문과 숫자, 특수문자만 사용해주세요.
+            <div class="button-group">
+                <button id="format-btn" class="action-button">포맷 (들여쓰기)</button>
+                <button id="minify-btn" class="action-button">압축 (한 줄로)</button>
             </div>
-            <textarea id="text-input" placeholder="여기에 PDF로 변환할 텍스트를 입력하세요..."></textarea>
-            <button id="download-pdf" class="action-button download-button">PDF로 다운로드</button>
+            <textarea id="json-input" placeholder="여기에 JSON 데이터를 붙여넣으세요..."></textarea>
+            <div id="status"></div>
         </div>
     </main>
     <footer>
@@ -52,24 +57,36 @@
     </footer>
     <script src="main.js"></script>
     <script>
-        window.jsPDF = window.jspdf.jsPDF;
+        const jsonInput = document.getElementById('json-input');
+        const formatBtn = document.getElementById('format-btn');
+        const minifyBtn = document.getElementById('minify-btn');
+        const statusDiv = document.getElementById('status');
 
-        document.getElementById('download-pdf').addEventListener('click', () => {
-            const text = document.getElementById('text-input').value;
-            if (!text) {
-                alert('텍스트를 입력해주세요.');
+        const validateAndOperate = (operation) => {
+            const text = jsonInput.value;
+            if (text.trim() === '') {
+                statusDiv.textContent = '';
+                statusDiv.className = '';
                 return;
             }
+            try {
+                const parsed = JSON.parse(text);
+                statusDiv.textContent = '✓ 유효한 JSON 형식입니다.';
+                statusDiv.className = 'status-valid';
+                if (operation === 'format') {
+                    jsonInput.value = JSON.stringify(parsed, null, 4);
+                } else if (operation === 'minify') {
+                    jsonInput.value = JSON.stringify(parsed);
+                }
+            } catch (e) {
+                statusDiv.textContent = `✗ 오류: ${e.message}`;
+                statusDiv.className = 'status-invalid';
+            }
+        };
 
-            // Create a new jsPDF instance
-            const doc = new jsPDF();
-            
-            // Add text to the PDF. The text function handles wrapping.
-            doc.text(text, 10, 10);
-            
-            // Save the PDF
-            doc.save('converted-document.pdf');
-        });
+        formatBtn.addEventListener('click', () => validateAndOperate('format'));
+        minifyBtn.addEventListener('click', () => validateAndOperate('minify'));
+        jsonInput.addEventListener('input', () => validateAndOperate());
     </script>
 </body>
 </html>
