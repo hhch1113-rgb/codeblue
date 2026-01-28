@@ -43,74 +43,74 @@
             <footer>
                 <p>Made by CodeBlue</p>
                 <p><a href="/about.html">사이트 정보</a> | <a href="/privacy.html">개인정보처리방침</a></p>
-            </footer>        <script src="main.js"></script>
-        <script>
-            const fileInput = document.getElementById('file-input');
-            const imagePreview = document.getElementById('image-preview');
-            const downloadBtn = document.getElementById('download-btn');
-            const formatSelect = document.getElementById('format-select');
-            const progressContainer = document.getElementById('progress-container');
-            const progressBar = document.getElementById('progress-bar');
-            let originalFileName = '';
-    
-            fileInput.addEventListener('change', (event) => {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    originalFileName = file.name.split('.')[0];
-                    reader.onload = (e) => {
-                        imagePreview.src = e.target.result;
-                        downloadBtn.disabled = false;
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-    
-            downloadBtn.addEventListener('click', () => {
-                const img = imagePreview;
-                if (!img.src) return;
-    
-                downloadBtn.disabled = true;
-                progressContainer.style.display = 'block';
-                progressBar.style.width = '0%';
-    
-                // Simulate progress
-                setTimeout(() => {
-                    progressBar.style.width = '30%';
-                    
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    
-                    canvas.width = img.naturalWidth;
-                    canvas.height = img.naturalHeight;
-                    
-                    setTimeout(() => {
-                        progressBar.style.width = '70%';
-                        ctx.drawImage(img, 0, 0);
-    
-                        const format = formatSelect.value;
-                        const mimeType = `image/${format}`;
-                        const dataUrl = canvas.toDataURL(mimeType);
-    
-                        const link = document.createElement('a');
-                        link.href = dataUrl;
-                        link.download = `${originalFileName}.${format}`;
-                        
-                        setTimeout(() => {
-                            progressBar.style.width = '100%';
-                            link.click();
-                            
-                            // Reset after a short delay
-                            setTimeout(() => {
-                                progressContainer.style.display = 'none';
+                </footer>
+                <script src="main.js"></script>
+                <script>
+                    const fileInput = document.getElementById('file-input');
+                    const imagePreview = document.getElementById('image-preview');
+                    const downloadBtn = document.getElementById('download-btn');
+                    const formatSelect = document.getElementById('format-select');
+                    const progressContainer = document.getElementById('progress-container');
+                    const progressBar = document.getElementById('progress-bar');
+                    let originalFileName = '';
+            
+                    fileInput.addEventListener('change', (event) => {
+                        const file = event.target.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            originalFileName = file.name.split('.')[0];
+                            reader.onload = (e) => {
+                                imagePreview.src = e.target.result;
                                 downloadBtn.disabled = false;
-                            }, 500);
-    
-                        }, 200);
-                    }, 100);
-                }, 100);
-            });
-        </script>
-    </body>
-    </html>
-    
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                    });
+            
+                    downloadBtn.addEventListener('click', () => {
+                        const img = imagePreview;
+                        if (!img.src) return;
+            
+                        downloadBtn.disabled = true;
+                        progressContainer.style.display = 'block';
+                        progressBar.style.width = '0%';
+            
+                        // Simulate progress
+                        setTimeout(() => {
+                            progressBar.style.width = '30%';
+                            
+                            const canvas = document.createElement('canvas');
+                            const ctx = canvas.getContext('2d');
+                            
+                            canvas.width = img.naturalWidth;
+                            canvas.height = img.naturalHeight;
+                            
+                            setTimeout(() => {
+                                progressBar.style.width = '70%';
+                                ctx.drawImage(img, 0, 0);
+            
+                                const format = formatSelect.value;
+                                const mimeType = `image/${format}`;
+                                const dataUrl = canvas.toDataURL(mimeType);
+            
+                                const link = document.createElement('a');
+                                link.href = dataUrl;
+                                link.download = `${originalFileName}.${format}`;
+                                
+                                setTimeout(() => {
+                                    progressBar.style.width = '100%';
+                                    link.click();
+                                    
+                                    // Reset after a short delay
+                                    setTimeout(() => {
+                                        progressContainer.style.display = 'none';
+                                        downloadBtn.disabled = false;
+                                    }, 500);
+            
+                                }, 200);
+                            }, 100);
+                        }, 100);
+                    });
+                </script>
+            </body>
+            </html>
