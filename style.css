@@ -171,3 +171,49 @@ footer {
 .result-box span {
     font-weight: bold;
 }
+
+/* Image Converter Specific Styles (tool-15.html) */
+.converter-section {
+    text-align: center;
+}
+#image-preview {
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    max-height: 400px;
+    margin-top: 1rem;
+    border: 1px solid var(--card-border-color);
+    background-color: var(--card-bg-color);
+}
+.controls {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.file-input-label, .download-button {
+    padding: 0.8rem 1.2rem;
+    border-radius: 5px;
+    border: 1px solid var(--card-border-color);
+    cursor: pointer;
+    background-color: var(--button-bg-color); /* Use theme variable */
+    color: var(--button-text-color); /* Use theme variable */
+}
+.download-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.progress-bar-container {
+    width: 100%;
+    background-color: var(--card-border-color);
+    border-radius: 5px;
+    margin-top: 1rem;
+    display: none; /* Hidden by default */
+}
+.progress-bar {
+    width: 0%;
+    height: 10px;
+    background-color: #4CAF50; /* Consider making this a theme variable if multiple progress bars */
+    border-radius: 5px;
+    transition: width 0.4s ease-in-out;
+}
