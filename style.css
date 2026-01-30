@@ -37,7 +37,7 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    right: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -116,7 +116,7 @@ footer {
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
+    right: 0;
     padding: 0.5rem 2rem; /* Reduced vertical padding */
     border-top: 1px solid var(--card-border-color);
     z-index: 1000;
