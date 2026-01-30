@@ -25,22 +25,26 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
-    padding: 0;
+    padding: 6rem 0 4rem 0;
     transition: background-color 0.3s, color 0.3s;
 }
 
 header, footer {
     background-color: var(--header-bg-color);
-    text-align: center;
-    padding: 1rem;
 }
 
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
     border-bottom: 1px solid var(--card-border-color);
+    z-index: 1000;
+    box-sizing: border-box;
 }
 
 header h1 {
@@ -105,8 +109,14 @@ main {
 }
 
 footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     margin-top: 2rem;
     border-top: 1px solid var(--card-border-color);
+    z-index: 1000;
+    box-sizing: border-box;
 }
 
 /* Tool Page Specific Styles */
