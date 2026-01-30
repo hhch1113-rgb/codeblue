@@ -25,7 +25,7 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
-    padding: 5rem 0 3rem 0; /* Adjusted for smaller footer */
+    padding: 3rem 0 3rem 0; /* Adjusted for smaller header and footer */
     transition: background-color 0.3s, color 0.3s;
 }
 
@@ -41,7 +41,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 0.5rem 2rem;
     border-bottom: 1px solid var(--card-border-color);
     z-index: 1000;
     box-sizing: border-box;
@@ -49,7 +49,7 @@ header {
 
 header h1 {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 #theme-toggle {
@@ -102,10 +102,14 @@ main {
     font-size: 1.2rem;
 }
 
-.tool-card p {
+.tool-card p, footer p {
     font-size: 0.9rem;
     color: var(--text-color);
     opacity: 0.8;
+}
+
+footer p {
+    margin: 0.1rem 0;
 }
 
 footer {
