@@ -25,7 +25,7 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
-    padding: 5rem 0 5rem 0; /* Adjusted for roughly equal header and footer heights */
+    padding: 5rem 0 3rem 0; /* Adjusted for smaller footer */
     transition: background-color 0.3s, color 0.3s;
 }
 
@@ -113,7 +113,7 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 1rem 2rem; /* Consistent with header's vertical padding */
+    padding: 0.5rem 2rem; /* Reduced vertical padding */
     border-top: 1px solid var(--card-border-color);
     z-index: 1000;
     box-sizing: border-box;
