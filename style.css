@@ -1,3 +1,7 @@
+html {
+    overflow-y: scroll; /* Force scrollbar to always be present */
+}
+
 :root {
     --bg-color: #ffffff;
     --text-color: #333333;
