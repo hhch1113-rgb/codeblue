@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="텍스트에서 지정한 특수문자나 모든 특수문자를 손쉽게 제거하여 깨끗한 텍스트를 만들어주는 온라인 도구입니다.">
+    <meta name="description" content="텍스트에서 사용자가 지정한 특정 문자 또는 모든 특수문자를 효율적으로 제거하여 깨끗하고 정돈된 텍스트를 생성합니다. 데이터 정제, 문서 편집, 프로그래밍 코드 정리 등에 매우 유용합니다.">
     <meta name="google-adsense-account" content="ca-pub-2738395748022643">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2738395748022643"
      crossorigin="anonymous"></script>
@@ -45,6 +45,38 @@
             <a href="/" class="back-button">메인으로 돌아가기</a>
         </div>
         <div class="tool-content">
+            <p>
+                <strong>특수문자 제거</strong> 도구는 텍스트 데이터의 불필요하거나 원치 않는 특수문자를 효율적으로 제거하여 깨끗하고 정돈된 결과물을 얻을 수 있도록 돕는 온라인 유틸리티입니다. 웹에서 텍스트를 복사하거나, 특정 형식의 데이터를 처리할 때 종종 특수문자가 포함되어 데이터 분석, 가독성 저해, 혹은 시스템 오류를 유발할 수 있습니다. 이 도구를 사용하면 이러한 특수문제를 손쉽게 해결하여 텍스트를 정제하고, 다양한 용도로 활용할 수 있습니다.
+                데이터 클리닝, 문서 편집, 프로그래밍 코드 정리 등 다방면에서 유용하게 사용됩니다.
+            </p>
+            <h3>사용 방법</h3>
+            <ol>
+                <li>정리하고자 하는 텍스트를 입력창에 붙여넣거나 직접 작성합니다.</li>
+                <li><strong>지정 문자 제거:</strong>
+                    <ul>
+                        <li>'제거할 특정 문자를 여기에 입력하세요.' 입력창에 제거하고 싶은 특수문자를 직접 입력합니다 (예: !, @, #).</li>
+                        <li>'지정 문자 제거' 버튼을 클릭하면 입력된 특수문자들이 텍스트에서 제거됩니다.</li>
+                    </ul>
+                </li>
+                <li><strong>모든 특수문자 제거 (영문, 숫자, 한글, 공백 제외):</strong>
+                    <ul>
+                        <li>이 버튼을 클릭하면 텍스트 내에서 영문자 (a-z, A-Z), 숫자 (0-9), 한글, 그리고 공백을 제외한 모든 특수문자들이 일괄적으로 제거됩니다.</li>
+                    </ul>
+                </li>
+                <li>버튼을 클릭하는 즉시 입력창의 텍스트가 선택한 기능에 따라 정리됩니다.</li>
+            </ol>
+            <h3>주요 기능 및 이점</h3>
+            <ul>
+                <li><strong>맞춤형 문자 제거:</strong> 사용자가 원하는 특정 특수문자만 선택적으로 제거할 수 있습니다.</li>
+                <li><strong>일괄 특수문자 제거:</strong> 영문, 숫자, 한글, 공백을 제외한 모든 특수문자를 한 번에 제거하여 텍스트를 빠르게 정제할 수 있습니다.</li>
+                <li><strong>데이터 클리닝:</strong> 데이터 분석 전 불필요한 노이즈를 제거하여 정확성을 높이는 데 기여합니다.</li>
+                <li><strong>가독성 향상:</strong> 지저분한 특수문자들을 제거함으로써 문서의 가독성을 크게 향상시킵니다.</li>
+                <li><strong>생산성 증대:</strong> 수동으로 특수문자를 찾아 지우는 시간과 노력을 절약하여 작업 효율을 높여줍니다.</li>
+            </ul>
+            <h3>예시</h3>
+            <p>
+                "Hello, @World! #123$%^" 와 같은 텍스트가 있을 때, '지정 문자 제거'에 "@#$%"를 입력하고 버튼을 누르면 "Hello, World! 123^"이 됩니다. '모든 특수문자 제거' 버튼을 누르면 "Hello World 123"과 같이 영문과 숫자만 남게 됩니다.
+            </p>
             <div class="control-group">
                 <input type="text" id="chars-to-remove" placeholder="제거할 특정 문자를 여기에 입력하세요.">
                 <button id="remove-specific" class="action-button">지정 문자 제거</button>
