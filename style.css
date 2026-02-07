@@ -45,6 +45,9 @@ header .description {
     font-size: 1.1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    width: 100%; /* Full width on mobile */
+    max-width: 300px; /* Max width for desktop */
+    margin: 0 auto; /* Center button */
 }
 
 .btn-primary:hover {
@@ -190,6 +193,7 @@ header .description {
     display: flex; /* Use flexbox for alignment */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
 }
 
 .feedback .feedback-option {
@@ -218,11 +222,15 @@ header .description {
 #share-result {
     display: block; /* Make it a block element */
     margin: 15px auto 0 auto; /* Center it */
+    width: 100%; /* Full width on mobile */
+    max-width: 300px; /* Max width for desktop */
 }
 
 #restart-test {
     margin-top: 2rem;
     width: 100%;
+    max-width: 300px; /* Max width for desktop */
+    margin: 2rem auto 0 auto; /* Center button */
 }
 
 footer {
@@ -231,12 +239,16 @@ footer {
     width: 100%;
     max-width: 700px;
     color: #666;
+    display: flex; /* Use flexbox for footer links */
+    justify-content: center;
+    flex-wrap: wrap; /* Allow wrapping of links */
+    gap: 10px; /* Space between links */
 }
 
 footer a {
     color: #e91e63;
     text-decoration: none;
-    margin: 0 10px;
+    margin: 0 10px; /* Adjusted margin for better spacing with gap */
     font-size: 0.9rem;
 }
 
@@ -246,6 +258,9 @@ footer a:hover {
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
+    .container {
+        padding: 1.5rem;
+    }
     header h1 {
         font-size: 2rem;
     }
@@ -261,5 +276,17 @@ footer a:hover {
     }
     .result-code {
         font-size: 1.3rem;
+    }
+    .result-details h3 {
+        font-size: 1.2rem;
+    }
+    .result-details p, .result-details ul {
+        font-size: 1rem;
+    }
+    .feedback {
+        flex-direction: column; /* Stack feedback options vertically */
+    }
+    .feedback .feedback-option {
+        margin: 5px 0;
     }
 }
