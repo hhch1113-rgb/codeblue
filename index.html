@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Firebase 이미지 업로더</title>
+    <title>Imgur 이미지 업로더</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -28,28 +28,6 @@
         </div>
     </div>
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
-
-    <script>
-        // 🚨 중요: 이 부분을 본인의 Firebase 프로젝트 정보로 반드시 교체해야 합니다.
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-
-        try {
-            firebase.initializeApp(firebaseConfig);
-        } catch (e) {
-            console.error("Firebase 초기화 실패! firebaseConfig 객체를 확인해주세요.", e);
-            document.getElementById('upload-status').textContent = "Firebase 설정 오류! 개발자 콘솔을 확인하세요.";
-        }
-    </script>
     <script src="main.js"></script>
 </body>
 </html>
