@@ -18,7 +18,7 @@ function resetUI() {
     progressBar.style.width = '0%';
     resultSection.style.display = 'none';
     resultUrl.value = '';
-    fileInput.value = ''; 
+    // fileInput.value = ''; 
 }
 
 // --- Main File Handling Logic ---
