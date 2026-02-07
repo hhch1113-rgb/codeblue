@@ -1,3 +1,14 @@
+// main.js - 연애 스타일 테스트 풀 버전 (텍스트 깨짐 해결 완료)
+
+const cleanText = (text) => {
+    if (!text) return '';
+    return text
+        .replace(/[\u200B\u200C\u200D\uFEFF\u2028\u2029]/g, '')  // 보이지 않는 공백/제어 문자 모두 제거
+        .replace(/\s+/g, ' ')                                    // 연속된 공백을 단일 공백으로
+        .replace(/ +/g, ' ')                                     // 중복 공백 재확인 제거
+        .trim();                                                 // 앞뒤 공백 제거
+};
+
 const questions = [
     // ① 감정 표현 (O / C)
     {
@@ -75,7 +86,7 @@ const questions = [
     {
         id: 11,
         question: "데이트 약속은",
-        options: { A: "미리 정해두는 게 좋다", "B": "그날 기분 따라 정하는 게 좋다" },
+        options: { A: "미리 정해두는 게 좋다", B: "그날 기분 따라 정하는 게 좋다" },
         axis: '관계 운영 방식',
         value: { A: 'P', B: 'F' }
     },
@@ -281,7 +292,7 @@ const results = {
         cons: ["기회를 놓칠 수 있습니다.", "상대가 확신을 느끼기 어렵습니다.", "표현 부족으로 거리감이 생길 수 있습니다."],
         advice: "완벽한 타이밍은 오지 않습니다. 감정은 어느 정도 드러내야 전달됩니다. 용기를 내보세요."
     },
-    "CTFI": {
+    "CFTI": {
         title: "🌌 혼자여도 마음은 깊은 연애형",
         image: "https://source.unsplash.com/400x200/?love,space,deep,independent",
         summary: "이 유형은 감정이 깊지만 독립성이 강합니다. 혼자만의 세계를 중요하게 여깁니다. 내면 중심적인 연애관을 가집니다.",
@@ -289,20 +300,7 @@ const results = {
         pros: ["감정에 휘둘리지 않습니다.", "안정적인 태도를 유지합니다.", "성숙한 관계를 만들 수 있습니다."],
         cons: ["상대가 소외감을 느낄 수 있습니다.", "감정 교류가 부족해질 수 있습니다.", "거리감이 커질 수 있습니다."],
         advice: "상대는 마음을 읽을 수 없습니다. 표현은 관계를 이어주는 다리입니다. 조금 더 보여주세요."
-    },
-    // Adding placeholder results for the few remaining combinations that weren't explicitly covered by user's new content
-    // to ensure all 16 results are valid. The user provided only 12 types in the last input, but mentioned 16 types overall.
-    // The previous prompt text was 16 types in total with 4 sets of 4 codes.
-    // I will use some generic placeholder text for the missing 4 types if they were not covered by the user's latest input.
-    // However, looking at the user's input, they provided 16 codes with new descriptions. My mistake in counting.
-    // So all 16 types are now covered. I've re-counted them.
-
-    // Let's ensure all 16 result codes are present and unique before proceeding.
-    // OSPB, OSPI, OSFB, OSFI, CSPB, CSPI, CSFB, CSFI, OTPB, OTPI, OTFB, OTFI, CTPB, CTPI, CTFB, CTFI
-    // My previous assumption about "OFPB" vs "OSPB" was based on my own interpretation of axes.
-    // I need to use the user's exact result codes. Let's ensure the full list is updated properly.
-    // The user provided codes OFPB, OFPI, OFTB, OFTI, OSPB, OSPI, OSTB, OSTI, CSPB, CSPI, CSTB, CSTI, CFPB, CFPI, CFTB, CTFI
-    // This is 16 unique codes. All were updated in the previous write_file.
+    }
 };
 
 const axisMapping = {
@@ -324,7 +322,7 @@ const progressBarEl = questionSection.querySelector('.progress-bar');
 
 const resultSection = document.getElementById('result-section');
 const resultTitleEl = resultSection.querySelector('.result-title');
-const resultCodeAttribute = resultSection.querySelector('.result-code');
+const resultCodeEl = resultSection.querySelector('.result-code');
 const resultImageEl = resultSection.querySelector('.result-image');
 const resultSummaryEl = resultSection.querySelector('.result-summary');
 const resultDescriptionEl = resultSection.querySelector('.result-description');
@@ -339,10 +337,9 @@ const restartTestBtn = document.getElementById('restart-test');
 const thumbUpCountEl = document.getElementById('thumb-up-count');
 const thumbDownCountEl = document.getElementById('thumb-down-count');
 
-
 // State
 let currentQuestionIndex = 0;
-let userAnswers = []; // Store chosen letter for each question
+let userAnswers = [];
 let axisScores = {
     'O': 0, 'C': 0,
     'S': 0, 'T': 0,
@@ -356,31 +353,26 @@ function startTest() {
     testArea.style.display = 'block';
     currentQuestionIndex = 0;
     userAnswers = [];
-    axisScores = {
-        'O': 0, 'C': 0,
-        'S': 0, 'T': 0,
-        'P': 0, 'F': 0,
-        'B': 0, 'I': 0
-    };
+    axisScores = { 'O': 0, 'C': 0, 'S': 0, 'T': 0, 'P': 0, 'F': 0, 'B': 0, 'I': 0 };
     displayQuestion();
-    resultSection.style.display = 'none'; // Hide result section if it was shown
-    questionSection.style.display = 'block'; // Ensure question section is visible
+    resultSection.style.display = 'none';
+    questionSection.style.display = 'block';
 }
 
 function displayQuestion() {
     if (currentQuestionIndex < questions.length) {
-        const questionData = questions[currentQuestionIndex];
+        const q = questions[currentQuestionIndex];
         questionNumberEl.textContent = `${currentQuestionIndex + 1} / ${questions.length}`;
-        questionTextEl.textContent = questionData.question;
+        questionTextEl.textContent = cleanText(q.question);
         
-        optionsContainer.innerHTML = ''; // Clear previous options
-        for (const optionKey in questionData.options) {
-            const button = document.createElement('button');
-            button.classList.add('option-btn');
-            button.textContent = questionData.options[optionKey];
-            button.dataset.option = optionKey;
-            button.addEventListener('click', () => handleAnswer(optionKey));
-            optionsContainer.appendChild(button);
+        optionsContainer.innerHTML = '';
+        for (const key in q.options) {
+            const btn = document.createElement('button');
+            btn.classList.add('option-btn');
+            btn.textContent = cleanText(q.options[key]);
+            btn.dataset.option = key;
+            btn.addEventListener('click', () => handleAnswer(key));
+            optionsContainer.appendChild(btn);
         }
         updateProgressBar();
     } else {
@@ -389,34 +381,26 @@ function displayQuestion() {
 }
 
 function handleAnswer(selectedOption) {
-    const questionData = questions[currentQuestionIndex];
+    const q = questions[currentQuestionIndex];
     userAnswers.push({
-        questionId: questionData.id,
+        questionId: q.id,
         selectedOption: selectedOption,
-        axis: questionData.axis,
-        value: questionData.value[selectedOption]
+        axis: q.axis,
+        value: q.value[selectedOption]
     });
-    
-    // Increment score for the chosen axis value
-    axisScores[questionData.value[selectedOption]]++;
-
+    axisScores[q.value[selectedOption]]++;
     currentQuestionIndex++;
     displayQuestion();
 }
 
 function calculateResult() {
-    questionSection.style.display = 'none'; // Hide question section
-    resultSection.style.display = 'block'; // Show result section
+    questionSection.style.display = 'none';
+    resultSection.style.display = 'block';
 
     const finalResult = [];
-
-    // 감정 표현 (O/C)
     finalResult.push(axisScores['O'] >= axisScores['C'] ? 'O' : 'C');
-    // 안정감 추구 (S/T)
     finalResult.push(axisScores['S'] >= axisScores['T'] ? 'S' : 'T');
-    // 관계 운영 방식 (P/F)
     finalResult.push(axisScores['P'] >= axisScores['F'] ? 'P' : 'F');
-    // 개인 영역 인식 (B/I)
     finalResult.push(axisScores['B'] >= axisScores['I'] ? 'B' : 'I');
 
     const resultCode = finalResult.join('');
@@ -428,49 +412,44 @@ function displayResult(resultCode) {
 
     if (!resultData) {
         resultTitleEl.textContent = "결과를 찾을 수 없습니다.";
-        resultCodeAttribute.textContent = resultCode;
-        // Optionally hide other elements or show a default message
-        resultImageEl.style.display = 'none'; // Hide image if no data
+        resultCodeEl.textContent = `(${resultCode})`;
+        resultImageEl.style.display = 'none';
         return;
     }
 
-    resultTitleEl.textContent = resultData.title;
-    resultCodeAttribute.textContent = `(${resultCode})`;
+    resultTitleEl.textContent = cleanText(resultData.title);
+    resultCodeEl.textContent = `(${resultCode})`;
     
     if (resultData.image) {
         resultImageEl.src = resultData.image;
-        resultImageEl.alt = `${resultData.title} 결과 이미지`;
+        resultImageEl.alt = cleanText(`${resultData.title} 결과 이미지`);
         resultImageEl.style.display = 'block';
-        // Add onerror handler for image
         resultImageEl.onerror = () => {
             console.error(`이미지 로드 실패: ${resultData.image}`);
             resultImageEl.style.display = 'none';
-            // Optionally display a fallback message or icon
         };
     } else {
         resultImageEl.style.display = 'none';
     }
 
-    resultSummaryEl.textContent = resultData.summary;
-    resultDescriptionEl.textContent = resultData.description;
+    resultSummaryEl.textContent = cleanText(resultData.summary);
+    resultDescriptionEl.textContent = cleanText(resultData.description);
+    resultAdviceEl.textContent = cleanText(resultData.advice);
 
     resultProsEl.innerHTML = '';
     resultData.pros.forEach(item => {
         const li = document.createElement('li');
-        li.textContent = item;
+        li.textContent = cleanText(item);
         resultProsEl.appendChild(li);
     });
 
     resultConsEl.innerHTML = '';
     resultData.cons.forEach(item => {
         const li = document.createElement('li');
-        li.textContent = item;
+        li.textContent = cleanText(item);
         resultConsEl.appendChild(li);
     });
 
-    resultAdviceEl.textContent = resultData.advice;
-    
-    // Initialize feedback counts (display 0 for now)
     thumbUpCountEl.textContent = '0';
     thumbDownCountEl.textContent = '0';
 }
@@ -481,8 +460,7 @@ function updateProgressBar() {
 }
 
 function shareResult() {
-    const shareText = `내 연애 스타일은 ${resultTitleEl.textContent} ${resultCodeAttribute.textContent}!
-${window.location.href}`;
+    const shareText = `내 연애 스타일은 ${cleanText(resultTitleEl.textContent)} ${resultCodeEl.textContent}!\n${window.location.href}`;
     if (navigator.share) {
         navigator.share({
             title: '내 연애 스타일은?',
@@ -492,8 +470,8 @@ ${window.location.href}`;
             alert('결과가 공유되었습니다!');
         }).catch((error) => {
             console.error('공유 실패:', error);
-            alert('공유 실패! 클립보드로 복사합니다.');
-            navigator.clipboard.writeText(shareText); // Fallback to clipboard
+            navigator.clipboard.writeText(shareText);
+            alert('공유 실패! 클립보드로 복사했습니다.');
         });
     } else {
         navigator.clipboard.writeText(shareText).then(() => {
@@ -508,14 +486,15 @@ ${window.location.href}`;
 // Event Listeners
 startTestBtn.addEventListener('click', startTest);
 shareResultBtn.addEventListener('click', shareResult);
-restartTestBtn.addEventListener('click', startTest); // Restart uses the same logic as start
+restartTestBtn.addEventListener('click', startTest);
 
 feedbackThumbUp.addEventListener('click', () => alert('피드백 카운트는 백엔드 연동이 필요합니다.'));
 feedbackThumbDown.addEventListener('click', () => alert('피드백 카운트는 백엔드 연동이 필요합니다.'));
 
-
 // Initial setup
 document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('header h1').textContent = cleanText("내 연애 스타일은?");
+    document.querySelector('.description').textContent = cleanText("4가지 연애 축으로 알아보는 나의 연애 성향!");
     headerSection.style.display = 'block';
     testArea.style.display = 'none';
 });
