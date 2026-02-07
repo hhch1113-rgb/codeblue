@@ -4,11 +4,33 @@ body {
     color: #1c1e21;
     margin: 0;
     display: flex;
+    flex-direction: column; /* Allow header, container, footer to stack */
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 20px; /* Add some padding for smaller screens */
-    box-sizing: border-box; /* Include padding in element's total width and height */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.top-bar {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+}
+
+.language-switcher .lang-btn {
+    color: #606770;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.language-switcher .lang-btn.active,
+.language-switcher .lang-btn:hover {
+    color: #1877f2;
 }
 
 .container {
@@ -17,7 +39,7 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 100%; /* Make it full width on smaller screens */
+    width: 100%;
     max-width: 500px;
 }
 
@@ -40,7 +62,7 @@ h1 {
     margin-bottom: 1.5rem;
     cursor: pointer;
     transition: background-color 0.2s, border-color 0.2s;
-    position: relative; /* For file-name positioning */
+    position: relative;
 }
 
 #drop-area.dragover {
@@ -78,13 +100,13 @@ h1 {
     margin-top: 1rem;
     font-size: 0.9rem;
     color: #333;
-    word-wrap: break-word; /* Allow long file names to wrap */
+    word-wrap: break-word;
 }
 
 .status-message {
     font-size: 1rem;
     margin-bottom: 1rem;
-    min-height: 20px; /* Reserve space to prevent layout shifts */
+    min-height: 20px;
 }
 
 #progress-container {
@@ -93,18 +115,18 @@ h1 {
     margin-bottom: 1.5rem;
     height: 10px;
     overflow: hidden;
-    display: none; /* Hidden by default, shown by JS */
+    display: none;
 }
 
 #progress-bar {
     height: 100%;
-    width: 0%; /* Controlled by JS */
+    width: 0%;
     background-color: #1877f2;
-    transition: width 0.1s ease-out; /* Smoother progress animation */
+    transition: width 0.1s ease-out;
 }
 
 #result {
-    display: none; /* Hidden by default, shown by JS */
+    display: none;
     margin-top: 1.5rem;
 }
 
@@ -114,11 +136,11 @@ h1 {
 }
 
 #result-url {
-    width: calc(100% - 22px); /* Account for padding and border */
+    width: calc(100% - 22px);
     padding: 0.5rem 10px;
     border: 1px solid #ccd0d5;
     border-radius: 6px;
-    box-sizing: border-box; /* Include padding and border in width */
+    box-sizing: border-box;
     margin-bottom: 1rem;
     font-family: monospace;
     font-size: 0.9rem;
@@ -137,4 +159,21 @@ h1 {
 
 #copy-button:hover {
     background-color: #36a420;
+}
+
+footer {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+footer a {
+    color: #606770;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: #1877f2;
 }
