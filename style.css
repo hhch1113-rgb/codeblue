@@ -5,12 +5,20 @@ body {
     margin: 0;
     padding: 20px;
     box-sizing: border-box;
-    line-height: 1.7;          /* 한국어 읽기 편하게 살짝 늘림 */
+    line-height: 1.7;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    /* ★★★ 전체 텍스트 깨짐 방지 핵심 */
+    word-break: keep-all !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto;
+    letter-spacing: normal !important;
+    word-spacing: normal !important;
 }
 
 .container {
@@ -22,6 +30,26 @@ body {
     width: 100%;
     max-width: 720px;
     margin-bottom: 2rem;
+}
+
+header h1,
+header .description,
+.question-text,
+.option-btn,
+.result-title,
+.result-code,
+.result-details p,
+.result-details li,
+.result-details span,
+.result-details h3 {
+    /* 모든 주요 텍스트 요소에 강제 적용 */
+    word-break: keep-all !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto;
+    letter-spacing: normal !important;
+    word-spacing: normal !important;
+    line-height: 1.75;
 }
 
 header h1 {
@@ -88,8 +116,6 @@ header .description {
     font-weight: 500;
     margin-bottom: 2.2rem;
     color: #222;
-    word-break: keep-all;     /* 한국어 단어 단위로 줄바꿈 */
-    hyphens: auto;
 }
 
 .options-container {
@@ -108,7 +134,6 @@ header .description {
     cursor: pointer;
     transition: all 0.2s ease;
     line-height: 1.5;
-    word-break: keep-all;
 }
 
 .option-btn:hover {
@@ -167,13 +192,14 @@ header .description {
 }
 
 .result-details p,
-.result-details ul {
+.result-details ul,
+.result-details li {
     font-size: 1.08rem;
     color: #444;
     margin-bottom: 1.4rem;
     line-height: 1.75;
-    word-break: keep-all;          /* 핵심: 한국어 깨짐 방지 */
-    hyphens: auto;
+    text-align: justify;
+    text-justify: inter-ideograph;
 }
 
 .result-details ul {
@@ -267,7 +293,7 @@ footer a:hover {
     text-decoration: underline;
 }
 
-/* 모바일 최적화 강화 */
+/* 모바일 최적화 */
 @media (max-width: 640px) {
     body {
         padding: 15px;
@@ -286,18 +312,11 @@ footer a:hover {
         font-size: 1.05rem;
     }
 
-    .btn-primary,
-    .btn-secondary {
-        padding: 0.95rem 1.8rem;
-        font-size: 1.05rem;
-    }
-
     .question-text {
         font-size: 1.38rem;
     }
 
     .option-btn {
-        padding: 1rem 1.2rem;
         font-size: 1.05rem;
     }
 
@@ -309,17 +328,8 @@ footer a:hover {
         font-size: 1.55rem;
     }
 
-    .result-details h3 {
-        font-size: 1.28rem;
-    }
-
     .result-details p,
-    .result-details ul {
+    .result-details li {
         font-size: 1.02rem;
-    }
-
-    .feedback {
-        flex-direction: column;
-        gap: 1rem;
     }
 }
