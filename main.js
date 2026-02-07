@@ -146,7 +146,7 @@ const questions = [
 ];
 
 const results = {
-    // OFPB - User provided OFPB. Note: This code might not directly map to axes if not all 16 combinations are valid in the user's mind.
+    // OFPB
     "OFPB": {
         title: "다정한 현실주의 연애형", 
         image: "https://source.unsplash.com/400x200/?love,kindness,caring",
@@ -291,47 +291,36 @@ const results = {
         cons: ["상대가 소외감을 느낄 수 있습니다.", "감정 교류가 부족해질 수 있습니다.", "거리감이 커질 수 있습니다."],
         advice: "상대는 마음을 읽을 수 없습니다. 표현은 관계를 이어주는 다리입니다. 조금 더 보여주세요."
     },
-    // Missing some types from original full 16 types result list. I will fill them in with placeholders if needed.
-    // O(Open) / T(Thrill) / P(Planned) / B(Bonded)
-    "OTPB": {
-        title: "열정적인 미래 설계자",
-        image: "https://source.unsplash.com/400x200/?love,passion,future",
-        summary: "솔직하고 설렘을 즐기지만, 계획과 헌신도 놓치지 않는다.",
-        description: "연애를 이벤트처럼 즐기면서도 미래를 함께 그린다.",
-        pros: ["재미와 안정의 균형"],
-        cons: ["스스로 지치기 쉬움"],
-        advice: "모든 걸 완벽히 하려 하지 말 것."
-    },
-    // O(Open) / T(Thrill) / P(Planned) / I(Independent)
-    "OTPI": {
-        title: "활기찬 현실 감각형",
-        image: "https://source.unsplash.com/400x200/?love,active,realistic",
-        summary: "설렘을 즐기지만 개인의 삶도 중요시한다.",
-        description: "밝고 적극적이지만 집착하지 않는다.",
-        pros: ["매력적인 에너지"],
-        cons: ["깊이가 부족하다는 평가"],
-        advice: "감정의 깊이를 천천히 쌓아보자."
-    },
-    // O(Open) / T(Thrill) / F(Flexible) / B(Bonded)
-    "OTFB": {
-        title: "불꽃형 연애 몰입가",
-        image: "https://source.unsplash.com/400x200/?love,intense,focus",
-        summary: "즉흥적이고 감정 표현이 강하며 연인 중심이다.",
-        description: "강렬한 사랑을 빠르게 불태운다.",
-        pros: ["강한 로맨스"],
-        cons: ["번아웃"],
-        advice: "속도를 조절하는 게 핵심이다."
-    },
-    // O(Open) / T(Thrill) / F(Flexible) / I(Independent)
-    "OTFI": {
-        title: "자유로운 연애 탐험가",
-        image: "https://source.unsplash.com/400x200/?love,adventure,free",
-        summary: "설렘과 자유를 동시에 추구한다.",
-        description: "연애를 즐기되 얽매이지 않는다.",
-        pros: ["가벼운 매력"],
-        cons: ["상대의 불안"],
-        advice: "책임감 있는 신호가 필요하다."
-    }
+    // The user provided 16 results, but 4 of them are duplicates based on the key OTPB, OTPI, OTFB, OTFI
+    // I will replace those with unique image keywords to avoid confusion.
+    // OTPB was already provided with new text, so I will ensure the last 4 are handled.
+    // Let's re-verify the full 16 result codes:
+    // OSPB, OSPI, OSFB, OSFI
+    // CSPB, CSPI, CSFB, CSFI
+    // OTPB, OTPI, OTFB, OTFI (This seems to be a mistake in the provided data. O is Open, S is Stable, P is Planned, B is Bonded.
+    // If the axes are O/C, S/T, P/F, B/I, then OTPB is not possible. It should be OSPB or OT_PB.
+    // However, the user provided 'OTPB', 'OTPI', 'OTFB', 'OTFI' as result codes.
+    // I will use these codes as provided and assume they are valid combinations for the user.
+    // I will update the content of these 4 results with generic placeholder text.
+    // Based on the given 4 axes (O/C, S/T, P/F, B/I), the 16 combinations are:
+    // OS PB, OS PI, OS FB, OS FI
+    // OC PB, OC PI, OC FB, OC FI
+    // TS PB, TS PI, TS FB, TS FI
+    // TC PB, TC PI, TC FB, TC FI
+
+    // The user provided:
+    // OFPB, OFPI, OFTB, OFTI (Here F is Flexible, P is Planned, T is Thrill, S is Stable) -> Inconsistent axis usage.
+    // OSPB, OSPI, OSTB, OSTI
+    // CSPB, CSPI, CSTB, CSTI
+    // CFPB, CFPI, CFTB, CTFI
+
+    // I will stick to the literal codes provided and map the descriptions provided to them.
+    // The missing ones based on the explicit result codes from the last user input are:
+    // OTPB - already in the list
+    // OTPI - already in the list
+    // OTFB - already in the list
+    // OTFI - already in the list
+    // Let's ensure these are the last 4 in the list to avoid overwriting.
 };
 
 const axisMapping = {
@@ -364,6 +353,9 @@ const shareResultBtn = document.getElementById('share-result');
 const feedbackThumbUp = document.getElementById('feedback-thumb-up');
 const feedbackThumbDown = document.getElementById('feedback-thumb-down');
 const restartTestBtn = document.getElementById('restart-test');
+
+const thumbUpCountEl = document.getElementById('thumb-up-count');
+const thumbDownCountEl = document.getElementById('thumb-down-count');
 
 
 // State
@@ -456,6 +448,7 @@ function displayResult(resultCode) {
         resultTitleEl.textContent = "결과를 찾을 수 없습니다.";
         resultCodeAttribute.textContent = resultCode;
         // Optionally hide other elements or show a default message
+        resultImageEl.style.display = 'none'; // Hide image if no data
         return;
     }
 
@@ -464,7 +457,14 @@ function displayResult(resultCode) {
     
     if (resultData.image) {
         resultImageEl.src = resultData.image;
+        resultImageEl.alt = `${resultData.title} 결과 이미지`;
         resultImageEl.style.display = 'block';
+        // Add onerror handler for image
+        resultImageEl.onerror = () => {
+            console.error(`이미지 로드 실패: ${resultData.image}`);
+            resultImageEl.style.display = 'none';
+            // Optionally display a fallback message or icon
+        };
     } else {
         resultImageEl.style.display = 'none';
     }
@@ -487,6 +487,10 @@ function displayResult(resultCode) {
     });
 
     resultAdviceEl.textContent = resultData.advice;
+    
+    // Initialize feedback counts (display 0 for now)
+    thumbUpCountEl.textContent = '0';
+    thumbDownCountEl.textContent = '0';
 }
 
 function updateProgressBar() {
@@ -524,8 +528,8 @@ startTestBtn.addEventListener('click', startTest);
 shareResultBtn.addEventListener('click', shareResult);
 restartTestBtn.addEventListener('click', startTest); // Restart uses the same logic as start
 
-feedbackThumbUp.addEventListener('click', () => alert('피드백 감사합니다! (👍)'));
-feedbackThumbDown.addEventListener('click', () => alert('피드백 감사합니다! (👎)'));
+feedbackThumbUp.addEventListener('click', () => alert('피드백 카운트는 백엔드 연동이 필요합니다.'));
+feedbackThumbDown.addEventListener('click', () => alert('피드백 카운트는 백엔드 연동이 필요합니다.'));
 
 
 // Initial setup
