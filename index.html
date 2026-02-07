@@ -36,15 +36,6 @@
             <button id="copy-button" data-i18n="copyButton">Copy URL</button>
         </div>
 
-        <!-- Debug Information Section -->
-        <div id="debug-info" class="debug-info" style="display: none;">
-            <h3 data-i18n="debugTitle">Server Response Information</h3>
-            <p><strong data-i18n="debugStatus">Status:</strong> <span id="debug-status-code"></span></p>
-            <p><strong data-i18n="debugResponse">Response:</strong></p>
-            <pre id="debug-response-text"></pre>
-            <p class="debug-explanation" id="debug-explanation"></p>
-        </div>
-
     </div>
 
     <footer>
@@ -54,6 +45,35 @@
         <a href="contact.html" target="_blank" data-i18n="contact">Contact/Report</a>
     </footer>
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
+
+    <script>
+        // IMPORTANT: Replace with your Firebase project's configuration
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        try {
+            firebase.initializeApp(firebaseConfig);
+            console.log("Firebase initialized successfully.");
+        } catch (error) {
+            console.error("Firebase initialization failed:", error);
+            const statusEl = document.getElementById('upload-status');
+            if (statusEl) {
+                // This message will be replaced by main.js language-specific message
+                statusEl.textContent = "Error: Firebase could not be configured. Check credentials.";
+                statusEl.style.color = 'red';
+            }
+        }
+    </script>
     <script src="main.js"></script>
 
 </body>
