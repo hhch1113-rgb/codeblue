@@ -1,5 +1,4 @@
 // main.js - 연애 스타일 테스트 (모바일 최적화 + 16가지 완전 버전)
-
 const cleanText = (text) => {
     if (!text) return '';
     return text
@@ -10,149 +9,29 @@ const cleanText = (text) => {
 
 const questions = [
     // ① 감정 표현 (O / C)
-    {
-        id: 1,
-        question: "연인이 서운하게 했을 때 나는",
-        options: { A: "바로 말하는 편이다", B: "혼자 정리한 뒤 넘어간다" },
-        axis: '감정 표현',
-        value: { A: 'O', B: 'C' }
-    },
-    {
-        id: 2,
-        question: "좋아하는 감정은",
-        options: { A: "말이나 행동으로 표현해야 한다고 생각한다", B: "굳이 말하지 않아도 느껴질 수 있다고 생각한다" },
-        axis: '감정 표현',
-        value: { A: 'O', B: 'C' }
-    },
-    {
-        id: 3,
-        question: "다툰 뒤 나는",
-        options: { A: "바로 풀고 싶다", B: "시간을 두고 싶다" },
-        axis: '감정 표현',
-        value: { A: 'O', B: 'C' }
-    },
-    {
-        id: 4,
-        question: "연애 중 내 감정 상태를",
-        options: { A: "상대가 잘 알고 있는 편이다", B: "잘 모를 것 같다고 느낀다" },
-        axis: '감정 표현',
-        value: { A: 'O', B: 'C' }
-    },
-    {
-        id: 5,
-        question: "연인에게 애정 표현을",
-        options: { A: "자주 하는 편이다", B: "마음속으로만 하는 경우가 많다" },
-        axis: '감정 표현',
-        value: { A: 'O', B: 'C' }
-    },
+    { id: 1, question: "연인이 서운하게 했을 때 나는", options: { A: "바로 말하는 편이다", B: "혼자 정리한 뒤 넘어간다" }, axis: '감정 표현', value: { A: 'O', B: 'C' } },
+    { id: 2, question: "좋아하는 감정은", options: { A: "말이나 행동으로 표현해야 한다고 생각한다", B: "굳이 말하지 않아도 느껴질 수 있다고 생각한다" }, axis: '감정 표현', value: { A: 'O', B: 'C' } },
+    { id: 3, question: "다툰 뒤 나는", options: { A: "바로 풀고 싶다", B: "시간을 두고 싶다" }, axis: '감정 표현', value: { A: 'O', B: 'C' } },
+    { id: 4, question: "연애 중 내 감정 상태를", options: { A: "상대가 잘 알고 있는 편이다", B: "잘 모를 것 같다고 느낀다" }, axis: '감정 표현', value: { A: 'O', B: 'C' } },
+    { id: 5, question: "연인에게 애정 표현을", options: { A: "자주 하는 편이다", B: "마음속으로만 하는 경우가 많다" }, axis: '감정 표현', value: { A: 'O', B: 'C' } },
     // ② 안정 vs 설렘 (S / T)
-    {
-        id: 6,
-        question: "연애에서 가장 중요한 건",
-        options: { A: "믿을 수 있는 안정감", B: "계속 설레는 감정" },
-        axis: '안정감 추구',
-        value: { A: 'S', B: 'T' }
-    },
-    {
-        id: 7,
-        question: "데이트가 반복될 때",
-        options: { A: "익숙해도 편하면 좋다", B: "지루해지면 힘들다" },
-        axis: '안정감 추구',
-        value: { A: 'S', B: 'T' }
-    },
-    {
-        id: 8,
-        question: "연애 초반보다 중반 이후가",
-        options: { A: "더 편하고 좋다", B: "아쉬운 경우가 많다" },
-        axis: '안정감 추구',
-        value: { A: 'S', B: 'T' }
-    },
-    {
-        id: 9,
-        question: "연인의 예측 가능한 행동은",
-        options: { A: "신뢰감을 준다", B: "재미가 줄어든다" },
-        axis: '안정감 추구',
-        value: { A: 'S', B: 'T' }
-    },
-    {
-        id: 10,
-        question: "연애는",
-        options: { A: "일상의 일부가 되는 게 좋다", B: "특별한 이벤트여야 한다" },
-        axis: '안정감 추구',
-        value: { A: 'S', B: 'T' }
-    },
+    { id: 6, question: "연애에서 가장 중요한 건", options: { A: "믿을 수 있는 안정감", B: "계속 설레는 감정" }, axis: '안정감 추구', value: { A: 'S', B: 'T' } },
+    { id: 7, question: "데이트가 반복될 때", options: { A: "익숙해도 편하면 좋다", B: "지루해지면 힘들다" }, axis: '안정감 추구', value: { A: 'S', B: 'T' } },
+    { id: 8, question: "연애 초반보다 중반 이후가", options: { A: "더 편하고 좋다", B: "아쉬운 경우가 많다" }, axis: '안정감 추구', value: { A: 'S', B: 'T' } },
+    { id: 9, question: "연인의 예측 가능한 행동은", options: { A: "신뢰감을 준다", B: "재미가 줄어든다" }, axis: '안정감 추구', value: { A: 'S', B: 'T' } },
+    { id: 10, question: "연애는", options: { A: "일상의 일부가 되는 게 좋다", B: "특별한 이벤트여야 한다" }, axis: '안정감 추구', value: { A: 'S', B: 'T' } },
     // ③ 계획 vs 즉흥 (P / F)
-    {
-        id: 11,
-        question: "데이트 약속은",
-        options: { A: "미리 정해두는 게 좋다", B: "그날 기분 따라 정하는 게 좋다" },
-        axis: '관계 운영 방식',
-        value: { A: 'P', B: 'F' }
-    },
-    {
-        id: 12,
-        question: "여행을 간다면",
-        options: { A: "일정이 있어야 편하다", B: "즉흥이 더 재밌다" },
-        axis: '관계 운영 방식',
-        value: { A: 'P', B: 'F' }
-    },
-    {
-        id: 13,
-        question: "연인이 갑자기 약속을 바꾸면",
-        options: { A: "당황하거나 불편하다", B: "크게 신경 쓰지 않는다" },
-        axis: '관계 운영 방식',
-        value: { A: 'P', B: 'F' }
-    },
-    {
-        id: 14,
-        question: "데이트 장소를",
-        options: { A: "미리 찾아본다", B: "가서 정한다" },
-        axis: '관계 운영 방식',
-        value: { A: 'P', B: 'F' }
-    },
-    {
-        id: 15,
-        question: "연애는",
-        options: { A: "어느 정도 예측 가능해야 한다", B: "변수가 있어야 재미있다" },
-        axis: '관계 운영 방식',
-        value: { A: 'P', B: 'F' }
-    },
+    { id: 11, question: "데이트 약속은", options: { A: "미리 정해두는 게 좋다", B: "그날 기분 따라 정하는 게 좋다" }, axis: '관계 운영 방식', value: { A: 'P', B: 'F' } },
+    { id: 12, question: "여행을 간다면", options: { A: "일정이 있어야 편하다", B: "즉흥이 더 재밌다" }, axis: '관계 운영 방식', value: { A: 'P', B: 'F' } },
+    { id: 13, question: "연인이 갑자기 약속을 바꾸면", options: { A: "당황하거나 불편하다", B: "크게 신경 쓰지 않는다" }, axis: '관계 운영 방식', value: { A: 'P', B: 'F' } },
+    { id: 14, question: "데이트 장소를", options: { A: "미리 찾아본다", B: "가서 정한다" }, axis: '관계 운영 방식', value: { A: 'P', B: 'F' } },
+    { id: 15, question: "연애는", options: { A: "어느 정도 예측 가능해야 한다", B: "변수가 있어야 재미있다" }, axis: '관계 운영 방식', value: { A: 'P', B: 'F' } },
     // ④ 연인 중심 vs 개인 중심 (B / I)
-    {
-        id: 16,
-        question: "연애를 하면",
-        options: { A: "연인이 내 생활의 중심이 된다", B: "기존 생활 패턴을 유지하고 싶다" },
-        axis: '개인 영역 인식',
-        value: { A: 'B', B: 'I' }
-    },
-    {
-        id: 17,
-        question: "혼자만의 시간이",
-        options: { A: "크게 필요하지 않다", B: "꼭 필요하다" },
-        axis: '개인 영역 인식',
-        value: { A: 'B', B: 'I' }
-    },
-    {
-        id: 18,
-        question: "연인이 자주 보자고 하면",
-        options: { A: "좋다", B: "부담스러울 수 있다" },
-        axis: '개인 영역 인식',
-        value: { A: 'B', B: 'I' }
-    },
-    {
-        id: 19,
-        question: "연애 중에도",
-        options: { A: "웬만한 일은 함께 하고 싶다", B: "각자의 시간이 중요하다" },
-        axis: '개인 영역 인식',
-        value: { A: 'B', B: 'I' }
-    },
-    {
-        id: 20,
-        question: "연애는",
-        options: { A: "둘이 하나의 팀이 되는 거다", B: "두 사람이 각자 존재하는 관계다" },
-        axis: '개인 영역 인식',
-        value: { A: 'B', B: 'I' }
-    },
+    { id: 16, question: "연애를 하면", options: { A: "연인이 내 생활의 중심이 된다", B: "기존 생활 패턴을 유지하고 싶다" }, axis: '개인 영역 인식', value: { A: 'B', B: 'I' } },
+    { id: 17, question: "혼자만의 시간이", options: { A: "크게 필요하지 않다", B: "꼭 필요하다" }, axis: '개인 영역 인식', value: { A: 'B', B: 'I' } },
+    { id: 18, question: "연인이 자주 보자고 하면", options: { A: "좋다", B: "부담스러울 수 있다" }, axis: '개인 영역 인식', value: { A: 'B', B: 'I' } },
+    { id: 19, question: "연애 중에도", options: { A: "웬만한 일은 함께 하고 싶다", B: "각자의 시간이 중요하다" }, axis: '개인 영역 인식', value: { A: 'B', B: 'I' } },
+    { id: 20, question: "연애는", options: { A: "둘이 하나의 팀이 되는 거다", B: "두 사람이 각자 존재하는 관계다" }, axis: '개인 영역 인식', value: { A: 'B', B: 'I' } },
 ];
 
 const results = {
@@ -188,7 +67,6 @@ const results = {
         cons: ["상대가 더 많은 안정감과 확신을 원할 때 불안해한다.", "자유로움이 무책임하게 보일 수 있다.", "깊은 헌신 단계로 넘어가는 게 늦어진다."],
         advice: "자유 속에서도 “너를 소중히 여긴다”는 신호를 꾸준히 줘라. 상대의 불안 포인트를 미리 대화로 풀어라. 작은 약속 하나가 오히려 더 큰 자유를 지켜준다."
     },
-
     "OTPB": {
         title: "💞 열정적인 미래 설계자",
         summary: "솔직한 표현과 설렘을 즐기면서도 계획과 헌신을 놓치지 않는 열정적 미래 설계자. 재미와 안정의 균형을 추구한다.",
@@ -221,7 +99,6 @@ const results = {
         cons: ["상대가 불안정함을 느끼고 불안해한다.", "깊은 헌신으로 이어지기 어렵다.", "책임감 부족으로 오해받는다."],
         advice: "자유 속에서도 최소한의 안심 신호를 줘라. 상대의 기대치를 미리 확인하고 맞춰라. 즐거움과 책임은 공존할 수 있다."
     },
-
     "CSPB": {
         title: "🪵 묵묵한 책임형 연애가",
         summary: "감정 표현은 적지만 행동으로 책임을 다하는 안정적이고 계획적인 헌신형. 묵묵히 오래 가는 관계의 강자.",
@@ -254,7 +131,6 @@ const results = {
         cons: ["상대가 차갑거나 무관심하다고 오해한다.", "온도 차로 인해 거리감이 벌어진다.", "깊은 감정 교류가 늦어진다."],
         advice: "상대에게 “너를 소중히 여긴다”는 신호를 적극 줘라. 작은 표현 하나가 오해를 크게 줄인다. 독립성과 애정은 동시에 존재할 수 있다."
     },
-
     "CTPB": {
         title: "🪵 조용한 헌신형 로맨티스트",
         summary: "겉으로는 조용하지만 설렘과 책임이 공존하는 은근한 헌신형 로맨티스트. 깊이 있는 안정 로맨스.",
@@ -289,7 +165,7 @@ const results = {
     }
 };
 
-// DOM Elements
+// DOM Elements (기존 그대로)
 const headerSection = document.querySelector('header');
 const testArea = document.getElementById('test-area');
 const startTestBtn = document.getElementById('start-test');
@@ -298,7 +174,6 @@ const questionNumberEl = questionSection.querySelector('.question-number');
 const questionTextEl = questionSection.querySelector('.question-text');
 const optionsContainer = questionSection.querySelector('.options-container');
 const progressBarEl = questionSection.querySelector('.progress-bar');
-
 const resultSection = document.getElementById('result-section');
 const resultTitleEl = resultSection.querySelector('.result-title');
 const resultCodeEl = resultSection.querySelector('.result-code');
@@ -312,21 +187,15 @@ const shareResultBtn = document.getElementById('share-result');
 const feedbackThumbUp = document.getElementById('feedback-thumb-up');
 const feedbackThumbDown = document.getElementById('feedback-thumb-down');
 const restartTestBtn = document.getElementById('restart-test');
-
 const thumbUpCountEl = document.getElementById('thumb-up-count');
 const thumbDownCountEl = document.getElementById('thumb-down-count');
 
 // State
 let currentQuestionIndex = 0;
 let userAnswers = [];
-let axisScores = {
-    'O': 0, 'C': 0,
-    'S': 0, 'T': 0,
-    'P': 0, 'F': 0,
-    'B': 0, 'I': 0
-};
+let axisScores = { 'O': 0, 'C': 0, 'S': 0, 'T': 0, 'P': 0, 'F': 0, 'B': 0, 'I': 0 };
 
-// Functions
+// Functions (기존 그대로, calculateResult에 디버그 로그 유지)
 function startTest() {
     headerSection.style.display = 'none';
     testArea.style.display = 'block';
@@ -343,7 +212,7 @@ function displayQuestion() {
         const q = questions[currentQuestionIndex];
         questionNumberEl.textContent = `${currentQuestionIndex + 1} / ${questions.length}`;
         questionTextEl.textContent = cleanText(q.question);
-        
+
         optionsContainer.innerHTML = '';
         for (const key in q.options) {
             const btn = document.createElement('button');
@@ -376,64 +245,46 @@ function calculateResult() {
     questionSection.style.display = 'none';
     resultSection.style.display = 'block';
 
-    // 결과 코드 생성: 반드시 O/C → S/T → P/F → B/I 순서로 고정
     const finalResult = [];
-    
-    // 1번째 자리: O 또는 C (감정 표현)
     finalResult.push(axisScores['O'] >= axisScores['C'] ? 'O' : 'C');
-    
-    // 2번째 자리: S 또는 T (안정감 추구)
     finalResult.push(axisScores['S'] >= axisScores['T'] ? 'S' : 'T');
-    
-    // 3번째 자리: P 또는 F (관계 운영 방식)
     finalResult.push(axisScores['P'] >= axisScores['F'] ? 'P' : 'F');
-    
-    // 4번째 자리: B 또는 I (개인 영역 인식)
     finalResult.push(axisScores['B'] >= axisScores['I'] ? 'B' : 'I');
 
     const resultCode = finalResult.join('');
-    
+
+    // 디버그 로그 (콘솔에서 확인 가능)
     console.log('=== 결과 디버깅 ===');
     console.log('Axis Scores:', axisScores);
-    console.log('O vs C:', axisScores['O'], 'vs', axisScores['C'], '→', finalResult[0]);
-    console.log('S vs T:', axisScores['S'], 'vs', axisScores['T'], '→', finalResult[1]);
-    console.log('P vs F:', axisScores['P'], 'vs', axisScores['F'], '→', finalResult[2]);
-    console.log('B vs I:', axisScores['B'], 'vs', axisScores['I'], '→', finalResult[3]);
     console.log('Final Result Code:', resultCode);
     console.log('Result Exists:', !!results[resultCode]);
-    console.log('Available Results:', Object.keys(results).sort());
-    
+    console.log('Available Keys:', Object.keys(results));
+
     displayResult(resultCode);
 }
 
 function displayResult(resultCode) {
     const resultData = results[resultCode];
-
     if (!resultData) {
         resultTitleEl.textContent = "결과를 찾을 수 없습니다.";
         resultCodeEl.textContent = `(${resultCode})`;
         resultImageEl.style.display = 'none';
         resultSummaryEl.textContent = "죄송합니다. 해당 결과 조합을 찾을 수 없습니다.";
         resultDescriptionEl.textContent = "";
-        resultAdviceEl.textContent = "";
         resultProsEl.innerHTML = '';
         resultConsEl.innerHTML = '';
         console.error('결과 코드를 찾을 수 없음:', resultCode);
-        console.log('사용 가능한 결과 코드:', Object.keys(results));
         return;
     }
 
     resultTitleEl.textContent = cleanText(resultData.title);
     resultCodeEl.textContent = `(${resultCode})`;
-    
+
     if (resultData.image) {
         resultImageEl.src = resultData.image;
-        resultImageEl.alt = cleanText(`${resultData.title} 결과 이미지`);
+        resultImageEl.alt = `${resultData.title} 결과 이미지`;
         resultImageEl.style.display = 'block';
-        resultImageEl.onerror = () => {
-            console.error(`이미지 로드 실패: ${resultData.image}`);
-            resultImageEl.style.display = 'none';
-        };
+        resultImageEl.onerror = () => resultImageEl.style.display = 'none';
     } else {
         resultImageEl.style.display = 'none';
     }
@@ -443,14 +294,14 @@ function displayResult(resultCode) {
     resultAdviceEl.textContent = cleanText(resultData.advice);
 
     resultProsEl.innerHTML = '';
-    resultData.pros.forEach(item => {
+    (resultData.pros || []).forEach(item => {
         const li = document.createElement('li');
         li.textContent = cleanText(item);
         resultProsEl.appendChild(li);
     });
 
     resultConsEl.innerHTML = '';
-    resultData.cons.forEach(item => {
+    (resultData.cons || []).forEach(item => {
         const li = document.createElement('li');
         li.textContent = cleanText(item);
         resultConsEl.appendChild(li);
@@ -468,25 +319,13 @@ function updateProgressBar() {
 function shareResult() {
     const shareText = `내 연애 스타일은 ${cleanText(resultTitleEl.textContent)} ${resultCodeEl.textContent}!\n${window.location.href}`;
     if (navigator.share) {
-        navigator.share({
-            title: '내 연애 스타일은?',
-            text: shareText,
-            url: window.location.href,
-        }).then(() => {
-            alert('결과가 공유되었습니다!');
-        }).catch((error) => {
-            console.error('공유 실패:', error);
-            navigator.clipboard.writeText(shareText).then(() => {
-                alert('공유 실패! 클립보드로 복사했습니다.');
+        navigator.share({ title: '내 연애 스타일은?', text: shareText, url: window.location.href })
+            .then(() => alert('결과가 공유되었습니다!'))
+            .catch(() => {
+                navigator.clipboard.writeText(shareText).then(() => alert('클립보드에 복사되었습니다!'));
             });
-        });
     } else {
-        navigator.clipboard.writeText(shareText).then(() => {
-            alert('결과가 클립보드에 복사되었습니다!');
-        }).catch((err) => {
-            console.error('클립보드 복사 실패:', err);
-            alert('클립보드 복사 실패!');
-        });
+        navigator.clipboard.writeText(shareText).then(() => alert('클립보드에 복사되었습니다!'));
     }
 }
 
@@ -494,7 +333,6 @@ function shareResult() {
 startTestBtn.addEventListener('click', startTest);
 shareResultBtn.addEventListener('click', shareResult);
 restartTestBtn.addEventListener('click', startTest);
-
 feedbackThumbUp.addEventListener('click', () => alert('피드백 카운트는 백엔드 연동이 필요합니다.'));
 feedbackThumbDown.addEventListener('click', () => alert('피드백 카운트는 백엔드 연동이 필요합니다.'));
 
