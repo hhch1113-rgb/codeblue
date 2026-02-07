@@ -200,6 +200,11 @@ header .description {
     transform: scale(1.2);
 }
 
+#share-result {
+    display: block; /* Make it a block element */
+    margin: 15px auto 0 auto; /* Center it */
+}
+
 #restart-test {
     margin-top: 2rem;
     width: 100%;
