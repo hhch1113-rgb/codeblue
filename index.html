@@ -35,6 +35,16 @@
             <input type="text" id="result-url" readonly>
             <button id="copy-button" data-i18n="copyButton">Copy URL</button>
         </div>
+
+        <!-- Debug Information Section -->
+        <div id="debug-info" class="debug-info" style="display: none;">
+            <h3 data-i18n="debugTitle">Server Response Information</h3>
+            <p><strong data-i18n="debugStatus">Status:</strong> <span id="debug-status-code"></span></p>
+            <p><strong data-i18n="debugResponse">Response:</strong></p>
+            <pre id="debug-response-text"></pre>
+            <p class="debug-explanation" id="debug-explanation"></p>
+        </div>
+
     </div>
 
     <footer>
