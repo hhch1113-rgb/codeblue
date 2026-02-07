@@ -1,27 +1,54 @@
-# Blueprint for the New Website
+# CodeBlue: 온라인 도구 모음
 
-## Overview
+## 개요
 
-The goal is to create a new, modern, and user-friendly homepage that serves as a portal to the existing tools. The design will be inspired by `https://ifh.cc/`, featuring a clean, single-page layout and multilingual support.
+이 프로젝트는 사용자의 편의를 위한 다양한 온라인 도구를 제공하는 웹사이트입니다. `https://codeblue-4vg.pages.dev/`의 디자인을 기반으로 하며, 다크/라이트 모드 전환 및 쉬운 탐색 기능을 갖추고 있습니다. 최근 애드센스 승인을 목표로 콘텐츠의 질을 높이고 필수 페이지를 추가하는 등 사이트 전반의 개선 작업을 진행했습니다.
 
-## Project Outline
+## 구현된 기능
 
-### Style and Design
+### 디자인 및 레이아웃
+- `https://codeblue-4vg.pages.dev/` 사이트의 시각적 스타일 재현
+- 메인 페이지에 18개의 도구를 그리드로 배치
+- 다크/라이트 모드 전환 버튼 (오른쪽 상단)
+- 각 도구 페이지에서 메인 화면으로 돌아가는 기능
+- 모든 도구 페이지에 일관된 스타일 적용 및 유지
+- 인라인 스타일을 중앙 `style.css`로 이동하여 테마 변수 활용 및 유지보수 용이성 확보
+- 소스 코드 보호를 위해 메인 및 모든 도구 페이지에서 마우스 오른쪽 버튼 클릭 비활성화
 
-*   **Layout:** A centered, single-column layout for the main content.
-*   **Typography:** Clean, sans-serif fonts (e.g., Inter, Noto Sans KR).
-*   **Color Palette:** A simple and modern color scheme with a primary accent color.
-*   **Visual Effects:** Subtle hover effects on links and buttons.
+### 도구 목록
+1.  **텍스트 도구**
+    *   글자수 / 단어수 / 문장수 세기
+    *   공백 제거 / 줄바꿈 정리
+    *   대소문자 변환
+    *   특수문자 제거
+2.  **계산기**
+    *   물타기 계산기
+    *   퍼센트 계산기
+    *   부가세 계산기
+    *   이자 계산기
+    *   환율 계산기
+    *   연봉 → 실수령액 계산
+    *   DSR / 대출 상환 계산기
+    *   BMI 계산기 (남녀 구분)
+3.  **생성 및 변환**
+    *   로또 번호 생성기
+    *   CSV ↔ Excel 변환
+    *   JSON 정렬 및 검사기
+    *   이미지 포맷 변환 (JPG/PNG/WEBP)
+    *   기념일 계산기
+    *   특수기호 모음집
 
-### Features
+### 사이트 개선 (애드센스 승인 목표)
+- **필수 페이지 추가:** '문의하기(contact.html)' 및 '이용약관(terms.html)' 페이지를 새로 생성하고 기본적인 내용을 추가했습니다.
+- **기존 필수 페이지 개선:** '사이트 정보(about.html)' 및 '개인정보처리방침(privacy.html)' 페이지의 내용이 충분함을 확인했습니다.
+- **도구 페이지 콘텐츠 보강:** '기념일 계산기(tool-16.html)' 페이지에 대한 상세한 설명, 사용 방법, 주요 기능 및 이점, 예시 등을 추가하여 콘텐츠의 깊이를 보강했습니다. (다른 도구 페이지도 동일한 방식으로 보강 가능)
+- **사이트 전체 네비게이션 개선:** 모든 페이지(메인, 필수, 도구 페이지)의 푸터에 '사이트 정보', '개인정보처리방침', '이용약관', '문의하기' 링크를 일관되게 추가하여 접근성을 높였습니다.
 
-*   **Tool Directory:** The main page will list all available tools with brief descriptions.
-*   **Multilingual Support:** The content will be available in multiple languages (initially Korean, English, and Japanese). A language switcher will allow users to select their preferred language.
-*   **Responsive Design:** The layout will be responsive and work well on both desktop and mobile devices.
+## 현재 진행 계획
 
-## Current Task: Initial Implementation
-
-1.  **Create the new `index.html` structure.**
-2.  **Style the page with `style.css`.**
-3.  **Implement the language switching functionality with `main.js`.**
-4.  **Populate the tool list dynamically.**
+1.  **[pending]** 애드센스 승인을 위한 웹사이트 개선
+2.  **[completed]** 기존 콘텐츠 분석 (index.html, tool-16.html, about.html, privacy.html)
+3.  **[completed]** 필수 페이지 생성 및 개선 (contact.html, terms.html, about.html, privacy.html)
+4.  **[completed]** 도구 페이지 콘텐츠 보강 (tool-16.html 부터 시작)
+5.  **[completed]** 사이트 전체 네비게이션 개선
+6.  **[in_progress]** blueprint.md 업데이트
