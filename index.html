@@ -1,56 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="pageTitle">Easy Image Uploader</title>
+    <title>Firebase 이미지 업로더</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="top-bar">
-        <div class="language-switcher">
-            <a href="#" class="lang-btn active" data-lang="en">EN</a>
-            <a href="#" class="lang-btn" data-lang="ko">KO</a>
-            <a href="#" class="lang-btn" data-lang="ja">JA</a>
-        </div>
-    </div>
     <div class="container">
-        <h1 data-i18n="title">Welcome to Easy Image Uploader</h1>
-        <p class="description" data-i18n="description">Drag and drop your images below or click to select a file for quick and easy sharing.</p>
+        <h1>이미지 업로더</h1>
+        <p class="description">아래 영역에 파일을 드래그하거나 버튼을 눌러 이미지를 선택하세요.</p>
 
         <div id="drop-area">
-            <p id="drop-text" data-i18n="dropText">Drag & Drop your image here or</p>
+            <p>파일을 여기에 드래그 또는 클릭하여 선택</p>
             <input type="file" id="file-input" accept="image/*">
-            <label for="file-input" class="file-label" data-i18n="chooseFile">Choose a file</label>
-            <p id="file-name" class="file-name"></p>
         </div>
         
         <div id="upload-status" class="status-message"></div>
-        <div id="progress-container">
+        <div id="progress-container" style="display: none;">
             <div id="progress-bar"></div>
         </div>
         
-        <div id="result">
-            <p data-i18n="resultTitle">Your image URL:</p>
+        <div id="result" style="display: none;">
+            <p>업로드 완료! 이미지 주소:</p>
             <input type="text" id="result-url" readonly>
-            <button id="copy-button" data-i18n="copyButton">Copy URL</button>
+            <button id="copy-button">주소 복사</button>
         </div>
-
     </div>
-
-    <footer>
-        <a href="privacy.html" target="_blank" data-i18n="privacy">Privacy</a>
-        <a href="terms.html" target="_blank" data-i18n="terms">Terms</a>
-        <a href="faq.html" target="_blank" data-i18n="faq">FAQ</a>
-        <a href="contact.html" target="_blank" data-i18n="contact">Contact/Report</a>
-    </footer>
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
 
     <script>
-        // IMPORTANT: Replace with your Firebase project's configuration
+        // 🚨 중요: 이 부분을 본인의 Firebase 프로젝트 정보로 반드시 교체해야 합니다.
         const firebaseConfig = {
             apiKey: "YOUR_API_KEY",
             authDomain: "YOUR_AUTH_DOMAIN",
@@ -60,21 +43,13 @@
             appId: "YOUR_APP_ID"
         };
 
-        // Initialize Firebase
         try {
             firebase.initializeApp(firebaseConfig);
-            console.log("Firebase initialized successfully.");
-        } catch (error) {
-            console.error("Firebase initialization failed:", error);
-            const statusEl = document.getElementById('upload-status');
-            if (statusEl) {
-                // This message will be replaced by main.js language-specific message
-                statusEl.textContent = "Error: Firebase could not be configured. Check credentials.";
-                statusEl.style.color = 'red';
-            }
+        } catch (e) {
+            console.error("Firebase 초기화 실패! firebaseConfig 객체를 확인해주세요.", e);
+            document.getElementById('upload-status').textContent = "Firebase 설정 오류! 개발자 콘솔을 확인하세요.";
         }
     </script>
     <script src="main.js"></script>
-
 </body>
 </html>
