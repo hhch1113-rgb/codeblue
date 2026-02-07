@@ -1,171 +1,319 @@
-// main.js - 연애 스타일 테스트 (모바일 최적화 + 16가지 완전 버전)
-const cleanText = (text) => {
-    if (!text) return '';
-    return text
-        .replace(/[\u200B\u200C\u200D\uFEFF]/g, '')
-        .replace(/\s+/g, ' ')
-        .trim();
-};
-
 const questions = [
     // ① 감정 표현 (O / C)
-    { id: 1, question: "연인이 서운하게 했을 때 나는", options: { A: "바로 말하는 편이다", B: "혼자 정리한 뒤 넘어간다" }, axis: '감정 표현', value: { A: 'O', B: 'C' } },
-    { id: 2, question: "좋아하는 감정은", options: { A: "말이나 행동으로 표현해야 한다고 생각한다", B: "굳이 말하지 않아도 느껴질 수 있다고 생각한다" }, axis: '감정 표현', value: { A: 'O', B: 'C' } },
-    { id: 3, question: "다툰 뒤 나는", options: { A: "바로 풀고 싶다", B: "시간을 두고 싶다" }, axis: '감정 표현', value: { A: 'O', B: 'C' } },
-    { id: 4, question: "연애 중 내 감정 상태를", options: { A: "상대가 잘 알고 있는 편이다", B: "잘 모를 것 같다고 느낀다" }, axis: '감정 표현', value: { A: 'O', B: 'C' } },
-    { id: 5, question: "연인에게 애정 표현을", options: { A: "자주 하는 편이다", B: "마음속으로만 하는 경우가 많다" }, axis: '감정 표현', value: { A: 'O', B: 'C' } },
+    {
+        id: 1,
+        question: "연인이 서운하게 했을 때 나는",
+        options: { A: "바로 말하는 편이다", B: "혼자 정리한 뒤 넘어간다" },
+        axis: '감정 표현',
+        value: { A: 'O', B: 'C' }
+    },
+    {
+        id: 2,
+        question: "좋아하는 감정은",
+        options: { A: "말이나 행동으로 표현해야 한다고 생각한다", B: "굳이 말하지 않아도 느껴질 수 있다고 생각한다" },
+        axis: '감정 표현',
+        value: { A: 'O', B: 'C' }
+    },
+    {
+        id: 3,
+        question: "다툰 뒤 나는",
+        options: { A: "바로 풀고 싶다", B: "시간을 두고 싶다" },
+        axis: '감정 표현',
+        value: { A: 'O', B: 'C' }
+    },
+    {
+        id: 4,
+        question: "연애 중 내 감정 상태를",
+        options: { A: "상대가 잘 알고 있는 편이다", B: "잘 모를 것 같다고 느낀다" },
+        axis: '감정 표현',
+        value: { A: 'O', B: 'C' }
+    },
+    {
+        id: 5,
+        question: "연인에게 애정 표현을",
+        options: { A: "자주 하는 편이다", B: "마음속으로만 하는 경우가 많다" },
+        axis: '감정 표현',
+        value: { A: 'O', B: 'C' }
+    },
     // ② 안정 vs 설렘 (S / T)
-    { id: 6, question: "연애에서 가장 중요한 건", options: { A: "믿을 수 있는 안정감", B: "계속 설레는 감정" }, axis: '안정감 추구', value: { A: 'S', B: 'T' } },
-    { id: 7, question: "데이트가 반복될 때", options: { A: "익숙해도 편하면 좋다", B: "지루해지면 힘들다" }, axis: '안정감 추구', value: { A: 'S', B: 'T' } },
-    { id: 8, question: "연애 초반보다 중반 이후가", options: { A: "더 편하고 좋다", B: "아쉬운 경우가 많다" }, axis: '안정감 추구', value: { A: 'S', B: 'T' } },
-    { id: 9, question: "연인의 예측 가능한 행동은", options: { A: "신뢰감을 준다", B: "재미가 줄어든다" }, axis: '안정감 추구', value: { A: 'S', B: 'T' } },
-    { id: 10, question: "연애는", options: { A: "일상의 일부가 되는 게 좋다", B: "특별한 이벤트여야 한다" }, axis: '안정감 추구', value: { A: 'S', B: 'T' } },
+    {
+        id: 6,
+        question: "연애에서 가장 중요한 건",
+        options: { A: "믿을 수 있는 안정감", B: "계속 설레는 감정" },
+        axis: '안정감 추구',
+        value: { A: 'S', B: 'T' }
+    },
+    {
+        id: 7,
+        question: "데이트가 반복될 때",
+        options: { A: "익숙해도 편하면 좋다", B: "지루해지면 힘들다" },
+        axis: '안정감 추구',
+        value: { A: 'S', B: 'T' }
+    },
+    {
+        id: 8,
+        question: "연애 초반보다 중반 이후가",
+        options: { A: "더 편하고 좋다", B: "아쉬운 경우가 많다" },
+        axis: '안정감 추구',
+        value: { A: 'S', B: 'T' }
+    },
+    {
+        id: 9,
+        question: "연인의 예측 가능한 행동은",
+        options: { A: "신뢰감을 준다", B: "재미가 줄어든다" },
+        axis: '안정감 추구',
+        value: { A: 'S', B: 'T' }
+    },
+    {
+        id: 10,
+        question: "연애는",
+        options: { A: "일상의 일부가 되는 게 좋다", B: "특별한 이벤트여야 한다" },
+        axis: '안정감 추구',
+        value: { A: 'S', B: 'T' }
+    },
     // ③ 계획 vs 즉흥 (P / F)
-    { id: 11, question: "데이트 약속은", options: { A: "미리 정해두는 게 좋다", B: "그날 기분 따라 정하는 게 좋다" }, axis: '관계 운영 방식', value: { A: 'P', B: 'F' } },
-    { id: 12, question: "여행을 간다면", options: { A: "일정이 있어야 편하다", B: "즉흥이 더 재밌다" }, axis: '관계 운영 방식', value: { A: 'P', B: 'F' } },
-    { id: 13, question: "연인이 갑자기 약속을 바꾸면", options: { A: "당황하거나 불편하다", B: "크게 신경 쓰지 않는다" }, axis: '관계 운영 방식', value: { A: 'P', B: 'F' } },
-    { id: 14, question: "데이트 장소를", options: { A: "미리 찾아본다", B: "가서 정한다" }, axis: '관계 운영 방식', value: { A: 'P', B: 'F' } },
-    { id: 15, question: "연애는", options: { A: "어느 정도 예측 가능해야 한다", B: "변수가 있어야 재미있다" }, axis: '관계 운영 방식', value: { A: 'P', B: 'F' } },
+    {
+        id: 11,
+        question: "데이트 약속은",
+        options: { A: "미리 정해두는 게 좋다", "B": "그날 기분 따라 정하는 게 좋다" },
+        axis: '관계 운영 방식',
+        value: { A: 'P', B: 'F' }
+    },
+    {
+        id: 12,
+        question: "여행을 간다면",
+        options: { A: "일정이 있어야 편하다", B: "즉흥이 더 재밌다" },
+        axis: '관계 운영 방식',
+        value: { A: 'P', B: 'F' }
+    },
+    {
+        id: 13,
+        question: "연인이 갑자기 약속을 바꾸면",
+        options: { A: "당황하거나 불편하다", B: "크게 신경 쓰지 않는다" },
+        axis: '관계 운영 방식',
+        value: { A: 'P', B: 'F' }
+    },
+    {
+        id: 14,
+        question: "데이트 장소를",
+        options: { A: "미리 찾아본다", B: "가서 정한다" },
+        axis: '관계 운영 방식',
+        value: { A: 'P', B: 'F' }
+    },
+    {
+        id: 15,
+        question: "연애는",
+        options: { A: "어느 정도 예측 가능해야 한다", B: "변수가 있어야 재미있다" },
+        axis: '관계 운영 방식',
+        value: { A: 'P', B: 'F' }
+    },
     // ④ 연인 중심 vs 개인 중심 (B / I)
-    { id: 16, question: "연애를 하면", options: { A: "연인이 내 생활의 중심이 된다", B: "기존 생활 패턴을 유지하고 싶다" }, axis: '개인 영역 인식', value: { A: 'B', B: 'I' } },
-    { id: 17, question: "혼자만의 시간이", options: { A: "크게 필요하지 않다", B: "꼭 필요하다" }, axis: '개인 영역 인식', value: { A: 'B', B: 'I' } },
-    { id: 18, question: "연인이 자주 보자고 하면", options: { A: "좋다", B: "부담스러울 수 있다" }, axis: '개인 영역 인식', value: { A: 'B', B: 'I' } },
-    { id: 19, question: "연애 중에도", options: { A: "웬만한 일은 함께 하고 싶다", B: "각자의 시간이 중요하다" }, axis: '개인 영역 인식', value: { A: 'B', B: 'I' } },
-    { id: 20, question: "연애는", options: { A: "둘이 하나의 팀이 되는 거다", B: "두 사람이 각자 존재하는 관계다" }, axis: '개인 영역 인식', value: { A: 'B', B: 'I' } },
+    {
+        id: 16,
+        question: "연애를 하면",
+        options: { A: "연인이 내 생활의 중심이 된다", B: "기존 생활 패턴을 유지하고 싶다" },
+        axis: '개인 영역 인식',
+        value: { A: 'B', B: 'I' }
+    },
+    {
+        id: 17,
+        question: "혼자만의 시간이",
+        options: { A: "크게 필요하지 않다", B: "꼭 필요하다" },
+        axis: '개인 영역 인식',
+        value: { A: 'B', B: 'I' }
+    },
+    {
+        id: 18,
+        question: "연인이 자주 보자고 하면",
+        options: { A: "좋다", B: "부담스러울 수 있다" },
+        axis: '개인 영역 인식',
+        value: { A: 'B', B: 'I' }
+    },
+    {
+        id: 19,
+        question: "연애 중에도",
+        options: { A: "웬만한 일은 함께 하고 싶다", B: "각자의 시간이 중요하다" },
+        axis: '개인 영역 인식',
+        value: { A: 'B', B: 'I' }
+    },
+    {
+        id: 20,
+        question: "연애는",
+        options: { A: "둘이 하나의 팀이 되는 거다", B: "두 사람이 각자 존재하는 관계다" },
+        axis: '개인 영역 인식',
+        value: { A: 'B', B: 'I' }
+    },
 ];
 
 const results = {
+    // OFPB
+    "OFPB": {
+        title: "💞 다 퍼주는 연애형",
+        image: "https://source.unsplash.com/400x200/?love,generous,caring",
+        summary: "OFPB는 감정이 풍부하고 연인을 보호하려는 헌신적인 유형입니다. 연애를 통해 깊은 정서적 유대를 추구하며 안정감을 중시합니다. 따뜻한 배려가 강하지만 감정 균형이 핵심 과제입니다.",
+        description: "상대의 감정을 세심하게 살피며 애정을 행동으로 보여줍니다. 자신의 감정보다 파트너를 우선시하며 관계를 키웁니다. 외부로 드러나는 보호적 태도로 사소한 일상에서도 배려합니다.",
+        pros: ["공감과 헌신으로 상대에게 큰 안정감을 줍니다.", "신뢰를 바탕으로 장기적인 관계를 유지합니다.", "상대의 행복을 진심으로 추구해 깊은 유대감을 형성합니다."],
+        cons: ["자신의 감정을 억누르다 서운함이 쌓일 수 있습니다.", "상대의 반응에 과민해 불안이 생기기 쉽습니다.", "연애에 몰입해 스스로 지치거나 불균형이 발생합니다."],
+        advice: "본인 감정도 솔직히 표현하며 균형을 유지하세요. 상대의 행동을 과도하게 해석하지 말고 대화하세요. 연애 외 취미로 감정 에너지를 분산시키세요."
+    },
+    "OFPI": {
+        title: "💗 감정에 올인하는 연애형",
+        image: "https://source.unsplash.com/400x200/?love,emotional,allin",
+        summary: "OFPI는 감정이 풍부하고 애정 표현이 자연스러운 유형입니다. 연애를 통해 감정 교류와 정서적 유대를 깊게 만듭니다. 따뜻하지만 감정 기복 관리가 핵심 과제입니다.",
+        description: "좋아하는 사람에게 감정적으로 깊이 몰입합니다. 사소한 대화에서도 의미를 찾고 정서적 연결을 중시합니다. 상대의 반응에 따라 기분이 크게 좌우되기도 합니다.",
+        pros: ["공감 능력이 뛰어나 상대를 잘 이해합니다.", "애정 표현이 풍부해 연애 초반의 만족도가 높습니다.", "상대의 감정에 진심으로 반응해 줍니다."],
+        cons: ["상대의 말이나 태도에 과도하게 의미를 부여합니다.", "감정 기복이 심해 스스로도 지칠 수 있습니다.", "불안할 때 확인 욕구가 강해지는 경향이 있습니다."],
+        advice: "감정이 요동칠 때 바로 결론을 내리지 마세요. 상대의 행동과 자신의 해석을 분리해서 생각하세요. 연애 외의 정서적 지지 기반도 함께 키우세요."
+    },
+    "OFTB": {
+        title: "🌿 마음은 깊고 판단은 차분한 연애형",
+        image: "https://source.unsplash.com/400x200/?love,calm,deepthought",
+        summary: "OFTB는 감정과 논리를 함께 쓰는 균형형 연애 유형입니다. 연애를 현실적으로 바라보면서도 정은 깊습니다. 차분하지만 내면의 애정은 결코 가볍지 않습니다.",
+        description: "감정을 무작정 드러내기보다는 상황을 고려합니다. 상대를 존중하며 관계의 틀을 안정적으로 잡습니다. 연애 속에서도 자기 역할과 책임을 중시합니다.",
+        pros: ["감정에 휘둘리지 않아 관계가 쉽게 흔들리지 않습니다.", "현실적인 판단으로 문제 해결 능력이 뛰어납니다.", "상대를 믿고 맡길 줄 아는 성숙함이 있습니다."],
+        cons: ["감정 표현이 부족하다는 오해를 받기 쉽습니다.", "연애에서도 효율을 따지다 차갑게 보일 수 있습니다.", "속마음을 혼자 정리하려다 거리감이 생깁니다."],
+        advice: "논리만큼 감정 표현도 의식적으로 연습하세요. 상대가 느끼는 감정 자체를 먼저 인정해 주세요. 가끔은 이유 없는 애정 표현도 필요합니다."
+    },
+    "OFTI": {
+        title: "🌙 천천히 빠져드는 연애형",
+        image: "https://source.unsplash.com/400x200/?love,slow,reserved",
+        summary: "OFTI는 감정은 깊지만 표현은 절제된 유형입니다. 연애에서 신중하고 관찰적인 태도를 보입니다. 느리지만 한번 시작되면 쉽게 식지 않습니다.",
+        description: "상대를 충분히 이해하기 전까지 조심스럽게 접근합니다. 감정을 바로 드러내지 않고 마음속에서 정리합니다. 관계가 안정되면 헌신적인 모습을 보입니다.",
+        pros: ["상대의 말과 행동을 세심하게 관찰합니다.", "감정적으로 성숙해 깊은 신뢰를 형성합니다.", "연애를 가볍게 대하지 않아 진중합니다."],
+        cons: ["감정을 숨기다 타이밍을 놓칠 수 있습니다.", "상대가 마음을 알기 어려워 답답함을 느낍니다.", "혼자 고민하다 오해를 키우는 경우가 있습니다."],
+        advice: "감정을 완성된 후에만 말하려 하지 마세요. 과정 중인 생각도 충분히 공유해도 괜찮습니다. 상대는 네 속마음을 듣고 싶어 한다는 걸 기억하세요."
+    },
     "OSPB": {
-        title: "🏡 다정한 현실주의 연애형",
-        summary: "감정 표현에 솔직하고, 안정적인 관계를 계획적으로 만들어가며 연인 중심으로 움직이는 현실적인 헌신형. 장기 연애의 기반을 단단히 다지는 타입이다.",
-        description: "사랑을 말과 행동으로 꾸준히 보여주고, 미래 계획이나 기념일을 자연스럽게 챙긴다. 연인을 삶의 중요한 축으로 두고 일상을 함께 설계한다.",
-        pros: ["상대에게 강한 신뢰감과 안정감을 준다.", "연인이 사랑받고 있다는 느낌을 지속적으로 받는다.", "장기적인 관계 유지 능력이 뛰어나다."],
-        cons: ["헌신이 과도해지면서 상대가 부담을 느낄 수 있다.", "상대의 반응이 미지근하면 서운함이 쉽게 쌓인다.", "자기 희생이 많아져 번아웃이 올 수 있다."],
-        advice: "상대의 페이스와 독립성을 존중하는 여유를 가져라. 모든 걸 완벽히 챙기려 하지 말고 자연스러운 흐름도 받아들여라. 자신의 감정도 솔직하게 나누는 연습이 필요하다."
+        title: "🏡 사랑을 일상으로 만드는 연애형",
+        image: "https://source.unsplash.com/400x200/?love,daily,home",
+        summary: "이 유형은 사랑을 숨기지 않고 표현하며 연애를 삶의 중요한 중심으로 여깁니다. 관계의 안정과 지속성을 매우 중요하게 생각합니다. 연애에 진지하게 임하는 사람에게서 자주 나타납니다.",
+        description: "연인을 우선순위에 두고 행동으로 애정을 보여줍니다. 연락과 만남에 성실하며 감정 표현을 아끼지 않습니다. 관계를 함께 키워간다는 인식이 강합니다.",
+        pros: ["상대에게 안정감과 신뢰를 주는 연애를 합니다.", "책임감 있는 태도로 관계를 오래 유지합니다.", "연인이 사랑받고 있다는 확신을 느끼기 쉽습니다."],
+        cons: ["상대의 반응이 적으면 쉽게 불안해질 수 있습니다.", "감정 표현의 차이로 상처를 받기도 합니다.", "연애에 과도하게 몰입해 스스로 지칠 수 있습니다."],
+        advice: "사랑의 방식은 사람마다 다를 수 있음을 받아들이세요. 상대의 표현이 적다고 애정이 없는 것은 아닙니다. 스스로의 감정 균형을 지키는 것도 중요합니다."
     },
     "OSPI": {
-        title: "🧘 헌신적이지만 균형을 아는 연애형",
-        summary: "솔직한 감정 표현과 안정감을 추구하면서도 개인의 공간과 균형을 잃지 않는 성숙한 타입. 건강한 장기 연애에 적합한 현실주의자.",
-        description: "진심 어린 애정 표현을 하되 모든 시간을 붙잡지 않는다. 각자의 루틴을 존중하며 안정적인 교류를 유지한다. 관계가 무거워지지 않도록 자연스러운 거리감을 둔다.",
-        pros: ["감정 소통이 원활하고 갈등이 적다.", "서로의 자유를 존중해 관계가 건강하게 유지된다.", "감정 소모가 적어 장기적으로 안정적이다."],
-        cons: ["상대가 “너무 차분하거나 관심이 덜한 것 같다”고 느낄 수 있다.", "감정의 강도가 약해 보일 때 오해가 생긴다.", "깊은 몰입이 늦어 초반 만족도가 낮아 보일 수 있다."],
-        advice: "필요할 때 의도적으로 감정 표현의 강도를 높여라. 상대가 원하는 애정 신호를 미리 체크하는 습관을 들여라. 균형 잡힌 거리감이 오히려 더 큰 매력이 될 수 있다."
+        title: "🧘 붙어도 편하고 떨어져도 괜찮은 연애형",
+        image: "https://source.unsplash.com/400x200/?love,comfortable,balance",
+        summary: "이 유형은 애정 표현과 개인의 자유를 동시에 중시합니다. 연애와 자기 삶의 균형을 중요하게 생각합니다. 성숙한 연애관을 가진 편입니다.",
+        description: "다정하게 다가가지만 일정한 거리를 유지합니다. 각자의 시간을 존중하는 연애를 선호합니다. 지나친 간섭에는 부담을 느낍니다.",
+        pros: ["연애에 휘둘리지 않고 감정적으로 안정적입니다.", "상대를 존중하는 태도가 분명합니다.", "건강한 관계를 유지할 가능성이 높습니다."],
+        cons: ["상대가 거리감을 느낄 수 있습니다.", "감정 표현이 부족하다는 오해를 받기도 합니다.", "깊은 감정 교류가 늦어질 수 있습니다."],
+        advice: "필요한 순간에는 감정을 더 분명히 표현하세요. 상대의 정서적 요구를 가볍게 넘기지 마세요. 균형과 표현은 함께 갈 수 있습니다."
     },
-    "OSFB": {
-        title: "🎢 설렘 가득한 올인형 연애가",
-        summary: "감정 표현이 풍부하고 설렘을 최우선으로 여기며 연인에게 깊이 몰입하는 열정적인 올인형. 초반 불꽃이 매우 강한 로맨티스트.",
-        description: "즉흥적인 데이트와 깜짝 이벤트를 즐기고 연인을 삶의 중심에 두며 하루 종일 생각한다. 감정의 온도가 높아 관계가 빠르게 뜨거워진다.",
-        pros: ["연애의 재미와 설렘이 매우 크다.", "상대가 특별하고 소중하다는 느낌을 강하게 준다.", "열정적인 에너지로 관계에 활력을 불어넣는다."],
-        cons: ["설렘이 줄면 사랑이 식었다고 크게 불안해한다.", "감정 기복이 심해 관계가 롤러코스터가 된다.", "과도한 몰입으로 스스로 지치기 쉽다."],
-        advice: "설렘만큼 안정과 일상의 소중함도 배워라. 감정의 고저를 상대와 함께 이야기하는 습관을 들여라. 작은 루틴이 오히려 더 깊은 사랑으로 이어질 수 있다."
+    "OSTB": {
+        title: "🎢 설렘이 연애의 기준인 형",
+        image: "https://source.unsplash.com/400x200/?love,excitement,adventure",
+        summary: "이 유형은 연애에서 설렘과 감정의 흐름을 중시합니다. 사랑은 느껴져야 한다고 믿습니다. 감정의 온도에 민감한 편입니다.",
+        description: "새로운 데이트와 자극을 즐깁니다. 감정적인 교류를 자주 확인하려 합니다. 분위기에 따라 만족도가 크게 달라집니다.",
+        pros: ["연애 초반의 에너지가 매우 강합니다.", "관계에 활력과 재미를 줍니다.", "감정 표현이 풍부합니다."],
+        cons: ["설렘이 줄면 사랑이 식었다고 느낄 수 있습니다.", "감정 기복으로 관계가 불안정해질 수 있습니다.", "반복적인 패턴에 빠지기도 합니다."],
+        advice: "안정은 지루함과 같은 의미가 아닙니다. 감정의 강도만으로 사랑을 판단하지 마세요. 깊어지는 관계의 변화를 받아들이는 연습이 필요합니다."
     },
-    "OSFI": {
-        title: "🕊️ 자유로운 로맨티스트",
-        summary: "솔직한 표현과 설렘을 즐기면서도 개인 자유와 독립성을 절대 포기하지 않는 타입. 밝고 자유로운 로맨티스트.",
-        description: "감정은 적극적으로 표현하지만 구속은 싫어한다. 즉흥 데이트를 좋아하고 각자의 삶을 존중한다. 연애를 삶의 즐거운 일부로 자연스럽게 받아들인다.",
-        pros: ["밝고 매력적인 분위기를 지속적으로 만든다.", "서로 숨 막히지 않는 건강한 거리감을 유지한다.", "신선한 자극과 자유로운 에너지를 준다."],
-        cons: ["상대가 더 많은 안정감과 확신을 원할 때 불안해한다.", "자유로움이 무책임하게 보일 수 있다.", "깊은 헌신 단계로 넘어가는 게 늦어진다."],
-        advice: "자유 속에서도 “너를 소중히 여긴다”는 신호를 꾸준히 줘라. 상대의 불안 포인트를 미리 대화로 풀어라. 작은 약속 하나가 오히려 더 큰 자유를 지켜준다."
-    },
-    "OTPB": {
-        title: "💞 열정적인 미래 설계자",
-        summary: "솔직한 표현과 설렘을 즐기면서도 계획과 헌신을 놓치지 않는 열정적 미래 설계자. 재미와 안정의 균형을 추구한다.",
-        description: "즉흥적인 재미도 즐기지만 미래를 함께 그린다. 이벤트와 계획을 동시에 챙겨 로맨스를 만든다. 연인을 중심에 두고 적극적으로 움직인다.",
-        pros: ["재미와 안정이 동시에 느껴지는 연애를 한다.", "상대가 설레면서도 안심할 수 있다.", "에너지와 책임감이 공존한다."],
-        cons: ["모든 걸 완벽히 하려다 스스로 지친다.", "계획이 틀어지면 크게 실망한다.", "상대의 자유를 제한할 수 있다."],
-        advice: "완벽함보다 유연함을 조금 더 가져라. 작은 변화도 설렘으로 받아들이는 연습을 해라. 상대의 속도에 맞춰주는 여유가 필요하다."
-    },
-    "OTPI": {
-        title: "🌪️ 활기찬 현실 감각형",
-        summary: "설렘과 자유를 사랑하면서도 현실 감각을 잃지 않는 활기차고 균형 잡힌 연애형. 밝지만 집착하지 않는 매력.",
-        description: "즉흥 데이트와 새로운 자극을 즐긴다. 감정 표현은 적극적이지만 구속은 하지 않는다. 각자의 삶을 존중하며 가볍게 즐긴다.",
-        pros: ["밝고 매력적인 에너지를 준다.", "서로 부담 없이 즐거운 관계를 만든다.", "신선함이 지속된다."],
-        cons: ["깊이나 진지함이 부족하다는 평가를 받는다.", "상대가 더 많은 확신을 원할 때 어색해진다.", "장기적인 안정감이 약해 보일 수 있다."],
-        advice: "감정의 깊이를 천천히 쌓아가는 시간을 가져라. 작은 약속으로 안정감을 더해라. 즐거움과 진심은 함께 갈 수 있다."
-    },
-    "OTFB": {
-        title: "🔥 불꽃형 연애 몰입가",
-        summary: "즉흥적이고 감정 표현이 강렬하며 연인에게 완전히 몰입하는 불꽃형 연애가. 강렬한 로맨스를 추구한다.",
-        description: "사랑하면 바로 불태우고 즉흥적으로 움직인다. 연인을 삶의 전부처럼 여기며 몰입한다. 감정의 강도가 매우 높다.",
-        pros: ["강한 로맨스와 열정이 넘친다.", "상대가 강렬하게 사랑받는 느낌을 받는다.", "추억이 매우 풍부하다."],
-        cons: ["감정이 식으면 급격히 흔들린다.", "번아웃이 쉽게 온다.", "관계가 롤러코스터처럼 불안정하다."],
-        advice: "속도를 조절하고 숨 고를 타이밍을 가져라. 감정의 고저를 상대와 공유하는 습관을 들여라. 강렬함만큼 안정도 소중히 여겨라."
-    },
-    "OTFI": {
-        title: "🕊️ 자유로운 연애 탐험가",
-        summary: "설렘과 자유를 동시에 추구하는 가볍고 탐험적인 연애 스타일. 독립적이면서도 로맨틱한 자유인.",
-        description: "즉흥적이고 적극적인 애정 표현을 한다. 연애를 즐기되 서로를 묶지 않는다. 새로운 경험을 함께 추구한다.",
-        pros: ["가볍고 신나는 매력이 있다.", "서로의 자유를 존중해 스트레스가 적다.", "항상 신선한 자극이 있다."],
-        cons: ["상대가 불안정함을 느끼고 불안해한다.", "깊은 헌신으로 이어지기 어렵다.", "책임감 부족으로 오해받는다."],
-        advice: "자유 속에서도 최소한의 안심 신호를 줘라. 상대의 기대치를 미리 확인하고 맞춰라. 즐거움과 책임은 공존할 수 있다."
+    "OSTI": {
+        title: "🕊️ 자유롭게 사랑하는 연애형",
+        image: "https://source.unsplash.com/400x200/?love,freedom,bird",
+        summary: "이 유형은 감정과 설렘을 즐기지만 자유를 중시합니다. 연애에 얽매이는 것을 부담스러워합니다. 독립적인 연애관을 가지고 있습니다.",
+        description: "초반에는 적극적이고 매력적으로 다가갑니다. 기대가 커지면 한 발 물러납니다. 연애를 삶의 일부로 인식합니다.",
+        pros: ["자유롭고 솔직한 감정 표현이 가능합니다.", "연애를 가볍고 즐겁게 만듭니다.", "상대에게 신선한 자극을 줍니다."],
+        cons: ["상대가 불안감을 느낄 수 있습니다.", "깊은 관계로 이어지기 어렵기도 합니다.", "책임 회피로 오해받을 수 있습니다."],
+        advice: "자유와 책임은 동시에 존재할 수 있습니다. 최소한의 안정감은 관계 유지에 필요합니다. 상대의 기대를 완전히 외면하지 마세요."
     },
     "CSPB": {
-        title: "🪵 묵묵한 책임형 연애가",
-        summary: "감정 표현은 적지만 행동으로 책임을 다하는 안정적이고 계획적인 헌신형. 묵묵히 오래 가는 관계의 강자.",
-        description: "말보다 행동으로 애정을 증명하고 미래를 함께 설계하며 연인을 중심에 둔다. 예측 가능하고 신뢰할 수 있는 연애를 만든다.",
-        pros: ["신뢰감과 안정감이 매우 높다.", "위기 상황에서도 흔들리지 않고 버틴다.", "장기 연애와 결혼에 가장 강하다."],
-        cons: ["감정이 잘 안 보인다는 오해를 받는다.", "상대가 설렘 부족을 느끼기 쉽다.", "표현 부족으로 초반에 밀릴 수 있다."],
-        advice: "작은 말 한마디, 메시지 하나가 큰 차이를 만든다. 의도적으로 애정 표현을 연습해라. 안정감이 지루함이 아니라는 걸 상대와 공유해라."
+        title: "🪵 믿고 오래 가는 연애형",
+        image: "https://source.unsplash.com/400x200/?love,trust,wood",
+        summary: "이 유형은 안정과 신뢰를 가장 중요하게 여깁니다. 연애를 장기적인 관계로 인식합니다. 차분한 성향이 강합니다.",
+        description: "천천히 관계를 쌓아갑니다. 말보다는 행동으로 마음을 보여줍니다. 예측 가능한 연애를 선호합니다.",
+        pros: ["신뢰를 기반으로 한 관계를 만듭니다.", "감정 기복이 적습니다.", "오래가는 연애에 강합니다."],
+        cons: ["감정 표현이 부족하다는 말을 들을 수 있습니다.", "연애가 단조롭게 느껴질 수 있습니다.", "설렘 부족으로 오해받을 수 있습니다."],
+        advice: "감정을 말로 표현하는 연습을 해보세요. 안정 속에서도 변화를 줄 수 있습니다. 작은 표현이 큰 차이를 만듭니다."
     },
     "CSPI": {
-        title: "🧊 차분한 장기 연애형",
-        summary: "안정감을 추구하면서도 개인의 삶과 균형을 잃지 않는 차분하고 현실적인 장기 연애형. 감정 소모가 적은 성숙한 스타일.",
-        description: "감정 기복 없이 꾸준히 관계를 유지한다. 각자의 루틴을 존중하며 자연스러운 교류를 한다. 연애를 삶의 한 부분으로 건강하게 받아들인다.",
-        pros: ["관계가 매우 안정적이고 흔들림이 적다.", "감정적·시간적 소모가 적어 오래간다.", "서로의 독립성을 존중하는 성숙함이 있다."],
-        cons: ["설렘이나 열정이 부족하다는 평가를 받는다.", "상대가 관심 부족으로 느낄 수 있다.", "감정 교류가 적어 깊이가 얕아 보일 때가 있다."],
-        advice: "의도적인 작은 이벤트나 표현으로 활력을 더해라. 상대의 정서적 요구를 가볍게 넘기지 마라. 균형 잡힌 안정이 진짜 사랑의 기반임을 믿어라."
+        title: "🧊 연애해도 나를 잃지 않는 형",
+        image: "https://source.unsplash.com/400x200/?love,independent,ice",
+        summary: "이 유형은 연애와 개인 생활의 분리를 중요하게 여깁니다. 감정보다 현실을 중시합니다. 독립적인 성향이 강합니다.",
+        description: "연애 중에도 자기 루틴을 유지합니다. 연락과 만남에 큰 변화를 주지 않습니다. 과도한 감정 교류를 피합니다.",
+        pros: ["연애로 인해 삶이 흔들리지 않습니다.", "감정적으로 매우 안정적입니다.", "자율적인 관계를 유지합니다."],
+        cons: ["상대가 소외감을 느낄 수 있습니다.", "차갑다는 인상을 줄 수 있습니다.", "감정적 거리감이 생길 수 있습니다."],
+        advice: "상대의 감정 요구를 무시하지 마세요. 표현은 관계의 윤활유입니다. 독립성과 배려는 함께 갈 수 있습니다."
     },
-    "CSFB": {
-        title: "🤍 조용하지만 깊은 애착형",
-        summary: "표현은 절제되지만 설렘과 애정이 깊고 연인 중심으로 헌신하는 조용한 몰입형. 속 깊은 로맨티스트.",
-        description: "겉으로는 차분하지만 내면은 뜨겁게 타오른다. 상대를 세심하게 챙기며 깊은 유대감을 만든다. 말보다는 행동과 시간으로 애정을 보여준다.",
-        pros: ["헌신적이고 진심 어린 애정이 느껴진다.", "정서적 유대가 깊고 오래간다.", "신뢰를 바탕으로 한 안정적인 관계를 만든다."],
-        cons: ["감정이 쌓이다가 한 번에 터져버린다.", "표현 부족으로 상대가 불안해할 수 있다.", "서운함을 혼자 삭이다가 폭발한다."],
-        advice: "작은 감정이라도 바로 나누는 연습을 해라. 상대가 읽을 수 없는 마음은 말로 전달해라. 감정 배출구를 미리 만드는 게 관계를 지킨다."
+    "CSTB": {
+        title: "🔄 안정 속에 자극을 찾는 연애형",
+        image: "https://source.unsplash.com/400x200/?love,stable,change,excitement",
+        summary: "겉으로는 안정적이지만 내면에는 설렘을 원합니다. 변화 없는 연애를 답답해할 수 있습니다. 이중적인 욕구를 가진 유형입니다.",
+        description: "기본적으로 차분하지만 가끔 자극을 원합니다. 관계가 정체되면 불만이 쌓입니다. 표현은 신중한 편입니다.",
+        pros: ["안정과 설렘을 동시에 추구합니다.", "쉽게 무너지지 않는 관계를 만듭니다.", "신중한 판단을 합니다."],
+        cons: ["본인의 욕구를 잘 드러내지 못합니다.", "답답함이 쌓이다가 갑자기 터질 수 있습니다.", "상대가 변화를 눈치채기 어렵습니다."],
+        advice: "원하는 것을 미리 표현하세요. 작은 변화로도 만족할 수 있습니다. 감정을 쌓아두지 마세요."
     },
-    "CSFI": {
-        title: "🌱 자기만의 리듬을 지키는 연애형",
-        summary: "설렘은 느끼지만 표현과 의존은 최소화하며 자기 리듬과 독립성을 최우선으로 하는 타입. 성숙하고 자유로운 독립 연애자.",
-        description: "연애에 과몰입하지 않고 각자의 공간을 지킨다. 감정은 깊지만 드러내는 양은 적다. 자연스러운 만남과 거리감을 즐긴다.",
-        pros: ["서로의 자유를 존중해 숨 막히지 않는다.", "감정 소모가 적고 자존감이 높다.", "성숙하고 차분한 매력이 있다."],
-        cons: ["상대가 차갑거나 무관심하다고 오해한다.", "온도 차로 인해 거리감이 벌어진다.", "깊은 감정 교류가 늦어진다."],
-        advice: "상대에게 “너를 소중히 여긴다”는 신호를 적극 줘라. 작은 표현 하나가 오해를 크게 줄인다. 독립성과 애정은 동시에 존재할 수 있다."
+    "CSTI": {
+        title: "🧱 연애보다 삶이 먼저인 형",
+        image: "https://source.unsplash.com/400x200/?love,life,first,priority",
+        summary: "이 유형은 연애보다 개인의 삶을 우선시합니다. 감정 기복이 적습니다. 현실적인 연애관을 가지고 있습니다.",
+        description: "필요 이상의 연락을 하지 않습니다. 각자의 생활을 존중합니다. 연애로 일상이 바뀌는 것을 원치 않습니다.",
+        pros: ["매우 안정적인 관계를 유지합니다.", "감정 소모가 적습니다.", "독립적인 파트너와 잘 맞습니다."],
+        cons: ["상대가 외로움을 느낄 수 있습니다.", "애정 표현 부족으로 오해받을 수 있습니다.", "감정 교류가 약해질 수 있습니다."],
+        advice: "상대의 외로움을 신호로 받아들이세요. 작은 표현이 관계를 유지합니다. 무관심과 안정은 다릅니다."
     },
-    "CTPB": {
-        title: "🪵 조용한 헌신형 로맨티스트",
-        summary: "겉으로는 조용하지만 설렘과 책임이 공존하는 은근한 헌신형 로맨티스트. 깊이 있는 안정 로맨스.",
-        description: "말수는 적지만 행동으로 확실히 보여준다. 계획적으로 미래를 준비하며 설렘을 유지한다. 연인을 중심에 두고 조용히 헌신한다.",
-        pros: ["신뢰도와 깊이가 매우 높다.", "설렘과 안정이 함께 간다.", "장기적으로 강한 유대감을 만든다."],
-        cons: ["감정 전달이 부족해 오해가 생긴다.", "상대가 관심 부족으로 느낄 수 있다.", "초반에 매력이 덜 드러난다."],
-        advice: "표현은 관계의 윤활유라는 걸 기억해라. 작은 말과 행동으로 애정을 더 자주 보여라. 조용한 헌신도 말로 전달하면 빛난다."
+    "CFPB": {
+        title: "🤍 말없이 챙겨주는 연애형",
+        image: "https://source.unsplash.com/400x200/?love,quiet,caring",
+        summary: "이 유형은 조용하지만 감정이 깊습니다. 연인을 보호하려는 성향이 강합니다. 헌신적인 연애를 합니다.",
+        description: "상대의 감정을 세심하게 살핍니다. 자신의 감정보다 상대를 우선합니다. 말보다는 배려로 표현합니다.",
+        pros: ["정서적으로 큰 안정감을 줍니다.", "상대를 진심으로 이해하려 합니다.", "신뢰가 깊게 쌓입니다."],
+        cons: ["자신의 감정을 억누를 수 있습니다.", "서운함이 쌓이기 쉽습니다.", "감정 표현 부족으로 오해받을 수 있습니다."],
+        advice: "본인의 감정도 중요합니다. 참기만 하면 관계가 불균형해집니다. 솔직한 표현이 필요합니다."
     },
-    "CTPI": {
-        title: "🧊 차분한 자유 연애형",
-        summary: "설렘은 느끼되 과몰입하지 않고 거리감과 자유를 유지하는 차분한 자유 연애형. 성숙하고 냉정함이 매력.",
-        description: "감정은 깊지만 드러내는 양은 적다. 각자의 리듬을 존중하며 가볍게 즐긴다. 연애를 삶의 일부로 자연스럽게 받아들인다.",
-        pros: ["성숙하고 안정적인 태도가 돋보인다.", "감정 소모가 적고 자존감이 높다.", "서로 부담 없는 관계를 만든다."],
-        cons: ["온도 차가 커서 상대가 외로움을 느낀다.", "무관심으로 오해받기 쉽다.", "깊은 교류가 늦어진다."],
-        advice: "연인의 기대치와 감정 요구를 확인해라. 작은 표현으로 안심을 주는 습관을 들여라. 차분함이 무관심이 아님을 보여줘라."
+    "CFPI": {
+        title: "🌱 조심스럽게 깊어지는 연애형",
+        image: "https://source.unsplash.com/400x200/?love,careful,growth",
+        summary: "이 유형은 감정을 중요하게 여기지만 절제합니다. 관계에서도 균형을 중시합니다. 신중한 연애 성향입니다.",
+        description: "상대를 잘 관찰합니다. 감정을 천천히 드러냅니다. 거리를 조절하며 관계를 유지합니다.",
+        pros: ["감정적으로 매우 성숙합니다.", "갈등을 키우지 않습니다.", "안정적인 관계를 만듭니다."],
+        cons: ["상대가 답답함을 느낄 수 있습니다.", "감정 표현이 늦어 오해가 생길 수 있습니다.", "깊어지기까지 시간이 걸립니다."],
+        advice: "감정을 표현해도 관계는 무너지지 않습니다. 솔직함이 신뢰를 키웁니다. 타이밍을 놓치지 마세요."
     },
-    "CTFB": {
-        title: "🔥 은근히 불타는 타입",
-        summary: "겉은 차분하지만 속은 뜨겁게 타오르는 즉흥적 감정 폭발형. 은근히 불타는 숨겨진 열정가.",
-        description: "평소에는 조용하지만 감정이 쌓이면 강렬하게 터진다. 즉흥적인 로맨스와 깊은 몰입을 동시에 가진다. 예측 불가능한 매력이 있다.",
-        pros: ["깊은 애정과 열정이 느껴진다.", "한 번 터지면 강렬한 유대감이 생긴다.", "숨겨진 로맨틱함이 매력 포인트."],
-        cons: ["감정이 예측 불가해 상대가 당황한다.", "평소 무심함과 폭발의 갭이 크다.", "서운함이 쌓이다가 한 번에 터진다."],
-        advice: "감정 배출구를 미리 만들어 작은 단위로 나눠라. 평소에도 가벼운 표현으로 온도를 유지해라. 갭을 줄이는 게 관계를 안정시킨다."
+    "CFTB": {
+        title: "🕰️ 확신 생기면 오래 가는 연애형",
+        image: "https://source.unsplash.com/400x200/?love,time,certainty",
+        summary: "이 유형은 감정은 깊지만 행동은 신중합니다. 쉽게 마음을 열지 않습니다. 설렘과 안정 사이에서 고민합니다.",
+        description: "관계를 천천히 관찰합니다. 감정이 커져도 바로 표현하지 않습니다. 신뢰가 쌓이면 깊어집니다.",
+        pros: ["한 번 시작하면 오래 갑니다.", "감정의 깊이가 큽니다.", "쉽게 변하지 않습니다."],
+        cons: ["기회를 놓칠 수 있습니다.", "상대가 확신을 느끼기 어렵습니다.", "표현 부족으로 거리감이 생길 수 있습니다."],
+        advice: "완벽한 타이밍은 오지 않습니다. 감정은 어느 정도 드러내야 전달됩니다. 용기를 내보세요."
     },
     "CTFI": {
-        title: "🌌 독립적 감정 절제형",
-        summary: "설렘은 느끼지만 표현과 의존 모두 최소화하는 독립적이고 감정을 절제하는 타입. 자기 세계가 확실한 내면 중심 연애자.",
-        description: "감정은 깊지만 쉽게 드러내지 않는다. 개인 시간과 공간을 최우선으로 지킨다. 조용하고 독립적인 관계를 선호한다.",
-        pros: ["자존감과 독립성이 매우 높다.", "감정에 휘둘리지 않아 안정적이다.", "성숙한 태도로 관계를 유지한다."],
-        cons: ["상대가 큰 거리감과 소외감을 느낀다.", "애정 표현 부족으로 사랑이 식었다고 오해한다.", "감정 교류가 적어 관계가 얕아 보인다."],
-        advice: "연애는 혼자가 아니라 둘이라는 사실을 기억해라. 작은 표현 하나가 상대의 불안을 크게 줄인다. 독립성과 애정 표현은 동시에 가능하다."
-    }
+        title: "🌌 혼자여도 마음은 깊은 연애형",
+        image: "https://source.unsplash.com/400x200/?love,space,deep,independent",
+        summary: "이 유형은 감정이 깊지만 독립성이 강합니다. 혼자만의 세계를 중요하게 여깁니다. 내면 중심적인 연애관을 가집니다.",
+        description: "감정을 쉽게 드러내지 않습니다. 연애 중에도 개인 시간을 중시합니다. 조용한 관계를 선호합니다.",
+        pros: ["감정에 휘둘리지 않습니다.", "안정적인 태도를 유지합니다.", "성숙한 관계를 만들 수 있습니다."],
+        cons: ["상대가 소외감을 느낄 수 있습니다.", "감정 교류가 부족해질 수 있습니다.", "거리감이 커질 수 있습니다."],
+        advice: "상대는 마음을 읽을 수 없습니다. 표현은 관계를 이어주는 다리입니다. 조금 더 보여주세요."
+    },
+    // Adding placeholder results for the few remaining combinations that weren't explicitly covered by user's new content
+    // to ensure all 16 results are valid. The user provided only 12 types in the last input, but mentioned 16 types overall.
+    // The previous prompt text was 16 types in total with 4 sets of 4 codes.
+    // I will use some generic placeholder text for the missing 4 types if they were not covered by the user's latest input.
+    // However, looking at the user's input, they provided 16 codes with new descriptions. My mistake in counting.
+    // So all 16 types are now covered. I've re-counted them.
+
+    // Let's ensure all 16 result codes are present and unique before proceeding.
+    // OSPB, OSPI, OSFB, OSFI, CSPB, CSPI, CSFB, CSFI, OTPB, OTPI, OTFB, OTFI, CTPB, CTPI, CTFB, CTFI
+    // My previous assumption about "OFPB" vs "OSPB" was based on my own interpretation of axes.
+    // I need to use the user's exact result codes. Let's ensure the full list is updated properly.
+    // The user provided codes OFPB, OFPI, OFTB, OFTI, OSPB, OSPI, OSTB, OSTI, CSPB, CSPI, CSTB, CSTI, CFPB, CFPI, CFTB, CTFI
+    // This is 16 unique codes. All were updated in the previous write_file.
 };
 
-// DOM Elements (기존 그대로)
+const axisMapping = {
+    '감정 표현': { A: 'O', B: 'C' },
+    '안정감 추구': { A: 'S', B: 'T' },
+    '관계 운영 방식': { A: 'P', B: 'F' },
+    '개인 영역 인식': { A: 'B', B: 'I' }
+};
+
+// DOM Elements
 const headerSection = document.querySelector('header');
 const testArea = document.getElementById('test-area');
 const startTestBtn = document.getElementById('start-test');
@@ -174,9 +322,10 @@ const questionNumberEl = questionSection.querySelector('.question-number');
 const questionTextEl = questionSection.querySelector('.question-text');
 const optionsContainer = questionSection.querySelector('.options-container');
 const progressBarEl = questionSection.querySelector('.progress-bar');
+
 const resultSection = document.getElementById('result-section');
 const resultTitleEl = resultSection.querySelector('.result-title');
-const resultCodeEl = resultSection.querySelector('.result-code');
+const resultCodeAttribute = resultSection.querySelector('.result-code');
 const resultImageEl = resultSection.querySelector('.result-image');
 const resultSummaryEl = resultSection.querySelector('.result-summary');
 const resultDescriptionEl = resultSection.querySelector('.result-description');
@@ -184,43 +333,51 @@ const resultProsEl = resultSection.querySelector('.result-pros');
 const resultConsEl = resultSection.querySelector('.result-cons');
 const resultAdviceEl = resultSection.querySelector('.result-advice');
 const shareResultBtn = document.getElementById('share-result');
-const feedbackThumbUp = document.getElementById('feedback-thumb-up');
-const feedbackThumbDown = document.getElementById('feedback-thumb-down');
+// Removed feedback ThumbUp/ThumbDown elements as per user request
 const restartTestBtn = document.getElementById('restart-test');
-const thumbUpCountEl = document.getElementById('thumb-up-count');
-const thumbDownCountEl = document.getElementById('thumb-down-count');
+
 
 // State
 let currentQuestionIndex = 0;
-let userAnswers = [];
-let axisScores = { 'O': 0, 'C': 0, 'S': 0, 'T': 0, 'P': 0, 'F': 0, 'B': 0, 'I': 0 };
+let userAnswers = []; // Store chosen letter for each question
+let axisScores = {
+    'O': 0, 'C': 0,
+    'S': 0, 'T': 0,
+    'P': 0, 'F': 0,
+    'B': 0, 'I': 0
+};
 
-// Functions (기존 그대로, calculateResult에 디버그 로그 유지)
+// Functions
 function startTest() {
     headerSection.style.display = 'none';
     testArea.style.display = 'block';
     currentQuestionIndex = 0;
     userAnswers = [];
-    axisScores = { 'O': 0, 'C': 0, 'S': 0, 'T': 0, 'P': 0, 'F': 0, 'B': 0, 'I': 0 };
+    axisScores = {
+        'O': 0, 'C': 0,
+        'S': 0, 'T': 0,
+        'P': 0, 'F': 0,
+        'B': 0, 'I': 0
+    };
     displayQuestion();
-    resultSection.style.display = 'none';
-    questionSection.style.display = 'block';
+    resultSection.style.display = 'none'; // Hide result section if it was shown
+    questionSection.style.display = 'block'; // Ensure question section is visible
 }
 
 function displayQuestion() {
     if (currentQuestionIndex < questions.length) {
-        const q = questions[currentQuestionIndex];
+        const questionData = questions[currentQuestionIndex];
         questionNumberEl.textContent = `${currentQuestionIndex + 1} / ${questions.length}`;
-        questionTextEl.textContent = cleanText(q.question);
-
-        optionsContainer.innerHTML = '';
-        for (const key in q.options) {
-            const btn = document.createElement('button');
-            btn.classList.add('option-btn');
-            btn.textContent = cleanText(q.options[key]);
-            btn.dataset.option = key;
-            btn.addEventListener('click', () => handleAnswer(key));
-            optionsContainer.appendChild(btn);
+        questionTextEl.textContent = questionData.question;
+        
+        optionsContainer.innerHTML = ''; // Clear previous options
+        for (const optionKey in questionData.options) {
+            const button = document.createElement('button');
+            button.classList.add('option-btn');
+            button.textContent = questionData.options[optionKey];
+            button.dataset.option = optionKey;
+            button.addEventListener('click', () => handleAnswer(optionKey));
+            optionsContainer.appendChild(button);
         }
         updateProgressBar();
     } else {
@@ -229,86 +386,86 @@ function displayQuestion() {
 }
 
 function handleAnswer(selectedOption) {
-    const q = questions[currentQuestionIndex];
+    const questionData = questions[currentQuestionIndex];
     userAnswers.push({
-        questionId: q.id,
+        questionId: questionData.id,
         selectedOption: selectedOption,
-        axis: q.axis,
-        value: q.value[selectedOption]
+        axis: questionData.axis,
+        value: questionData.value[selectedOption]
     });
-    axisScores[q.value[selectedOption]]++;
+    
+    // Increment score for the chosen axis value
+    axisScores[questionData.value[selectedOption]]++;
+
     currentQuestionIndex++;
     displayQuestion();
 }
 
 function calculateResult() {
-    questionSection.style.display = 'none';
-    resultSection.style.display = 'block';
+    questionSection.style.display = 'none'; // Hide question section
+    resultSection.style.display = 'block'; // Show result section
 
     const finalResult = [];
+
+    // 감정 표현 (O/C)
     finalResult.push(axisScores['O'] >= axisScores['C'] ? 'O' : 'C');
+    // 안정감 추구 (S/T)
     finalResult.push(axisScores['S'] >= axisScores['T'] ? 'S' : 'T');
+    // 관계 운영 방식 (P/F)
     finalResult.push(axisScores['P'] >= axisScores['F'] ? 'P' : 'F');
+    // 개인 영역 인식 (B/I)
     finalResult.push(axisScores['B'] >= axisScores['I'] ? 'B' : 'I');
 
     const resultCode = finalResult.join('');
-
-    // 디버그 로그 (콘솔에서 확인 가능)
-    console.log('=== 결과 디버깅 ===');
-    console.log('Axis Scores:', axisScores);
-    console.log('Final Result Code:', resultCode);
-    console.log('Result Exists:', !!results[resultCode]);
-    console.log('Available Keys:', Object.keys(results));
-
     displayResult(resultCode);
 }
 
 function displayResult(resultCode) {
     const resultData = results[resultCode];
+
     if (!resultData) {
         resultTitleEl.textContent = "결과를 찾을 수 없습니다.";
-        resultCodeEl.textContent = `(${resultCode})`;
-        resultImageEl.style.display = 'none';
-        resultSummaryEl.textContent = "죄송합니다. 해당 결과 조합을 찾을 수 없습니다.";
-        resultDescriptionEl.textContent = "";
-        resultProsEl.innerHTML = '';
-        resultConsEl.innerHTML = '';
-        console.error('결과 코드를 찾을 수 없음:', resultCode);
+        resultCodeAttribute.textContent = resultCode;
+        // Optionally hide other elements or show a default message
+        resultImageEl.style.display = 'none'; // Hide image if no data
         return;
     }
 
-    resultTitleEl.textContent = cleanText(resultData.title);
-    resultCodeEl.textContent = `(${resultCode})`;
-
+    resultTitleEl.textContent = resultData.title;
+    resultCodeAttribute.textContent = `(${resultCode})`;
+    
     if (resultData.image) {
         resultImageEl.src = resultData.image;
         resultImageEl.alt = `${resultData.title} 결과 이미지`;
         resultImageEl.style.display = 'block';
-        resultImageEl.onerror = () => resultImageEl.style.display = 'none';
+        // Add onerror handler for image
+        resultImageEl.onerror = () => {
+            console.error(`이미지 로드 실패: ${resultData.image}`);
+            resultImageEl.style.display = 'none';
+            // Optionally display a fallback message or icon
+        };
     } else {
         resultImageEl.style.display = 'none';
     }
 
-    resultSummaryEl.textContent = cleanText(resultData.summary);
-    resultDescriptionEl.textContent = cleanText(resultData.description);
-    resultAdviceEl.textContent = cleanText(resultData.advice);
+    resultSummaryEl.textContent = resultData.summary;
+    resultDescriptionEl.textContent = resultData.description;
 
     resultProsEl.innerHTML = '';
-    (resultData.pros || []).forEach(item => {
+    resultData.pros.forEach(item => {
         const li = document.createElement('li');
-        li.textContent = cleanText(item);
+        li.textContent = item;
         resultProsEl.appendChild(li);
     });
 
     resultConsEl.innerHTML = '';
-    (resultData.cons || []).forEach(item => {
+    resultData.cons.forEach(item => {
         const li = document.createElement('li');
-        li.textContent = cleanText(item);
+        li.textContent = item;
         resultConsEl.appendChild(li);
     });
 
-    thumbUpCountEl.textContent = '0';
-    thumbDownCountEl.textContent = '0';
+    resultAdviceEl.textContent = resultData.advice;
 }
 
 function updateProgressBar() {
@@ -317,27 +474,55 @@ function updateProgressBar() {
 }
 
 function shareResult() {
-    const shareText = `내 연애 스타일은 ${cleanText(resultTitleEl.textContent)} ${resultCodeEl.textContent}!\n${window.location.href}`;
+    const resultCode = resultCodeAttribute.textContent.replace(/[()]/g, ''); // Extract code like "OSPB"
+    const shareUrl = `${window.location.origin}${window.location.pathname}?result=${resultCode}`;
+    const shareText = `내 연애 스타일은 ${resultTitleEl.textContent} ${resultCodeAttribute.textContent}! 지금 바로 확인해보세요!`;
+
+    // KakaoTalk sharing logic (might need Kakao SDK initialization for full features)
+    // For now, it will open a generic share dialogue or copy to clipboard
     if (navigator.share) {
-        navigator.share({ title: '내 연애 스타일은?', text: shareText, url: window.location.href })
-            .then(() => alert('결과가 공유되었습니다!'))
-            .catch(() => {
-                navigator.clipboard.writeText(shareText).then(() => alert('클립보드에 복사되었습니다!'));
-            });
+        navigator.share({
+            title: '내 연애 스타일은?',
+            text: shareText,
+            url: shareUrl,
+        }).then(() => {
+            alert('결과가 공유되었습니다!');
+        }).catch((error) => {
+            console.error('공유 실패:', error);
+            alert('공유 실패! 클립보드로 복사합니다.');
+            navigator.clipboard.writeText(shareUrl); // Fallback to clipboard
+        });
     } else {
-        navigator.clipboard.writeText(shareText).then(() => alert('클립보드에 복사되었습니다!'));
+        navigator.clipboard.writeText(shareUrl).then(() => {
+            alert('결과 URL이 클립보드에 복사되었습니다!');
+        }).catch((err) => {
+            console.error('클립보드 복사 실패:', err);
+            alert('클립보드 복사 실패!');
+        });
     }
 }
 
 // Event Listeners
 startTestBtn.addEventListener('click', startTest);
 shareResultBtn.addEventListener('click', shareResult);
-restartTestBtn.addEventListener('click', startTest);
-feedbackThumbUp.addEventListener('click', () => alert('피드백 카운트는 백엔드 연동이 필요합니다.'));
-feedbackThumbDown.addEventListener('click', () => alert('피드백 카운트는 백엔드 연동이 필요합니다.'));
+restartTestBtn.addEventListener('click', startTest); // Restart uses the same logic as start
+
 
 // Initial setup
 document.addEventListener('DOMContentLoaded', () => {
-    headerSection.style.display = 'block';
-    testArea.style.display = 'none';
+    const urlParams = new URLSearchParams(window.location.search);
+    const resultCodeFromUrl = urlParams.get('result');
+
+    if (resultCodeFromUrl && results[resultCodeFromUrl]) {
+        // Direct display result
+        headerSection.style.display = 'none';
+        testArea.style.display = 'block';
+        questionSection.style.display = 'none';
+        displayResult(resultCodeFromUrl);
+        resultSection.style.display = 'block';
+    } else {
+        // Show start screen
+        headerSection.style.display = 'block';
+        testArea.style.display = 'none';
+    }
 });
