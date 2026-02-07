@@ -146,42 +146,7 @@ const questions = [
 ];
 
 const results = {
-    "OFPB": {
-        title: "💞 다 퍼주는 연애형",
-        image: "https://source.unsplash.com/400x200/?love,generous,caring",
-        summary: "OFPB는 감정이 풍부하고 연인을 보호하려는 헌신적인 유형입니다. 연애를 통해 깊은 정서적 유대를 추구하며 안정감을 중시합니다. 따뜻한 배려가 강하지만 감정 균형이 핵심 과제입니다.",
-        description: "상대의 감정을 세심하게 살피며 애정을 행동으로 보여줍니다. 자신의 감정보다 파트너를 우선시하며 관계를 키웁니다. 외부로 드러나는 보호적 태도로 사소한 일상에서도 배려합니다.",
-        pros: ["공감과 헌신으로 상대에게 큰 안정감을 줍니다.", "신뢰를 바탕으로 장기적인 관계를 유지합니다.", "상대의 행복을 진심으로 추구해 깊은 유대감을 형성합니다."],
-        cons: ["자신의 감정을 억누르다 서운함이 쌓일 수 있습니다.", "상대의 반응에 과민해 불안이 생기기 쉽습니다.", "연애에 몰입해 스스로 지치거나 불균형이 발생합니다."],
-        advice: "본인 감정도 솔직히 표현하며 균형을 유지하세요. 상대의 행동을 과도하게 해석하지 말고 대화하세요. 연애 외 취미로 감정 에너지를 분산시키세요."
-    },
-    "OFPI": {
-        title: "💗 감정에 올인하는 연애형",
-        image: "https://source.unsplash.com/400x200/?love,emotional,allin",
-        summary: "OFPI는 감정이 풍부하고 애정 표현이 자연스러운 유형입니다. 연애를 통해 감정 교류와 정서적 유대를 깊게 만듭니다. 따뜻하지만 감정 기복 관리가 핵심 과제입니다.",
-        description: "좋아하는 사람에게 감정적으로 깊이 몰입합니다. 사소한 대화에서도 의미를 찾고 정서적 연결을 중시합니다. 상대의 반응에 따라 기분이 크게 좌우되기도 합니다.",
-        pros: ["공감 능력이 뛰어나 상대를 잘 이해합니다.", "애정 표현이 풍부해 연애 초반의 만족도가 높습니다.", "상대의 감정에 진심으로 반응해 줍니다."],
-        cons: ["상대의 말이나 태도에 과도하게 의미를 부여합니다.", "감정 기복이 심해 스스로도 지칠 수 있습니다.", "불안할 때 확인 욕구가 강해지는 경향이 있습니다."],
-        advice: "감정이 요동칠 때 바로 결론을 내리지 마세요. 상대의 행동과 자신의 해석을 분리해서 생각하세요. 연애 외의 정서적 지지 기반도 함께 키우세요."
-    },
-    "OFTB": {
-        title: "🌿 마음은 깊고 판단은 차분한 연애형",
-        image: "https://source.unsplash.com/400x200/?love,calm,deepthought",
-        summary: "OFTB는 감정과 논리를 함께 쓰는 균형형 연애 유형입니다. 연애를 현실적으로 바라보면서도 정은 깊습니다. 차분하지만 내면의 애정은 결코 가볍지 않습니다.",
-        description: "감정을 무작정 드러내기보다는 상황을 고려합니다. 상대를 존중하며 관계의 틀을 안정적으로 잡습니다. 연애 속에서도 자기 역할과 책임을 중시합니다.",
-        pros: ["감정에 휘둘리지 않아 관계가 쉽게 흔들리지 않습니다.", "현실적인 판단으로 문제 해결 능력이 뛰어납니다.", "상대를 믿고 맡길 줄 아는 성숙함이 있습니다."],
-        cons: ["감정 표현이 부족하다는 오해를 받기 쉽습니다.", "연애에서도 효율을 따지다 차갑게 보일 수 있습니다.", "속마음을 혼자 정리하려다 거리감이 생깁니다."],
-        advice: "논리만큼 감정 표현도 의식적으로 연습하세요. 상대가 느끼는 감정 자체를 먼저 인정해 주세요. 가끔은 이유 없는 애정 표현도 필요합니다."
-    },
-    "OFTI": {
-        title: "🌙 천천히 빠져드는 연애형",
-        image: "https://source.unsplash.com/400x200/?love,slow,reserved",
-        summary: "OFTI는 감정은 깊지만 표현은 절제된 유형입니다. 연애에서 신중하고 관찰적인 태도를 보입니다. 느리지만 한번 시작되면 쉽게 식지 않습니다.",
-        description: "상대를 충분히 이해하기 전까지 조심스럽게 접근합니다. 감정을 바로 드러내지 않고 마음속에서 정리합니다. 관계가 안정되면 헌신적인 모습을 보입니다.",
-        pros: ["상대의 말과 행동을 세심하게 관찰합니다.", "감정적으로 성숙해 깊은 신뢰를 형성합니다.", "연애를 가볍게 대하지 않아 진중합니다."],
-        cons: ["감정을 숨기다 타이밍을 놓칠 수 있습니다.", "상대가 마음을 알기 어려워 답답함을 느낍니다.", "혼자 고민하다 오해를 키우는 경우가 있습니다."],
-        advice: "감정을 완성된 후에만 말하려 하지 마세요. 과정 중인 생각도 충분히 공유해도 괜찮습니다. 상대는 네 속마음을 듣고 싶어 한다는 걸 기억하세요."
-    },
+    // OSxx: O(표현) + S(안정) + P/F + B/I
     "OSPB": {
         title: "🏡 사랑을 일상으로 만드는 연애형",
         image: "https://source.unsplash.com/400x200/?love,daily,home",
@@ -218,6 +183,46 @@ const results = {
         cons: ["상대가 불안감을 느낄 수 있습니다.", "깊은 관계로 이어지기 어렵기도 합니다.", "책임 회피로 오해받을 수 있습니다."],
         advice: "자유와 책임은 동시에 존재할 수 있습니다. 최소한의 안정감은 관계 유지에 필요합니다. 상대의 기대를 완전히 외면하지 마세요."
     },
+
+    // OFxx: O(표현) + T(설렘) + P/F + B/I
+    "OFPB": {
+        title: "💞 다 퍼주는 연애형",
+        image: "https://source.unsplash.com/400x200/?love,generous,caring",
+        summary: "OFPB는 감정이 풍부하고 연인을 보호하려는 헌신적인 유형입니다. 연애를 통해 깊은 정서적 유대를 추구하며 안정감을 중시합니다. 따뜻한 배려가 강하지만 감정 균형이 핵심 과제입니다.",
+        description: "상대의 감정을 세심하게 살피며 애정을 행동으로 보여줍니다. 자신의 감정보다 파트너를 우선시하며 관계를 키웁니다. 외부로 드러나는 보호적 태도로 사소한 일상에서도 배려합니다.",
+        pros: ["공감과 헌신으로 상대에게 큰 안정감을 줍니다.", "신뢰를 바탕으로 장기적인 관계를 유지합니다.", "상대의 행복을 진심으로 추구해 깊은 유대감을 형성합니다."],
+        cons: ["자신의 감정을 억누르다 서운함이 쌓일 수 있습니다.", "상대의 반응에 과민해 불안이 생기기 쉽습니다.", "연애에 몰입해 스스로 지치거나 불균형이 발생합니다."],
+        advice: "본인 감정도 솔직히 표현하며 균형을 유지하세요. 상대의 행동을 과도하게 해석하지 말고 대화하세요. 연애 외 취미로 감정 에너지를 분산시키세요."
+    },
+    "OFPI": {
+        title: "💗 감정에 올인하는 연애형",
+        image: "https://source.unsplash.com/400x200/?love,emotional,allin",
+        summary: "OFPI는 감정이 풍부하고 애정 표현이 자연스러운 유형입니다. 연애를 통해 감정 교류와 정서적 유대를 깊게 만듭니다. 따뜻하지만 감정 기복 관리가 핵심 과제입니다.",
+        description: "좋아하는 사람에게 감정적으로 깊이 몰입합니다. 사소한 대화에서도 의미를 찾고 정서적 연결을 중시합니다. 상대의 반응에 따라 기분이 크게 좌우되기도 합니다.",
+        pros: ["공감 능력이 뛰어나 상대를 잘 이해합니다.", "애정 표현이 풍부해 연애 초반의 만족도가 높습니다.", "상대의 감정에 진심으로 반응해 줍니다."],
+        cons: ["상대의 말이나 태도에 과도하게 의미를 부여합니다.", "감정 기복이 심해 스스로도 지칠 수 있습니다.", "불안할 때 확인 욕구가 강해지는 경향이 있습니다."],
+        advice: "감정이 요동칠 때 바로 결론을 내리지 마세요. 상대의 행동과 자신의 해석을 분리해서 생각하세요. 연애 외의 정서적 지지 기반도 함께 키우세요."
+    },
+    "OFTB": {
+        title: "🌿 마음은 깊고 판단은 차분한 연애형",
+        image: "https://source.unsplash.com/400x200/?love,calm,deepthought",
+        summary: "OFTB는 감정과 논리를 함께 쓰는 균형형 연애 유형입니다. 연애를 현실적으로 바라보면서도 정은 깊습니다. 차분하지만 내면의 애정은 결코 가볍지 않습니다.",
+        description: "감정을 무작정 드러내기보다는 상황을 고려합니다. 상대를 존중하며 관계의 틀을 안정적으로 잡습니다. 연애 속에서도 자기 역할과 책임을 중시합니다.",
+        pros: ["감정에 휘둘리지 않아 관계가 쉽게 흔들리지 않습니다.", "현실적인 판단으로 문제 해결 능력이 뛰어납니다.", "상대를 믿고 맡길 줄 아는 성숙함이 있습니다."],
+        cons: ["감정 표현이 부족하다는 오해를 받기 쉽습니다.", "연애에서도 효율을 따지다 차갑게 보일 수 있습니다.", "속마음을 혼자 정리하려다 거리감이 생깁니다."],
+        advice: "논리만큼 감정 표현도 의식적으로 연습하세요. 상대가 느끼는 감정 자체를 먼저 인정해 주세요. 가끔은 이유 없는 애정 표현도 필요합니다."
+    },
+    "OFTI": {
+        title: "🌙 천천히 빠져드는 연애형",
+        image: "https://source.unsplash.com/400x200/?love,slow,reserved",
+        summary: "OFTI는 감정은 깊지만 표현은 절제된 유형입니다. 연애에서 신중하고 관찰적인 태도를 보입니다. 느리지만 한번 시작되면 쉽게 식지 않습니다.",
+        description: "상대를 충분히 이해하기 전까지 조심스럽게 접근합니다. 감정을 바로 드러내지 않고 마음속에서 정리합니다. 관계가 안정되면 헌신적인 모습을 보입니다.",
+        pros: ["상대의 말과 행동을 세심하게 관찰합니다.", "감정적으로 성숙해 깊은 신뢰를 형성합니다.", "연애를 가볍게 대하지 않아 진중합니다."],
+        cons: ["감정을 숨기다 타이밍을 놓칠 수 있습니다.", "상대가 마음을 알기 어려워 답답함을 느낍니다.", "혼자 고민하다 오해를 키우는 경우가 있습니다."],
+        advice: "감정을 완성된 후에만 말하려 하지 마세요. 과정 중인 생각도 충분히 공유해도 괜찮습니다. 상대는 네 속마음을 듣고 싶어 한다는 걸 기억하세요."
+    },
+
+    // CSxx: C(절제) + S(안정) + P/F + B/I
     "CSPB": {
         title: "🪵 믿고 오래 가는 연애형",
         image: "https://source.unsplash.com/400x200/?love,trust,wood",
@@ -254,6 +259,8 @@ const results = {
         cons: ["상대가 외로움을 느낄 수 있습니다.", "애정 표현 부족으로 오해받을 수 있습니다.", "감정 교류가 약해질 수 있습니다."],
         advice: "상대의 외로움을 신호로 받아들이세요. 작은 표현이 관계를 유지합니다. 무관심과 안정은 다릅니다."
     },
+
+    // CFxx: C(절제) + T(설렘) + P/F + B/I
     "CFPB": {
         title: "🤍 말없이 챙겨주는 연애형",
         image: "https://source.unsplash.com/400x200/?love,quiet,caring",
@@ -281,7 +288,7 @@ const results = {
         cons: ["기회를 놓칠 수 있습니다.", "상대가 확신을 느끼기 어렵습니다.", "표현 부족으로 거리감이 생길 수 있습니다."],
         advice: "완벽한 타이밍은 오지 않습니다. 감정은 어느 정도 드러내야 전달됩니다. 용기를 내보세요."
     },
-    "CTFI": {
+    "CFTI": {
         title: "🌌 혼자여도 마음은 깊은 연애형",
         image: "https://source.unsplash.com/400x200/?love,space,deep,independent",
         summary: "이 유형은 감정이 깊지만 독립성이 강합니다. 혼자만의 세계를 중요하게 여깁니다. 내면 중심적인 연애관을 가집니다.",
@@ -289,20 +296,7 @@ const results = {
         pros: ["감정에 휘둘리지 않습니다.", "안정적인 태도를 유지합니다.", "성숙한 관계를 만들 수 있습니다."],
         cons: ["상대가 소외감을 느낄 수 있습니다.", "감정 교류가 부족해질 수 있습니다.", "거리감이 커질 수 있습니다."],
         advice: "상대는 마음을 읽을 수 없습니다. 표현은 관계를 이어주는 다리입니다. 조금 더 보여주세요."
-    },
-    // Adding placeholder results for the few remaining combinations that weren't explicitly covered by user's new content
-    // to ensure all 16 results are valid. The user provided only 12 types in the last input, but mentioned 16 types overall.
-    // The previous prompt text was 16 types in total with 4 sets of 4 codes.
-    // I will use some generic placeholder text for the missing 4 types if they were not covered by the user's latest input.
-    // However, looking at the user's input, they provided 16 codes with new descriptions. My mistake in counting.
-    // So all 16 types are now covered. I've re-counted them.
-
-    // Let's ensure all 16 result codes are present and unique before proceeding.
-    // OSPB, OSPI, OSFB, OSFI, CSPB, CSPI, CSFB, CSFI, OTPB, OTPI, OTFB, OTFI, CTPB, CTPI, CTFB, CTFI
-    // My previous assumption about "OFPB" vs "OSPB" was based on my own interpretation of axes.
-    // I need to use the user's exact result codes. Let's ensure the full list is updated properly.
-    // The user provided codes OFPB, OFPI, OFTB, OFTI, OSPB, OSPI, OSTB, OSTI, CSPB, CSPI, CSTB, CSTI, CFPB, CFPI, CFTB, CTFI
-    // This is 16 unique codes. All were updated in the previous write_file.
+    }
 };
 
 const axisMapping = {
