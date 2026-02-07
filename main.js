@@ -1,12 +1,11 @@
-// main.js - 연애 스타일 테스트 풀 버전 (텍스트 깨짐 해결 완료)
+// main.js - 연애 스타일 테스트 (모바일 최적화 완료)
 
 const cleanText = (text) => {
     if (!text) return '';
     return text
-        .replace(/[\u200B\u200C\u200D\uFEFF\u2028\u2029]/g, '')  // 보이지 않는 공백/제어 문자 모두 제거
-        .replace(/\s+/g, ' ')                                    // 연속된 공백을 단일 공백으로
-        .replace(/ +/g, ' ')                                     // 중복 공백 재확인 제거
-        .trim();                                                 // 앞뒤 공백 제거
+        .replace(/[\u200B\u200C\u200D\uFEFF]/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
 };
 
 const questions = [
@@ -303,13 +302,6 @@ const results = {
     }
 };
 
-const axisMapping = {
-    '감정 표현': { A: 'O', B: 'C' },
-    '안정감 추구': { A: 'S', B: 'T' },
-    '관계 운영 방식': { A: 'P', B: 'F' },
-    '개인 영역 인식': { A: 'B', B: 'I' }
-};
-
 // DOM Elements
 const headerSection = document.querySelector('header');
 const testArea = document.getElementById('test-area');
@@ -470,8 +462,9 @@ function shareResult() {
             alert('결과가 공유되었습니다!');
         }).catch((error) => {
             console.error('공유 실패:', error);
-            navigator.clipboard.writeText(shareText);
-            alert('공유 실패! 클립보드로 복사했습니다.');
+            navigator.clipboard.writeText(shareText).then(() => {
+                alert('공유 실패! 클립보드로 복사했습니다.');
+            });
         });
     } else {
         navigator.clipboard.writeText(shareText).then(() => {
@@ -493,8 +486,6 @@ feedbackThumbDown.addEventListener('click', () => alert('피드백 카운트는 
 
 // Initial setup
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('header h1').textContent = cleanText("내 연애 스타일은?");
-    document.querySelector('.description').textContent = cleanText("4가지 연애 축으로 알아보는 나의 연애 성향!");
     headerSection.style.display = 'block';
     testArea.style.display = 'none';
 });
