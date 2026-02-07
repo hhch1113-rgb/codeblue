@@ -26,16 +26,16 @@ const translations = {
         faq: "FAQ",
         contact: "Contact/Report",
         // Status Messages
-        noFileSelected: "No file selected.",
         notAnImage: "Please upload an image file.",
         selectedFile: "Selected: ",
         uploadStarting: "Starting upload...",
         uploading: "Uploading: ",
-        uploadFailed: "Upload failed: ",
+        uploadFailed: "Upload failed. ",
         uploadComplete: "Upload complete!",
-        firebaseError: "Error: Firebase Storage is not initialized. Check console for details.",
         copySuccess: "URL copied to clipboard!",
         copyFail: "Failed to copy URL. Please copy it manually.",
+        corsError: "A network error occurred. This could be due to a server configuration (CORS) issue. Please check the browser console for more details.",
+        serverError: "Server returned an error. Please try again later."
     },
     ko: {
         pageTitle: "간편 이미지 업로더",
@@ -50,16 +50,16 @@ const translations = {
         faq: "자주 묻는 질문",
         contact: "문의/신고",
         // Status Messages
-        noFileSelected: "선택된 파일이 없습니다.",
         notAnImage: "이미지 파일을 업로드해주세요.",
         selectedFile: "선택됨: ",
         uploadStarting: "업로드를 시작합니다...",
         uploading: "업로드 중: ",
-        uploadFailed: "업로드 실패: ",
+        uploadFailed: "업로드 실패. ",
         uploadComplete: "업로드 완료!",
-        firebaseError: "오류: Firebase Storage가 초기화되지 않았습니다. 콘솔을 확인하세요.",
         copySuccess: "주소가 클립보드에 복사되었습니다!",
         copyFail: "주소 복사에 실패했습니다. 직접 복사해주세요.",
+        corsError: "네트워크 오류가 발생했습니다. 서버 설정(CORS) 문제일 수 있습니다. 자세한 내용은 브라우저 콘솔을 확인해주세요.",
+        serverError: "서버에서 오류가 발생했습니다. 나중에 다시 시도해주세요."
     },
     ja: {
         pageTitle: "簡単画像アップローダー",
@@ -74,16 +74,16 @@ const translations = {
         faq: "よくある質問",
         contact: "お問い合わせ/報告",
         // Status Messages
-        noFileSelected: "ファイルが選択されていません。",
         notAnImage: "画像ファイルをアップロードしてください。",
         selectedFile: "選択済み: ",
         uploadStarting: "アップロードを開始します...",
         uploading: "アップロード中: ",
-        uploadFailed: "アップロードに失敗しました: ",
+        uploadFailed: "アップロードに失敗しました. ",
         uploadComplete: "アップロード完了！",
-        firebaseError: "エラー：Firebase Storageが初期化されていません。コンソールを確認してください。",
         copySuccess: "URLがクリップボードにコピーされました！",
         copyFail: "URLのコピーに失敗しました。手動でコピーしてください。",
+        corsError: "ネットワークエラーが発生しました。サーバー構成（CORS）の問題である可能性があります。詳細については、ブラウザコンソールを確認してください。",
+        serverError: "サーバーからエラーが返されました。後でもう一度お試しください。"
     }
 };
 let currentLang = 'en';
@@ -93,14 +93,10 @@ let currentLang = 'en';
 function setLanguage(lang) {
     currentLang = lang;
     document.documentElement.lang = lang;
-    const elements = document.querySelectorAll("[data-i18n]");
-    elements.forEach((element) => {
-        const key = element.getAttribute("data-i18n");
-        if (translations[lang][key]) {
-            element.textContent = translations[lang][key];
-        }
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (translations[lang][key]) el.textContent = translations[lang][key];
     });
-    // Special case for the title tag
     document.title = translations[lang].pageTitle;
 }
 
@@ -115,12 +111,8 @@ function resetUI() {
 }
 
 function handleFiles(files) {
-    // We don't resetUI here anymore. The bug was that this cleared the file input before it could be processed.
-    if (files.length === 0) {
-        // This case might not be reachable with the new flow, but it's good for safety.
-        uploadStatus.textContent = translations[currentLang].noFileSelected;
-        return;
-    }
+    if (files.length === 0) return;
+    resetUI();
     const file = files[0];
     if (!file.type.startsWith('image/')) {
         uploadStatus.textContent = translations[currentLang].notAnImage;
@@ -131,46 +123,61 @@ function handleFiles(files) {
 }
 
 function uploadFile(file) {
-    if (!window.firebase || !firebase.storage) {
-        uploadStatus.textContent = translations[currentLang].firebaseError;
-        console.error("Firebase Storage object is not available.");
-        return;
-    }
-    
-    uploadStatus.textContent = translations[currentLang].uploadStarting;
-    
-    const storageRef = firebase.storage().ref();
-    const fileName = `${new Date().getTime()}-${file.name}`;
-    const fileRef = storageRef.child(`images/${fileName}`);
-    const uploadTask = fileRef.put(file);
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    const uploadUrl = "http://144.24.86.35/app/uploads/ETC/image";
 
-    progressContainer.style.display = 'block';
+    formData.append("file", file); // Assuming the server expects a field named "file"
 
-    uploadTask.on('state_changed',
-        (snapshot) => {
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    // Progress
+    xhr.upload.addEventListener("progress", (e) => {
+        if (e.lengthComputable) {
+            const progress = (e.loaded / e.total) * 100;
             progressBar.style.width = progress + '%';
             uploadStatus.textContent = `${translations[currentLang].uploading}${Math.floor(progress)}%`;
-        },
-        (error) => {
-            console.error("Upload failed:", error);
-            uploadStatus.textContent = `${translations[currentLang].uploadFailed}${error.code}`;
-            progressContainer.style.display = 'none';
-        },
-        () => {
-            uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-                resultUrl.value = downloadURL;
-                resultSection.style.display = 'block';
-                progressContainer.style.display = 'none';
-                uploadStatus.textContent = translations[currentLang].uploadComplete;
-            });
         }
-    );
+    });
+
+    // Success
+    xhr.addEventListener("load", () => {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            uploadStatus.textContent = translations[currentLang].uploadComplete;
+            try {
+                // Assuming server returns JSON: {"url": "http://..."}
+                const response = JSON.parse(xhr.responseText);
+                if (response.url) {
+                    resultUrl.value = response.url;
+                    resultSection.style.display = 'block';
+                } else {
+                     // If JSON is returned but no 'url' key, show server response for debugging
+                    uploadStatus.textContent = translations[currentLang].uploadFailed + "Invalid server response.";
+                    console.error("Server response:", xhr.responseText);
+                }
+            } catch (e) {
+                uploadStatus.textContent = translations[currentLang].uploadFailed + "Could not parse server response.";
+                console.error("Could not parse server response:", xhr.responseText, e);
+            }
+        } else {
+             // Handle HTTP errors
+            uploadStatus.textContent = translations[currentLang].serverError + ` (Code: ${xhr.status})`;
+        }
+        progressContainer.style.display = 'none';
+    });
+
+    // Error
+    xhr.addEventListener("error", () => {
+        uploadStatus.textContent = translations[currentLang].corsError;
+        progressContainer.style.display = 'none';
+    });
+
+    xhr.open("POST", uploadUrl, true);
+    uploadStatus.textContent = translations[currentLang].uploadStarting;
+    progressContainer.style.display = 'block';
+    xhr.send(formData);
 }
 
 // --- Event Listeners ---
 
-// Language Switcher
 langButtons.forEach(button => {
     button.addEventListener('click', (e) => {
         e.preventDefault();
@@ -181,39 +188,17 @@ langButtons.forEach(button => {
     });
 });
 
-// UI Reset Trigger
-dropArea.addEventListener('click', (e) => {
-    // Only reset if the click is not on the label itself, to avoid double-triggering
-    if (e.target !== fileLabel) {
-       resetUI();
-    }
-});
-
-// Drag and Drop
+dropArea.addEventListener('click', () => resetUI());
 ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
     dropArea.addEventListener(eventName, e => {
         e.preventDefault();
         e.stopPropagation();
     }, false);
 });
-['dragenter', 'dragover'].forEach(eventName => {
-    dropArea.addEventListener(eventName, () => dropArea.classList.add('dragover'), false);
-});
-['dragleave', 'drop'].forEach(eventName => {
-    dropArea.addEventListener(eventName, () => dropArea.classList.remove('dragover'), false);
-});
-dropArea.addEventListener('drop', (e) => {
-    resetUI();
-    handleFiles(e.dataTransfer.files);
-}, false);
-
-// File Input
-fileInput.addEventListener('change', (e) => {
-    // The reset is handled by the click on the drop area/label
-    handleFiles(e.target.files);
-});
-
-// Copy Button
+['dragenter', 'dragover'].forEach(e => dropArea.addEventListener(e, () => dropArea.classList.add('dragover')));
+['dragleave', 'drop'].forEach(e => dropArea.addEventListener(e, () => dropArea.classList.remove('dragover')));
+dropArea.addEventListener('drop', (e) => handleFiles(e.dataTransfer.files));
+fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
 copyButton.addEventListener('click', () => {
     resultUrl.select();
     resultUrl.setSelectionRange(0, 99999);
@@ -226,5 +211,5 @@ copyButton.addEventListener('click', () => {
 });
 
 // --- Initial Setup ---
-setLanguage('en'); // Set default language on load
-resetUI(); // Set a clean initial state
+setLanguage('en');
+resetUI();
