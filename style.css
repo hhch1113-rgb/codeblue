@@ -1,241 +1,94 @@
-html {
-    overflow-y: scroll; /* Force scrollbar to always be present */
-}
-
 :root {
-    --bg-color: #ffffff;
-    --text-color: #333333;
-    --card-bg-color: #f9f9f9;
-    --card-border-color: #eeeeee;
-    --header-bg-color: #f1f1f1;
-    --footer-bg-color: #f1f1f1;
-    --button-bg-color: #e0e0e0;
-    --button-text-color: #333333;
-}
-
-body.dark-mode {
-    --bg-color: #121212;
-    --text-color: #e0e0e0;
-    --card-bg-color: #1e1e1e;
-    --card-border-color: #333333;
-    --header-bg-color: #1a1a1a;
-    --footer-bg-color: #1a1a1a;
-    --button-bg-color: #333333;
-    --button-text-color: #e0e0e0;
+    --background-color: #f8f9fa;
+    --text-color: #212529;
+    --primary-color: #007bff;
+    --card-background: #ffffff;
+    --card-border: #dee2e6;
+    --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 body {
-    font-family: sans-serif;
-    background-color: var(--bg-color);
+    font-family: 'Inter', 'Noto Sans KR', sans-serif;
+    background-color: var(--background-color);
     color: var(--text-color);
     margin: 0;
-    padding: 3rem 0 3rem 0; /* Adjusted for smaller header and footer */
-    transition: background-color 0.3s, color 0.3s;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-header, footer {
-    background-color: var(--header-bg-color);
+.container {
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
 }
 
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 2rem;
-    border-bottom: 1px solid var(--card-border-color);
-    z-index: 1000;
-    box-sizing: border-box;
+    margin-bottom: 3rem;
 }
 
-header h1 {
-    margin: 0;
+.language-switcher {
+    margin-bottom: 1rem;
+}
+
+.language-switcher .lang-btn {
+    color: #888;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.language-switcher .lang-btn.active,
+.language-switcher .lang-btn:hover {
+    color: var(--primary-color);
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+p {
     font-size: 1.2rem;
+    color: #6c757d;
 }
 
-#theme-toggle {
-    background-color: var(--button-bg-color);
-    color: var(--button-text-color);
-    border: 1px solid var(--card-border-color);
-    border-radius: 5px;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    font-size: 0.9rem;
-}
-
-main {
-    padding: 2rem;
-}
-
-.intro {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 2rem auto;
-    line-height: 1.6;
-}
-
-.tool-grid {
+#tool-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
-    max-width: 1200px;
-    margin: 0 auto;
+    text-align: left;
 }
 
 .tool-card {
-    background-color: var(--card-bg-color);
-    border: 1px solid var(--card-border-color);
+    background-color: var(--card-background);
+    border: 1px solid var(--card-border);
     border-radius: 8px;
     padding: 1.5rem;
-    text-align: center;
-    transition: transform 0.2s, box-shadow 0.2s;
-    text-decoration: none;
-    color: var(--text-color);
+    box-shadow: 0 4px 8px var(--shadow-color);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .tool-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px var(--shadow-color);
 }
 
-.tool-card h3 {
+.tool-card h2 {
     margin-top: 0;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
 }
 
-.tool-card p, footer p {
-    font-size: 0.9rem;
-    color: var(--text-color);
-    opacity: 0.8;
-}
-
-footer p {
-    margin: 0.1rem 0;
-}
-
-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 0.5rem 2rem; /* Reduced vertical padding */
-    border-top: 1px solid var(--card-border-color);
-    z-index: 1000;
-    box-sizing: border-box;
-    display: flex; /* Enable flexbox */
-    flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center horizontally */
-    justify-content: center; /* Center vertically if space allows */
-}
-
-/* Tool Page Specific Styles */
-.tool-page {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.tool-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    border-bottom: 1px solid var(--card-border-color);
-    padding-bottom: 1rem;
-}
-
-.tool-header h2 {
-    margin: 0;
-}
-
-.back-button {
-    background-color: var(--button-bg-color);
-    color: var(--button-text-color);
-    padding: 0.6rem 1.2rem;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    border: 1px solid var(--card-border-color);
-}
-
-.home-link {
-    text-decoration: none;
-    color: inherit;
-}
-
-.tool-content textarea {
-    width: 100%;
-    min-height: 200px;
-    padding: 1rem;
-    border-radius: 5px;
-    border: 1px solid var(--card-border-color);
-    background-color: var(--card-bg-color);
-    color: var(--text-color);
+.tool-card p {
     font-size: 1rem;
-    resize: vertical;
+    margin-bottom: 1.5rem;
 }
 
-.result-box {
-    margin-top: 1.5rem;
-    padding: 1.5rem;
-    background-color: var(--card-bg-color);
-    border: 1px solid var(--card-border-color);
-    border-radius: 5px;
-}
-
-.result-box p {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.1rem;
-}
-
-.result-box span {
+.tool-card a {
+    text-decoration: none;
+    color: var(--primary-color);
     font-weight: bold;
-}
-
-/* Image Converter Specific Styles (tool-15.html) */
-.converter-section {
-    text-align: center;
-}
-#image-preview {
-    max-width: 100%;
-    height: auto; /* Maintain aspect ratio */
-    max-height: 400px;
-    margin-top: 1rem;
-    border: 1px solid var(--card-border-color);
-    background-color: var(--card-bg-color);
-}
-.controls {
-    margin: 1rem 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-}
-.file-input-label, .download-button {
-    padding: 0.8rem 1.2rem;
-    border-radius: 5px;
-    border: 1px solid var(--card-border-color);
-    cursor: pointer;
-    background-color: var(--button-bg-color); /* Use theme variable */
-    color: var(--button-text-color); /* Use theme variable */
-}
-.download-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-.progress-bar-container {
-    width: 100%;
-    background-color: var(--card-border-color);
-    border-radius: 5px;
-    margin-top: 1rem;
-    display: none; /* Hidden by default */
-}
-.progress-bar {
-    width: 0%;
-    height: 10px;
-    background-color: #4CAF50; /* Consider making this a theme variable if multiple progress bars */
-    border-radius: 5px;
-    transition: width 0.4s ease-in-out;
 }
