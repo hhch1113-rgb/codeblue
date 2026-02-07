@@ -3,110 +3,143 @@ body {
     background-color: #f0f2f5;
     color: #333;
     margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
-    line-height: 1.6;
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    /* ★★★ 전체 텍스트 깨짐 방지 핵심 */
+    word-break: keep-all !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto;
+    letter-spacing: normal !important;
+    word-spacing: normal !important;
+    line-height: 1.75;
 }
 
 .container {
     background-color: #fff;
     padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
     text-align: center;
     width: 100%;
-    max-width: 700px;
-    margin-bottom: 20px;
+    max-width: 720px;
+    margin-bottom: 2rem;
+}
+
+header h1,
+header .description,
+.question-text,
+.option-btn,
+.result-title,
+.result-code,
+.result-details p,
+.result-details li,
+.result-details span,
+.result-details h3 {
+    /* 모든 주요 텍스트 요소에 강제 적용 */
+    word-break: keep-all !important;
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto;
+    letter-spacing: normal !important;
+    word-spacing: normal !important;
+    line-height: 1.75;
 }
 
 header h1 {
-    font-size: 2.5rem;
-    color: #e91e63; /* Pink accent */
-    margin-bottom: 0.5rem;
+    font-size: 2.6rem;
+    color: #e91e63;
+    margin: 0 0 0.6rem 0;
 }
 
 header .description {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 2rem;
+    font-size: 1.15rem;
+    color: #555;
+    margin-bottom: 2.2rem;
 }
 
 .btn-primary {
-    background-color: #e91e63; /* Pink */
+    background-color: #e91e63;
     color: white;
     border: none;
-    padding: 15px 30px;
-    border-radius: 8px;
-    font-size: 1.1rem;
+    padding: 1rem 2.5rem;
+    border-radius: 12px;
+    font-size: 1.15rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: 100%; /* Full width on mobile */
-    max-width: 300px; /* Max width for desktop */
-    margin: 0 auto; /* Center button */
+    transition: all 0.25s ease;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    display: block;
 }
 
 .btn-primary:hover {
-    background-color: #d81b60; /* Darker pink */
+    background-color: #d81b60;
+    transform: translateY(-2px);
 }
 
 .btn-secondary {
-    background-color: #4caf50; /* Green */
+    background-color: #4caf50;
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 1rem;
+    padding: 0.9rem 1.8rem;
+    border-radius: 10px;
+    font-size: 1.05rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 15px;
+    transition: all 0.25s ease;
+    margin-top: 1.2rem;
 }
 
 .btn-secondary:hover {
-    background-color: #43a047; /* Darker green */
+    background-color: #43a047;
 }
 
-
 #question-section {
-    margin-top: 2rem;
+    margin-top: 2.5rem;
 }
 
 .question-number {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     color: #888;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
 }
 
 .question-text {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
-    color: #333;
+    font-size: 1.55rem;
+    font-weight: 500;
+    margin-bottom: 2.2rem;
+    color: #222;
 }
 
 .options-container {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 1.2rem;
 }
 
 .option-btn {
-    background-color: #f8f8f8;
+    background-color: #fafafa;
     border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 8px;
+    padding: 1.1rem 1.4rem;
+    border-radius: 12px;
     font-size: 1.1rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
     text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    line-height: 1.5;
 }
 
 .option-btn:hover {
-    background-color: #e0e0e0;
-    border-color: #c0c0c0;
+    background-color: #f0f0f0;
+    border-color: #bbb;
     transform: translateY(-2px);
 }
 
@@ -117,18 +150,18 @@ header .description {
 .progress-bar-container {
     width: 100%;
     background-color: #e0e0e0;
-    border-radius: 5px;
+    border-radius: 6px;
     height: 10px;
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     overflow: hidden;
 }
 
 .progress-bar {
     height: 100%;
     width: 0%;
-    background-color: #e91e63; /* Pink */
-    border-radius: 5px;
-    transition: width 0.3s ease-in-out;
+    background-color: #e91e63;
+    border-radius: 6px;
+    transition: width 0.4s ease-in-out;
 }
 
 #result-section {
@@ -137,35 +170,35 @@ header .description {
 }
 
 .result-title {
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: #e91e63;
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
 }
 
 .result-code {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
-    color: #666;
+    color: #444;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 2.2rem;
 }
 
 .result-details h3 {
-    font-size: 1.3rem;
+    font-size: 1.35rem;
     color: #e91e63;
-    margin-top: 1.5rem;
-    border-bottom: 2px solid #f8bbd0; /* Light pink */
-    padding-bottom: 5px;
-    margin-bottom: 1rem;
+    margin: 2rem 0 1rem 0;
+    border-bottom: 2px solid #ffc1e3;
+    padding-bottom: 0.5rem;
 }
 
-.result-details p, .result-details ul {
-    font-size: 1.05rem;
-    color: #555;
-    margin-bottom: 1rem;
-    padding-left: 0;
-    list-style-position: inside;
+.result-details p,
+.result-details ul,
+.result-details li {
+    font-size: 1.08rem;
+    color: #444;
+    margin-bottom: 1.4rem;
+    line-height: 1.75;
 }
 
 .result-details ul {
@@ -173,80 +206,120 @@ header .description {
     padding-left: 20px;
 }
 .result-details li {
-    margin-bottom: 5px;
+    margin-bottom: 0.5rem;
 }
 
 .result-image {
     max-width: 100%;
     height: auto;
-    border-radius: 8px;
+    border-radius: 12px;
     margin: 1.5rem auto;
     display: block;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 #share-result {
-    display: block; /* Make it a block element */
-    margin: 15px auto 0 auto; /* Center it */
-    width: 100%; /* Full width on mobile */
-    max-width: 300px; /* Max width for desktop */
+    display: block;
+    margin: 1.5rem auto 0 auto;
+    width: 100%;
+    max-width: 300px;
+    padding: 0.9rem 1.8rem;
+    border-radius: 10px;
+    font-size: 1.05rem;
+    font-weight: 500;
 }
 
 #restart-test {
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     width: 100%;
-    max-width: 300px; /* Max width for desktop */
-    margin: 2rem auto 0 auto; /* Center button */
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 footer {
-    margin-top: 2rem;
+    margin-top: 3rem;
     text-align: center;
     width: 100%;
-    max-width: 700px;
-    color: #666;
-    display: flex; /* Use flexbox for footer links */
+    max-width: 720px;
+    color: #777;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+    display: flex;
     justify-content: center;
-    flex-wrap: wrap; /* Allow wrapping of links */
-    gap: 10px; /* Space between links */
+    flex-wrap: wrap;
+    gap: 0.8rem 1.5rem;
 }
 
 footer a {
     color: #e91e63;
     text-decoration: none;
-    margin: 0 10px; /* Adjusted margin for better spacing with gap */
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
 }
 
 footer a:hover {
+    color: #d81b60;
     text-decoration: underline;
 }
 
 /* Responsive adjustments */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .container {
         padding: 1.5rem;
+        margin-bottom: 1.5rem;
     }
     header h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
+    }
+    header .description {
+        font-size: 1.05rem;
     }
     .btn-primary, .btn-secondary, .option-btn {
         font-size: 1rem;
-        padding: 12px 20px;
+        padding: 0.9rem 1.8rem;
     }
     .question-text {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
     }
     .result-title {
-        font-size: 1.7rem;
+        font-size: 2rem;
     }
     .result-code {
-        font-size: 1.3rem;
+        font-size: 1.6rem;
     }
     .result-details h3 {
-        font-size: 1.2rem;
+        font-size: 1.25rem;
     }
     .result-details p, .result-details ul {
         font-size: 1rem;
+    }
+    footer {
+        padding-left: 10px;
+        padding-right: 10px;
+        flex-direction: column; /* Stack links vertically on small screens */
+        gap: 0.5rem;
+    }
+    footer a {
+        margin: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+    .question-text {
+        font-size: 1.2rem;
+    }
+    .option-btn {
+        font-size: 0.95rem;
+        padding: 0.8rem 1rem;
+    }
+    .result-title {
+        font-size: 1.5rem;
+    }
+    .result-code {
+        font-size: 1.3rem;
     }
 }
