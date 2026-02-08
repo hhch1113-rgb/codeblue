@@ -309,6 +309,12 @@ function displayResult(resultCode) {
         li.textContent = cleanText(item);
         resultConsEl.appendChild(li);
     });
+
+    // Ensure the event listener for restartTestBtn is active when results are displayed
+    restartTestBtn.onclick = () => { // Using onclick to ensure it overrides any previous handlers
+        console.log("DEBUG: Restart Test button clicked via displayResult! Attempting redirect using window.location.replace('./')");
+        window.location.replace('./');
+    };
 }
 
 function updateProgressBar() {
@@ -345,10 +351,7 @@ window.updateUI = () => {
 // Event Listeners
 startTestBtn.addEventListener('click', startTest);
 shareResultBtn.addEventListener('click', shareResult);
-restartTestBtn.addEventListener('click', () => {
-    console.log("Restart Test button clicked, redirecting to index.html"); // Added console.log
-    window.location.href = './';
-});
+
 
 // Initial setup
 document.addEventListener('DOMContentLoaded', () => {
