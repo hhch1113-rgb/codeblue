@@ -34,7 +34,7 @@ body {
     text-align: center;
     width: 100%;
     max-width: 720px;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 /* 헤더 */
@@ -299,7 +299,7 @@ header .description {
 
 /* 푸터 */
 footer {
-    margin-top: 3rem;
+    margin-top: 1.5rem;
     text-align: center;
     width: 100%;
     max-width: 720px;
