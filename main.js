@@ -201,13 +201,14 @@ function startTest() {
     console.log("startTest function executed!");
     headerSection.style.display = 'none';
     testArea.style.display = 'block';
+    questionSection.style.display = 'block'; // Moved this up
+    resultSection.style.display = 'none'; // Moved this up
+
     currentQuestionIndex = 0;
     userAnswers = [];
     axisScores = { 'O': 0, 'C': 0, 'S': 0, 'T': 0, 'P': 0, 'F': 0, 'B': 0, 'I': 0 };
     getTranslatedContent(); // Ensure questions are for the current language
     displayQuestion();
-    resultSection.style.display = 'none';
-    questionSection.style.display = 'block';
 }
 
 function displayQuestion() {
