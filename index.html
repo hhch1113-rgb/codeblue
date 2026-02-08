@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>연애 스타일 성향 테스트</title>
-    <meta name="description" content="나의 연애 스타일을 4가지 축으로 알아보고, 16가지 유형 중 당신은 어떤 연애 성향을 가졌는지 확인해보세요. 재미있는 연애 심리 테스트!">
+    <title data-i18n="love_style_test">연애 스타일 성향 테스트</title>
+    <meta name="description" content="나의 연애 스타일을 4가지 축으로 알아보고, 16가지 유형 중 당신은 어떤 연애 성향을 가졌는지 확인해보세요. 재미있는 연애 심리 테스트!" data-i18n-content="test_description">
     <meta name="google-adsense-account" content="ca-pub-2738395748022643">
     
     <!-- Open Graph Meta Tags for Social Sharing -->
-    <meta property="og:title" content="내 연애 스타일은? 연애 스타일 성향 테스트! ❤️">
-    <meta property="og:description" content="4가지 연애 축으로 알아보는 나의 연애 성향! 당신은 어떤 타입의 연애를 하고 있나요?">
+    <meta property="og:title" content="내 연애 스타일은? 연애 스타일 성향 테스트! ❤️" data-i18n-content="og_title">
+    <meta property="og:description" content="4가지 연애 축으로 알아보는 나의 연애 성향! 당신은 어떤 타입의 연애를 하고 있나요?" data-i18n-content="og_description">
     <meta property="og:image" content="https://source.unsplash.com/400x200/?heart,love,couple"> <!-- A generic love/heart image -->
     <meta property="og:url" content="https://yourdomain.com/index.html"> <!-- Update with your actual domain -->
     <meta property="og:type" content="website">
@@ -19,9 +19,9 @@
 <body>
     <div class="container">
         <header>
-            <h1>내 연애 스타일은?</h1>
-            <p class="description">4가지 연애 축으로 알아보는 나의 연애 성향!</p>
-            <button id="start-test" class="btn-primary">테스트 시작하기</button>
+            <h1 data-i18n="header_title">내 연애 스타일은?</h1>
+            <p class="description" data-i18n="header_description">4가지 연애 축으로 알아보는 나의 연애 성향!</p>
+            <button id="start-test" class="btn-primary" data-i18n="start_test">테스트 시작하기</button>
         </header>
 
         <main id="test-area" style="display: none;">
@@ -41,31 +41,38 @@
                 <h2 class="result-title"></h2>
                 <p class="result-code"></p>
                 <div class="result-details">
-                    <img src="" alt="결과 이미지" class="result-image" style="display: none;">
-                    <h3>총평</h3>
+                    <img src="" alt="결과 이미지" class="result-image" style="display: none;" data-i18n-alt="result_image_alt">
+                    <h3 data-i18n="result_summary_title">총평</h3>
                     <p class="result-summary"></p>
-                    <h3>연애에서의 모습</h3>
+                    <h3 data-i18n="result_description_title">연애에서의 모습</h3>
                     <p class="result-description"></p>
-                    <h3>장점</h3>
+                    <h3 data-i18n="result_pros_title">장점</h3>
                     <ul class="result-pros"></ul>
-                    <h3>자주 겪는 문제</h3>
+                    <h3 data-i18n="result_cons_title">자주 겪는 문제</h3>
                     <ul class="result-cons"></ul>
-                    <h3>연애 조언</h3>
+                    <h3 data-i18n="result_advice_title">연애 조언</h3>
                     <p class="result-advice"></p>
                 </div>
                 <!-- Feedback section removed as per user request -->
-                <button id="restart-test" class="btn-primary">다시 테스트하기</button>
+                <button id="restart-test" class="btn-primary" data-i18n="restart_test">다시 테스트하기</button>
             </div>
         </main>
     </div>
 
     <footer>
-        <a href="privacy.html">개인정보처리방침</a>
-        <a href="terms.html">이용약관</a>
-        <a href="about.html">사이트 소개</a>
-        <a href="contact.html">문의 페이지</a>
+        <div class="lang-switcher">
+            <button onclick="setLanguage('ko')">🇰🇷</button>
+            <button onclick="setLanguage('en')">🇺🇸</button>
+            <button onclick="setLanguage('ja')">🇯🇵</button>
+        </div>
+        <a href="privacy.html" data-i18n="privacy_policy">개인정보처리방침</a>
+        <a href="terms.html" data-i18n="terms_of_service">이용약관</a>
+        <a href="about.html" data-i18n="about_site">사이트 소개</a>
+        <a href="contact.html" data-i18n="contact_page">문의 페이지</a>
     </footer>
 
+    <script src="locales.js"></script>
+    <script src="i18n.js"></script>
     <script src="main.js"></script>
     <script>
         document.addEventListener('contextmenu', event => event.preventDefault());

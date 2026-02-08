@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>문의 페이지</title>
+    <title data-i18n="contact_title">문의 페이지</title>
     <link rel="stylesheet" href="style.css">
     <style>
         .page-content { text-align: left; max-width: 700px; margin: 2rem auto; padding: 20px; background-color: #fff; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
@@ -18,18 +18,29 @@
 </head>
 <body>
     <div class="page-content">
-        <h1>문의 페이지</h1>
+        <h1 data-i18n="contact_h1">문의 페이지</h1>
         
-        <p>본 연애 스타일 성향 테스트에 대한 문의사항이나 의견이 있으시면 아래 이메일 주소로 연락주시기 바랍니다. 여러분의 소중한 의견은 서비스 개선에 큰 도움이 됩니다.</p>
+        <p data-i18n="contact_p_1">본 연애 스타일 성향 테스트에 대한 문의사항이나 의견이 있으시면 아래 이메일 주소로 연락주시기 바랍니다. 여러분의 소중한 의견은 서비스 개선에 큰 도움이 됩니다.</p>
         
-        <h2>문의 방법</h2>
-        <p><strong>이메일:</strong> <a href="mailto:chqhcornffj1234@gmail.com">chqhcornffj1234@gmail.com</a></p>
-        <p>문의 내용과 함께 연락처를 남겨주시면 확인 후 최대한 빠르게 답변드리겠습니다.</p>
+        <h2 data-i18n="contact_h2_1">문의 방법</h2>
+        <p><strong data-i18n="contact_email">이메일:</strong> <a href="mailto:chqhcornffj1234@gmail.com">chqhcornffj1234@gmail.com</a></p>
+        <p data-i18n="contact_p_2">문의 내용과 함께 연락처를 남겨주시면 확인 후 최대한 빠르게 답변드리겠습니다.</p>
 
-        <h2>불법/유해 콘텐츠 신고</h2>
-        <p>테스트 내용 중 불법적이거나 유해한 콘텐츠를 발견하신 경우에도 위 이메일로 신고해주시면 신속하게 조치하겠습니다.</p>
+        <h2 data-i18n="contact_h2_2">불법/유해 콘텐츠 신고</h2>
+        <p data-i18n="contact_p_3">테스트 내용 중 불법적이거나 유해한 콘텐츠를 발견하신 경우에도 위 이메일로 신고해주시면 신속하게 조치하겠습니다.</p>
         
-        <a href="index.html" class="back-btn">테스트로</a>
+        <a href="index.html" class="back-btn" data-i18n="contact_back_button">테스트로</a>
     </div>
+
+    <footer>
+        <div class="lang-switcher">
+            <button onclick="setLanguage('ko')">🇰🇷</button>
+            <button onclick="setLanguage('en')">🇺🇸</button>
+            <button onclick="setLanguage('ja')">🇯🇵</button>
+        </div>
+    </footer>
+
+    <script src="locales.js"></script>
+    <script src="i18n.js"></script>
 </body>
 </html>
