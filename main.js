@@ -198,7 +198,6 @@ let axisScores = { 'O': 0, 'C': 0, 'S': 0, 'T': 0, 'P': 0, 'F': 0, 'B': 0, 'I': 
 
 // Functions (기존 그대로, calculateResult에 디버그 로그 유지)
 function startTest() {
-    console.log("startTest function executed!");
     headerSection.style.display = 'none';
     testArea.style.display = 'block';
     questionSection.style.display = 'block'; // Moved this up
@@ -346,7 +345,9 @@ window.updateUI = () => {
 // Event Listeners
 startTestBtn.addEventListener('click', startTest);
 shareResultBtn.addEventListener('click', shareResult);
-restartTestBtn.addEventListener('click', startTest);
+restartTestBtn.addEventListener('click', () => {
+    window.location.href = 'index.html';
+});
 
 // Initial setup
 document.addEventListener('DOMContentLoaded', () => {
