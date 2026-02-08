@@ -346,6 +346,7 @@ window.updateUI = () => {
 startTestBtn.addEventListener('click', startTest);
 shareResultBtn.addEventListener('click', shareResult);
 restartTestBtn.addEventListener('click', () => {
+    console.log("Restart Test button clicked, redirecting to index.html"); // Added console.log
     window.location.href = 'index.html';
 });
 

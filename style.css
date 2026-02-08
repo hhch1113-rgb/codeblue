@@ -517,3 +517,12 @@ footer a:hover {
     color: white;
     border-color: #e91e63;
 }
+
+
+footer > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem; /* Adjust as needed */
+    margin-top: 1rem; /* Space between lang switcher and links */
+}
