@@ -198,11 +198,13 @@ let axisScores = { 'O': 0, 'C': 0, 'S': 0, 'T': 0, 'P': 0, 'F': 0, 'B': 0, 'I': 
 
 // Functions (기존 그대로, calculateResult에 디버그 로그 유지)
 function startTest() {
+    console.log("startTest function executed!");
     headerSection.style.display = 'none';
     testArea.style.display = 'block';
     currentQuestionIndex = 0;
     userAnswers = [];
     axisScores = { 'O': 0, 'C': 0, 'S': 0, 'T': 0, 'P': 0, 'F': 0, 'B': 0, 'I': 0 };
+    getTranslatedContent(); // Ensure questions are for the current language
     displayQuestion();
     resultSection.style.display = 'none';
     questionSection.style.display = 'block';
